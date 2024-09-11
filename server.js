@@ -68,6 +68,15 @@ app.get('/data/syawal', (req, res) => {
 
 });
 
+app.post('/api/data', (req, res)=>{
+    let data = req.body;
+    res.send({
+        "status" : 200,
+        "message" : "Sukses menambah data",
+        "data" : data
+    });
+});
+
 app.listen(3000, (e)=>{
     console.log("Server start on http://localhost:3000");
 });
