@@ -21,6 +21,16 @@ app.get('/', (req, res)=>{
         }
     });
 });
+app.get ('/data/arya', (req, res)=>{
+    res.send({
+        "status" : 200,
+        "message" : "berhasil mengambil data",
+        "data" : {
+            "nama" : "Arya",
+            "nim" : "2201020001"
+        }
+    })
+})
 
 app.listen(3000, (e)=>{
     console.log("Server start");
