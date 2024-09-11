@@ -5,7 +5,7 @@ const createServer = require('http').createServer
 const app = express()
 const server = createServer(app, {});
 const viewDir = "./app/views/";
-
+const path = require('path');
 //Routing
 //Get untuk mengambil data dari server
 //Post biasany untuk mengirim data ke server
@@ -13,8 +13,10 @@ const viewDir = "./app/views/";
 //Delete delete data
 app.use(express.json());
 app.use(express.static('./public'));
+
 app.get('/', (req, res)=>{
-    const file = fs.readFileSync(viewDir + "index.html", 'utf-8');
+    let usersPath = path.join(process.cwd(),viewDir + "index.html");
+    const file = fs.readFileSync(usersPath, 'utf-8');
     
     res.send(file);
 });
