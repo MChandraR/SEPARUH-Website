@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MChandraR/Project-Akhir-Pemrograman-Web/issues"
   },
-  "homepage": "https://github.com/MChandraR/Project-Akhir-Pemrograman-Web#readme"
+  "homepage": "https://github.com/MChandraR/Project-Akhir-Pemrograman-Web#readme",
+  "dependencies": {
+    "express": "^4.20.0"
+  }
 }
