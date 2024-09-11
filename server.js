@@ -32,6 +32,17 @@ app.get ('/data/arya', (req, res)=>{
     })
 })
 
+app.get('/data/adit', (req, res) => {
+    res.send({
+        "status" : 200, 
+        "message" : "berhasil mengambil data",
+        "data" : {
+            "nama" : "Adit", 
+            "nim" : "1234"
+        }
+    });
+});
+
 app.listen(3000, (e)=>{
     console.log("Server start");
 });
