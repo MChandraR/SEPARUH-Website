@@ -37,8 +37,9 @@ app.get('/data/adit', (req, res) => {
         "status" : 200, 
         "message" : "berhasil mengambil data",
         "data" : {
-            "nama" : "Adit", 
-            "nim" : "1234"
+            "nama" : "Aditya Firmansyah", 
+            "nim" : "2201020018",
+            "Hobi": "Biliar lawan orang hoki",
         }
     });
 });
