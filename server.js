@@ -33,6 +33,17 @@ app.get('/data/adit', (req, res) => {
     });
 });
 
+app.get('/data/syawal', (req, res) => {
+    res.send({
+        "status" : 200,
+        "message" : "berhasil mengambil data",
+        "data" : {
+            "nama" : "Syawal",
+            "nim": "099"
+        }
+    });
+});
+
 app.listen(3000, (e)=>{
     console.log("Server start");
 });
