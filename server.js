@@ -1,8 +1,10 @@
 const express = require('express');
+const fs = require('fs');
 const createServer = require('http').createServer
 //Inisialisasi Server
 const app = express()
 const server = createServer(app, {});
+const viewDir = "./app/views/";
 
 //Routing
 //Get untuk mengambil data dari server
@@ -10,16 +12,11 @@ const server = createServer(app, {});
 //Put biasanya untuk update data
 //Delete delete data
 app.use(express.json());
-
+app.use(express.static('./public'));
 app.get('/', (req, res)=>{
-    res.send({
-        "status" : 200, 
-        "message" : "berhasil mengambil data",
-        "data" : {
-            "nama" : "Chandra", 
-            "nim" : "nim"
-        }
-    });
+    const file = fs.readFileSync(viewDir + "index.html", 'utf-8');
+    
+    res.send(file);
 });
 
 app.get ('/data/arya', (req, res)=>{
@@ -66,7 +63,7 @@ app.get('/data/syawal', (req, res) => {
             "nim": "099"
         }
     });
-    
+
 });
 
 app.listen(3000, (e)=>{
