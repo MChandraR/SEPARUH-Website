@@ -44,6 +44,18 @@ app.get('/data/adit', (req, res) => {
     });
 });
 
+app.get('/data/melah', (req, res) => {
+    res.send({
+        "status" : 200, 
+        "message" : "berhasil mengambil data",
+        "data" : {
+            "nama" : "melahhhh", 
+            "nim" : "10000",
+            "Hobi": "reading",
+        }
+    });
+});
+
 app.get('/data/syawal', (req, res) => {
     res.send({
         "status" : 200,
