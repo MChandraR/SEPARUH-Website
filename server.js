@@ -21,6 +21,7 @@ app.get('/', (req, res)=>{
         }
     });
 });
+
 app.get ('/data/arya', (req, res)=>{
     res.send({
         "status" : 200,
@@ -53,6 +54,7 @@ app.get('/data/syawal', (req, res) => {
             "nim": "099"
         }
     });
+    
 });
 
 app.listen(3000, (e)=>{
