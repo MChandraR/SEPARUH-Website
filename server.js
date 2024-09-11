@@ -34,5 +34,5 @@ app.get('/data/adit', (req, res) => {
 });
 
 app.listen(3000, (e)=>{
-    console.log("Server start");
+    console.log("Server start on http://localhost:3000");
 });
