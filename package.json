@@ -1,0 +1,19 @@
+{
+  "name": "project-akhir-pemrograman-web",
+  "version": "1.0.0",
+  "description": "Ini merupakan project akhir dari mk Pemrograman WEB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MChandraR/Project-Akhir-Pemrograman-Web.git"
+  },
+  "author": "Kelompok Naga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MChandraR/Project-Akhir-Pemrograman-Web/issues"
+  },
+  "homepage": "https://github.com/MChandraR/Project-Akhir-Pemrograman-Web#readme"
+}
