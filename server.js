@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const createServer = require('http').createServer
+const utils = require('./utils/utils');
 //Inisialisasi Server
 const app = express()
 const server = createServer(app, {});
@@ -32,31 +33,23 @@ app.post('/api/users', async(req,res)=>{
     console.log(data);
     //const result = await sql`INSERT INTO users VALUES('`+data.user_id+`', '`+data.username+`', '`+data.password+`', '`+data.name+`', '`+data.role+`', '`+data.email+`') ;`;
     const result = await sql`INSERT INTO users VALUES(${data.user_id}, ${data.username},${data.password},${data.name}, ${data.role}, ${data.email}) ;`;
-    res.send({
-        status : 200,
-        message : "Berhasil menambahkan data !",
-        data : result
-    });
+    utils.sendResponse(res, 200, "Berhasil menambah data ", result);
 });
 
 app.put('/api/users', async(req,res)=>{
     const data = req.body;
     const result = await sql`UPDATE users SET email = ${data.email} WHERE user_id = ${data.user_id};`;
-    res.send({
-        status : 200,
-        message : `Berhasil mengupdate data user (${data.user_id}) !`,
-        data : result
-    });
+    utils.sendResponse(res, 200,  `Berhasil mengupdate data user (${data.user_id}) !`, result);
 });
 
 app.delete('/api/users', async(req, res)=>{
     const data = req.body;
     const result = await sql`DELETE FROM users WHERE user_id = ${data.user_id};`;
-    res.send({
-        status : 200,
-        message : `Berhasil menghapus data user (${data.user_id}) !`,
-        data : result
-    });
+    utils.sendResponse(res,200, "Berhasil mengupdate data !", result);
+});
+
+app.get('/api', async(req,res)=>{
+    utils.sendResponse(res,200, "Berhasil mengupdate data !", null);
 });
 
 app.listen(3000, (e)=>{
