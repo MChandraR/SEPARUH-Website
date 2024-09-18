@@ -77,6 +77,6 @@ app.post('/api/data', (req, res)=>{
     });
 });
 
-app.listen(3000, (e)=>{
+app.listen(3030, (e)=>{
     console.log("Server start on http://localhost:3000");
 });
