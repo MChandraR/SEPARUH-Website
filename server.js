@@ -22,66 +22,10 @@ app.get('/', (req, res)=>{
     res.send(file);
 });
 
-app.get ('/data/arya', (req, res)=>{
-    res.send({
-        "status" : 200,
-        "message" : "berhasil mengambil data",
-        "data" : {
-            "nama" : "Arya",
-            "nim" : "2201020001"
-        }
-    })
-})
-
 app.get('/api/users', async(req,res)=>{
     const result = await sql`SELECT*FROM users ;`;
     res.send(result.rows);
 
-});
-
-app.get('/data/adit', (req, res) => {
-    res.send({
-        "status" : 200, 
-        "message" : "berhasil mengambil data",
-        "data" : {
-            "nama" : "Aditya Firmansyah", 
-            "nim" : "2201020018",
-            "Hobi": "Biliar lawan orang hoki",
-        }
-    });
-});
-
-app.get('/data/melah', (req, res) => {
-    res.send({
-        "status" : 200, 
-        "message" : "berhasil mengambil data",
-        "data" : {
-            "nama" : "melahhhh", 
-            "nim" : "10000",
-            "Hobi": "reading",
-        }
-    });
-});
-
-app.get('/data/syawal', (req, res) => {
-    res.send({
-        "status" : 200,
-        "message" : "berhasil mengambil data",
-        "data" : {
-            "nama" : "Syawal",
-            "nim": "099"
-        }
-    });
-
-});
-
-app.post('/api/data', (req, res)=>{
-    let data = req.body;
-    res.send({
-        "status" : 200,
-        "message" : "Sukses menambah data",
-        "data" : data
-    });
 });
 
 app.listen(3000, (e)=>{
