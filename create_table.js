@@ -17,9 +17,10 @@ async function exportData() {
 
     // const result = await client.query('Create table users (user_id varchar (10), username varchar (50), password varchar (150), name varchar (50), role int, email varchar (50))');
     const result2 = await client.query('CREATE TABLE sessions ( session_id varchar(10), user_id varchar(10), token varchar(50), last_accessed timestamp, expired timestamp )');
-
+    const insertUser = await client.query("INSERT INTO users VALUES('U00000001', 'admin' , 'admin', 'admin' , 1, 'admin@gmail.com');");
     // console.log(result.rows);
     // console.log(result2.rows);
+    
   } catch (err) {
     console.error('Error saat mengekspor data:', err);
   } finally {

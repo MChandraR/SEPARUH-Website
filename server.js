@@ -6,6 +6,7 @@ const app = express()
 const server = createServer(app, {});
 const viewDir = "./app/views/";
 const path = require('path');
+const {sql} = require('@vercel/postgres');
 //Routing
 //Get untuk mengambil data dari server
 //Post biasany untuk mengirim data ke server
@@ -31,6 +32,12 @@ app.get ('/data/arya', (req, res)=>{
         }
     })
 })
+
+app.get('/api/users', async(req,res)=>{
+    const result = await sql`SELECT*FROM users ;`;
+    res.send(result.rows);
+
+});
 
 app.get('/data/adit', (req, res) => {
     res.send({
