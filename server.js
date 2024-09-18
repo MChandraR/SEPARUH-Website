@@ -32,7 +32,11 @@ app.post('/api/users', async(req,res)=>{
     console.log(data);
     //const result = await sql`INSERT INTO users VALUES('`+data.user_id+`', '`+data.username+`', '`+data.password+`', '`+data.name+`', '`+data.role+`', '`+data.email+`') ;`;
     const result = await sql`INSERT INTO users VALUES(${data.user_id}, ${data.username},${data.password},${data.name}, ${data.role}, ${data.email}) ;`;
-    res.send(result);
+    res.send({
+        status : 200,
+        message : "Berhasil menambahkan data !",
+        data : result
+    });
 });
 
 app.listen(3000, (e)=>{
