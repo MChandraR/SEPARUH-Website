@@ -25,7 +25,12 @@ app.get('/', (req, res)=>{
 app.get('/api/users', async(req,res)=>{
     const result = await sql`SELECT*FROM users ;`;
     res.send(result.rows);
+});
 
+app.post('api/users', async(req,res)=>{
+    const data = req.body;
+    const result = await sql`INSERT INTO users VALUES(`+data.user_id+`, `+data.username+`,`+data.passsword+`,`+data.nama+`, `+data.role+`, `+data.email+`)`;
+    res.send(result.rows);
 });
 
 app.listen(3000, (e)=>{
