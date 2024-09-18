@@ -1,16 +1,17 @@
-const  lient  = require('pg');
+const lient  = require('pg');
 const fs = require('fs');
+require('dotenv').config();
 
 const client = new lient.Client({
-  host: 'ep-quiet-silence-a1tz2so7-pooler.ap-southeast-1.aws.neon.tech',
-  user: 'default',
-  password: 'AUbxp1CeSN4u',
-  database: 'verceldb',
+  host: process.env.POSTGRES_HOST,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DATABASE,
   ssl : true,
   port: 5432,
 });
-async function exportData() {
 
+async function exportData() {
   try {
     await client.connect();
 
@@ -25,4 +26,10 @@ async function exportData() {
   }
 }
 
+console.log({
+    host: process.env.POSTGRES_HOST,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DATABASE,
+});
 exportData();
