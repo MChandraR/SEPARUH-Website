@@ -40,12 +40,21 @@ app.post('/api/users', async(req,res)=>{
 });
 
 app.put('/api/users', async(req,res)=>{
-    
     const data = req.body;
     const result = await sql`UPDATE users SET email = ${data.email} WHERE user_id = ${data.user_id};`;
     res.send({
         status : 200,
-        message : `Berhasil mengupdate data user_id (${data.user_id}) !`,
+        message : `Berhasil mengupdate data user (${data.user_id}) !`,
+        data : result
+    });
+});
+
+app.delete('/api/users', async(req, res)=>{
+    const data = req.body;
+    const result = await sql`DELETE FROM users WHERE user_id = ${data.user_id};`;
+    res.send({
+        status : 200,
+        message : `Berhasil menghapus data user (${data.user_id}) !`,
         data : result
     });
 });
