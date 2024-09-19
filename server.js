@@ -56,12 +56,11 @@ app.post('/api/users/login', async(req,res)=> {
         "query": query
     }
     console.log(data);
-    // if (result.rows.length > 1) {
-    //     utils.sendResponse(res, 200, `Berhasil login ke user, ${data.email} !`, result);
-    // } else {
-    //     utils.sendResponse(res, 400, `Gagal login email atau password salah ! `, result);
-    // }
-    utils.sendResponse(res, 200, `Berhasil`, result);
+    if (result.rows.length > 1) {
+        utils.sendResponse(res, 200, `Berhasil login ke user, ${query.rows.email} !`, result);
+    } else {
+        utils.sendResponse(res, 400, `Gagal login email atau password salah ! `, result);
+    }
 });
 
 app.get('/api', async(req,res)=>{
