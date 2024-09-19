@@ -56,7 +56,7 @@ app.post('/api/users/login', async(req,res)=> {
         "query": query
     }
     console.log(data);
-    if (result.rows.length > 1) {
+    if (query.rows.length > 1) {
         utils.sendResponse(res, 200, `Berhasil login ke user, ${data.user_id} !`, result);
     } else {
         utils.sendResponse(res, 401, `Gagal login email atau password salah ! `, result);
