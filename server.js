@@ -52,12 +52,12 @@ app.post('/api/users/login', async(req,res)=> {
     const data = req.body;
     const query = await sql`SELECT * FROM users WHERE user_id = ${data.user_id} AND password = ${data.password}`;
     const result = {
-        "data": data,
+        data,
         "query": query
     }
     console.log(data);
     if (query.rowCount >= 1) {
-        utils.sendResponse(res, 200, `Berhasil login ke user, ${data.user_id} !`, result);
+        utils.sendResponse(res, 200, `Berhasil login ! \t USER_ID: ${data.user_id}, EMAIL: ${query.rows[0].email} !`, result);
     } else {
         utils.sendResponse(res, 401, `Gagal login email atau password salah ! `, result);
     }
