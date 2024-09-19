@@ -51,6 +51,7 @@ app.delete('/api/users', async(req, res)=>{
 app.post('/api/users/login', async(req,res)=> {
     const data = req.body;
     const result = await sql`SELECT * FROM users WHERE user_id = ${data.email} AND password = ${data.password}`;
+    console.log(data);
     if (result.rows.length > 1) {
         utils.sendResponse(res, 200, `Berhasil login ke user, ${data.email} !`, result);
     } else {
