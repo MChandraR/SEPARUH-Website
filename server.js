@@ -50,7 +50,7 @@ app.delete('/api/users', async(req, res)=>{
 
 app.post('/api/users/login', async(req,res)=> {
     const data = req.body;
-    const query = await sql`SELECT * FROM users WHERE user_id = ${data.email} AND password = ${data.password}`;
+    const query = await sql`SELECT * FROM users WHERE user_id = ${data.user_id} AND password = ${data.password}`;
     const result = {
         "data": data,
         "query": query
