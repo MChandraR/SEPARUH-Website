@@ -57,9 +57,9 @@ app.post('/api/users/login', async(req,res)=> {
     }
     console.log(data);
     if (result.rows.length > 1) {
-        utils.sendResponse(res, 200, `Berhasil login ke user, ${query.rows.email} !`, result);
+        utils.sendResponse(res, 200, `Berhasil login ke user, ${data.user_id} !`, result);
     } else {
-        utils.sendResponse(res, 400, `Gagal login email atau password salah ! `, result);
+        utils.sendResponse(res, 401, `Gagal login email atau password salah ! `, result);
     }
 });
 
