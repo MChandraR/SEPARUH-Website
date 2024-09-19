@@ -58,7 +58,7 @@
         document.getElementById('loginForm').addEventListener('submit', async function() {
             event.preventDefault();
 
-            const username = document.getElementById('username').value;
+            const user_id = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             try {
@@ -67,7 +67,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ username, password })
+                    body: JSON.stringify({ user_id, password })
                 });
 
                 if (!response.ok) {
