@@ -57,7 +57,7 @@ app.post('/api/users/login', async(req,res)=> {
     }
     console.log(data);
     if (query.rowCount >= 1) {
-        utils.sendResponse(res, 200, `Berhasil login ! \t USER_ID: ${data.user_id}, EMAIL: ${query.rows[0].email} !`, result);
+        utils.sendResponse(res, 200, `Berhasil login !   USER_ID: ${data.user_id}, EMAIL: ${query.rows[0].email} !`, result);
     } else {
         utils.sendResponse(res, 401, `Gagal login email atau password salah ! `, result);
     }
