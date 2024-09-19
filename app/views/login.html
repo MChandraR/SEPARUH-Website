@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            color: cornflowerblue;
+            font-size: 1.3rem;
+        }
+
+        #form-content {
+            width: 30%;
+            padding: 20px 10px;
+            margin: 100px auto;
+            border: solid black;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #loginForm label, #form-content input {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        #loginForm input:not(:last-of-type) {
+            margin-bottom: 10px;
+        }
+
+        #loginForm button {
+            padding: 8px 12px;
+            margin-top: 12px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="form-content">
+        <h2 style="text-align: center;">Login Form</h2>
+        <form id="loginForm">
+            <label>Username: </label>
+            <input type="text" id="username" required />
+            
+            <label>Password: </label>
+            <input type="password" id="password" required />
+
+            <button type="submit">Login</button>
+        </form>
+        <div id="Error" style="color: red;"></div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function() {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Login failed');
+                }
+
+                const data = await response.json();
+                alert(data.message);
+            } catch (err) {
+                document.getElementById('Error').innerText = err.message;
+            }
+        });
+    </script>
+</body>
+</html>
