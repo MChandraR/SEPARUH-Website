@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const createServer = require('http').createServer
 const utils = require('./utils/utils');
+const view = require('./utils/views').view;
 //Inisialisasi Server
 const app = express()
 const server = createServer(app, {});
@@ -26,6 +27,10 @@ app.get('/', (req, res)=>{
 app.get('/api/users', async(req,res)=>{
     const result = await sql`SELECT*FROM users ;`;
     res.send(result.rows);
+});
+
+app.get('/login', async(req,res)=> {
+    res.send(view('login'));
 });
 
 app.post('/api/users', async(req,res)=>{
