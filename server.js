@@ -2,26 +2,18 @@ const express = require('express');
 const fs = require('fs');
 const createServer = require('http').createServer
 const utils = require('./utils/utils');
-const view = require('./utils/views').view;
-//Inisialisasi Server
+const View = require('./utils/views').view;
 const app = express()
 const server = createServer(app, {});
 const viewDir = "./app/views/";
 const path = require('path');
 const {sql} = require('@vercel/postgres');
-//Routing
-//Get untuk mengambil data dari server
-//Post biasany untuk mengirim data ke server
-//Put biasanya untuk update data
-//Delete delete data
+
 app.use(express.json());
 app.use(express.static('./public'));
 
-app.get('/', (req, res)=>{
-    let usersPath = path.join(process.cwd(),viewDir + "index.html");
-    const file = fs.readFileSync(usersPath, 'utf-8');
-    
-    res.send(file);
+app.get('/', async(req, res)=>{
+    res.send(View('index'));
 });
 
 app.get('/api/users', async(req,res)=>{
@@ -30,7 +22,7 @@ app.get('/api/users', async(req,res)=>{
 });
 
 app.get('/login', async(req,res)=> {
-    res.send(view('login'));
+    res.send(View('login'));
 });
 
 app.post('/api/users', async(req,res)=>{
