@@ -58,7 +58,7 @@ app.post('/api/login', [
         const data = req.body;
         const result = { data, query: await sql`SELECT * FROM users WHERE user_id = ${data.user_id} AND password = ${data.password}` }
 
-        if (query.rowCount >= 1) 
+        if (result.query.rowCount >= 1) 
             utils.sendResponse(res, 200, "Berhasil login!", result);
         else
             utils.sendResponse(res, 401, "Gagal login!", result);
