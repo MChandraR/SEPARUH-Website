@@ -46,15 +46,8 @@ app.delete('/api/users', async(req, res)=>{
     utils.sendResponse(res,200, "Berhasil mengupdate data !", result);
 });
 
-app.post('/api/login', [
-    body('user_id').trim().isLength({ min: 1 }).withMessage('Username is required!'),
-    body('password').trim().isLength({ min: 1 }).withMessage('Password is required!')
-], async(req,res)=> {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        utils.sendResponse(res, 400, "Validation Error", errors.array());
-    }
-    else {
+app.post('/api/login', async(req,res)=> {
+    
         const data = req.body;
         const query = await sql`SELECT * FROM users WHERE user_id = ${data.user_id} AND password = ${data.password}`;
         const result = data;
@@ -64,7 +57,7 @@ app.post('/api/login', [
         else
             utils.sendResponse(res, 401, "Gagal login!", result);
         res.send(result);
-    }
+
 });
 
 app.get('/api', async(req,res)=>{
