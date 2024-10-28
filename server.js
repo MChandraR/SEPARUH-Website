@@ -11,7 +11,9 @@ const path = require('path');
 const {sql} = require('@vercel/postgres');
 
 app.use(express.json());
-app.use(express.static('./public'));
+
+// Static Files
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async(req, res)=>{
     res.send(View('index'));
