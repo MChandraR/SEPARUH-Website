@@ -45,10 +45,6 @@ app.post('/api/login', [
     }
 });
 
-app.get('/api', async(req,res)=>{
-    utils.sendResponse(res,200, "Berhasil mengupdate data !", null);
-});
-
 app.listen(3000,"0.0.0.0", (e)=>{
     console.log("Server start on http://localhost:3000");
 });

@@ -1,4 +1,5 @@
 const View = require('../../utils/views').view;
+const Response = require('../../utils/utils').sendResponse;
 
 class loginController{
     index(req,res){

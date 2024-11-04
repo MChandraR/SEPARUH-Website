@@ -1,10 +1,10 @@
 const db = require('../models/mongo');
+const Response = require('../../utils/utils').sendResponse;
 const Users = require('../models/users');
 
 class userController{
     async get(req,res){
-        let data = await Users.get();
-        res.send(data);
+        Response(res, 200, "Berhasil mengambil data !", await Users.get());
     }
 
     async post(req,res){
