@@ -11,7 +11,7 @@ class userController{
         const data = req.body;
         console.log(data);
 
-        res.send(await Users.create({
+        Response(res, 200, "Berhasil menambahkan data !",await Users.create({
             user_id : data.user_id,
             username: data.username,
             password : data.password,
