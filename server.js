@@ -1,44 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const fs = require('fs');
-const createServer = require('http').createServer
 const utils = require('./utils/utils');
-const View = require('./utils/views').view;
 const app = express()
-const server = createServer(app, {});
-const viewDir = "./app/views/";
 const path = require('path');
-const {sql} = require('@vercel/postgres');
-
+const router = require('./app/routes');
 app.use(express.json());
 
-// Static Files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/",router);
 
-app.get('/', async(req, res)=>{
-    res.send(View('landing'));
-});
 
-app.get('/landing', async(req, res)=>{
-    res.send(View('landing'));
-});
 
-app.get('/api/users', async(req,res)=>{
-    const result = await sql`SELECT*FROM users ;`;
-    res.send(result.rows);
-});
-
-app.get('/login', async(req,res)=> {
-    res.send(View('login'));
-});
-
-app.post('/api/users', async(req,res)=>{
-    const data = req.body;
-    console.log(data);
-    //const result = await sql`INSERT INTO users VALUES('`+data.user_id+`', '`+data.username+`', '`+data.password+`', '`+data.name+`', '`+data.role+`', '`+data.email+`') ;`;
-    const result = await sql`INSERT INTO users VALUES(${data.user_id}, ${data.username},${data.password},${data.name}, ${data.role}, ${data.email}) ;`;
-    utils.sendResponse(res, 200, "Berhasil menambah data ", result);
-});
 
 app.put('/api/users', async(req,res)=>{
     const data = req.body;
@@ -76,6 +49,6 @@ app.get('/api', async(req,res)=>{
     utils.sendResponse(res,200, "Berhasil mengupdate data !", null);
 });
 
-app.listen(80,"0.0.0.0", (e)=>{
+app.listen(3000,"0.0.0.0", (e)=>{
     console.log("Server start on http://localhost:3000");
 });
