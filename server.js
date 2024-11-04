@@ -13,7 +13,11 @@ app.use(express.json());
 app.use(express.static('./public'));
 
 app.get('/', async(req, res)=>{
-    res.send(View('index'));
+    res.send(View('landing'));
+});
+
+app.get('/landing', async(req, res)=>{
+    res.send(View('landing'));
 });
 
 app.get('/api/users', async(req,res)=>{
@@ -64,6 +68,6 @@ app.get('/api', async(req,res)=>{
     utils.sendResponse(res,200, "Berhasil mengupdate data !", null);
 });
 
-app.listen(3000, (e)=>{
+app.listen(80,"0.0.0.0", (e)=>{
     console.log("Server start on http://localhost:3000");
 });
