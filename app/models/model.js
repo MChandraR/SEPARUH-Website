@@ -1,0 +1,7 @@
+class Model{
+    table = "";
+
+    select(){
+
+    }
+}

@@ -6,7 +6,7 @@ class Users{
         await getClient('users', async (db, client)=>{
             try{
                 const query = { };
-                const movie = await db.findOne(query);
+                const movie = await db.find(query);
                 data = movie;
             } finally {
                 await client.close();
