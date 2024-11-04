@@ -5,14 +5,12 @@ class Users{
         let data = null;
         await getClient('users', async (db, client)=>{
             try{
-                const query = { };
-                const movie = await db.find(query);
-                data = movie;
+                data = await db.find().toArray();
             } finally {
                 await client.close();
             }
         });
-           
+        console.log(data);
         return data;
     }
 
