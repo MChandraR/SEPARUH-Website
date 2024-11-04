@@ -1,0 +1,121 @@
+:root {
+    --input-border-radius: 6px;
+}
+
+body {
+    font-family: 'Lucida Sans', sans-serif;
+    background-color: #1C356D;
+}
+
+a {
+    color: cornflowerblue;
+    font-size: 1.3rem;
+}
+
+#login-header-container {
+    height: 70px;
+    background-color: #264384;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#header-title {
+    font-size: 1rem;
+    color: white;
+}
+
+#header-logo-container {
+    width: 50px;
+    margin: 0 20px;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: #ffc107;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#header-logo-container img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+#login-form-container {
+    width: 450px;
+    margin: 100px auto;
+    padding: 20px 30px;
+    border: solid black;
+    border-radius: 12px;
+    background-color: #bec7db;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-title {
+    margin-bottom: 32px;
+}
+
+.input-container {
+    width: 100%;
+    height: 46px;
+    /* border: 1px solid red; */
+    position: relative;
+    display: flex;
+}
+.input-container span.input-logo {
+    width: 48px;
+    font-size: 24px;
+    height: 100%;
+    color: gray;
+    border: 1px solid gray;
+    background-color: #dddddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input-container:not(:last-child) {
+    margin-bottom: 25px;
+}
+
+#login-form label, #login-form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#login-form input {
+    height: 46px;
+    padding: 1px 1px 1px 20px;
+    border: 1px solid gray;
+    border-left: none !important;
+}
+
+/* input border radius */
+.input-container, .input-container span.input-logo {
+    border-top-left-radius: var(--input-border-radius);
+    border-bottom-left-radius: var(--input-border-radius);
+}
+#login-form input {
+    border-top-right-radius: var(--input-border-radius);
+    border-bottom-right-radius: var(--input-border-radius);
+}
+
+#login-form input::placeholder {
+    color: gray;
+}
+
+#login-form button {
+    width: 100%;
+    height: 46px;
+    margin-top: 12px;
+    color: white;
+    border: 1px solid gray;
+    background-color: #f3bf16;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+#login-form button:hover {
+    background-color: #d7aa15;
+}

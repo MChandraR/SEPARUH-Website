@@ -20,6 +20,7 @@
     "@vercel/postgres": "^0.10.0",
     "dotenv": "^16.4.5",
     "express": "^4.20.0",
+    "express-validator": "^7.2.0",
     "pg": "^8.13.0"
   }
 }

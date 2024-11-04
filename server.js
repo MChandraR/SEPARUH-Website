@@ -1,4 +1,5 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const fs = require('fs');
 const createServer = require('http').createServer
 const utils = require('./utils/utils');
@@ -10,7 +11,9 @@ const path = require('path');
 const {sql} = require('@vercel/postgres');
 
 app.use(express.json());
-app.use(express.static('./public'));
+
+// Static Files
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async(req, res)=>{
     res.send(View('landing'));
@@ -49,18 +52,23 @@ app.delete('/api/users', async(req, res)=>{
     utils.sendResponse(res,200, "Berhasil mengupdate data !", result);
 });
 
-app.post('/api/users/login', async(req,res)=> {
-    const data = req.body;
-    const query = await sql`SELECT * FROM users WHERE user_id = ${data.user_id} AND password = ${data.password}`;
-    const result = {
-        data,
-        "query": query
+app.post('/api/login', [
+    body('user_id').trim().isLength({ min: 1 }).withMessage('Username is required!'),
+    body('password').trim().isLength({ min: 1 }).withMessage('Password is required!')
+], async(req,res)=> {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        utils.sendResponse(res, 400, "Validation Error", errors.array());
     }
-    console.log(data);
-    if (query.rowCount >= 1) {
-        utils.sendResponse(res, 200, `Berhasil login !   USER_ID: ${data.user_id}, EMAIL: ${query.rows[0].email} !`, result);
-    } else {
-        utils.sendResponse(res, 401, `Gagal login email atau password salah ! `, result);
+    else {
+        const data = req.body;
+        const result = { data, query: await sql`SELECT * FROM users WHERE user_id = ${data.user_id} AND password = ${data.password}` }
+
+        if (result.query.rowCount >= 1) 
+            utils.sendResponse(res, 200, "Berhasil login!", result);
+        else
+            utils.sendResponse(res, 401, "Gagal login!", result);
+        res.send(result);
     }
 });
 
