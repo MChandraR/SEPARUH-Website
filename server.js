@@ -9,6 +9,12 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/",router);
+app.get("/env", (req,res)=>{
+    res.send({
+        username : process.env.MONGO_USER,
+        pass : process.env.MONGO_PASS
+    });
+});
 
 
 

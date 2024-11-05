@@ -2,6 +2,6 @@ class Model{
     table = "";
 
     select(){
-
+        
     }
 }
