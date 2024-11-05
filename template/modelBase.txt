@@ -1,0 +1,10 @@
+const model = require("./model");
+
+class namespace extends model{
+    constructor(){ 
+        super();
+        this.table = 'namespace';
+    }
+}
+
+module.exports = new namespace();

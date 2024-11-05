@@ -19,17 +19,8 @@ app.get("/env", (req,res)=>{
 
 
 
-app.put('/api/users', async(req,res)=>{
-    const data = req.body;
-    const result = await sql`UPDATE users SET email = ${data.email} WHERE user_id = ${data.user_id};`;
-    utils.sendResponse(res, 200,  `Berhasil mengupdate data user (${data.user_id}) !`, result);
-});
 
-app.delete('/api/users', async(req, res)=>{
-    const data = req.body;
-    const result = await sql`DELETE FROM users WHERE user_id = ${data.user_id};`;
-    utils.sendResponse(res,200, "Berhasil mengupdate data !", result);
-});
+
 
 app.post('/api/login', [
     body('user_id').trim().isLength({ min: 1 }).withMessage('Username is required!'),

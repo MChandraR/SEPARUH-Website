@@ -19,6 +19,27 @@ class userController{
             email : data.email
         }));
     }
+
+    async put(req,res){
+        const data = req.body;
+        Response(res, 200, "Berhasil mengupdate !", await Users.update(
+            {user_id:data.user_id},
+            {
+                password : data.password
+            }
+        ));
+    }
+
+    async delete(req,res){
+        const data = req.body;
+        // const result = await sql`DELETE FROM users WHERE user_id = ${data.user_id};`;
+        Response(res,200, "Berhasil menghapus data !", await Users.delete(
+            {user_id : data.user_id}
+        ));
+    }
+
+
+
 }
 
 module.exports = new userController();
