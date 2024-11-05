@@ -5,6 +5,7 @@ const userController = require('./controllers/userController');
 
 route.get('/', (req,res)=>res.send(View('index')));
 route.get('/login',(req,res)=>loginController.index(req,res));
+route.get('/login2',(req,res)=>loginController.alternateIndex(req,res));
 
 //Route untuk user
 route.get('/api/users', async(req,res)=>userController.get(req,res));
