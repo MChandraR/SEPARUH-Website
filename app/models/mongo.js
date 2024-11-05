@@ -22,6 +22,13 @@ try {
 run().catch(console.dir);
 
 async function getClient(collection, callback){
+  let client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
     try {
         await client.connect();
         const database = client.db('pemweb');
@@ -29,7 +36,6 @@ async function getClient(collection, callback){
         return callback(col, client);
       } finally {
       }
-    return null;
 }
 
 module.exports = getClient;

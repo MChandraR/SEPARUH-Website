@@ -4,17 +4,15 @@ class Model{
     table = "";
 
     async get(){
-        let data = null;
-        let client = await getClient();
-        try{
-            await client.connect();
-            const database = await client.db('pemweb');
-            const db = await database.collection(this.table);
-            data = await db.find().toArray();
-            return data;
-        } finally {
-            await client.close();
-        }
+        let result = null;
+        await getClient(this.table, async (db, client)=>{
+            try{
+                result = await db.find().toArray();
+            } finally {
+                if(client!=null)await client.close();
+            }
+        });
+        return result;
         
     }
 
