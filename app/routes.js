@@ -1,12 +1,13 @@
 const route = require('express').Router();
 const View = require('./../utils/views').view;
-const loginController = require('./controllers/loginController');
+const viewController = require('./controllers/viewController');
 const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController');
 
-route.get('/', (req,res)=>res.send(View('index')));
-route.get('/login',(req,res)=>loginController.index(req,res));
-route.get('/login2',(req,res)=>loginController.alternateIndex(req,res));
+//Route untuk view
+route.get('/', (req,res)=>viewController.index(req,res));
+route.get('/login',(req,res)=>viewController.login(req,res));
+route.get('/login2',(req,res)=>viewController.login2(req,res));
 
 //Route untuk user
 route.get('/api/users', async(req,res)=>await userController.index(req,res));
