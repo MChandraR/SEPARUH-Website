@@ -14,7 +14,10 @@ class sessionController {
         if(data){
             req.session.regenerate(function (err) {
                 if (err) next(err)
-                req.session.user = body;
+                req.session.user = {
+                    user_id : data.user_id,
+                    username : data.username
+                };
                 var hour = 3600000
                 req.session.cookie.expires = new Date(Date.now() + hour)
                 req.session.cookie.maxAge = hour

@@ -18,39 +18,14 @@ app.use(session(sess))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/",router);
 
-app.get('/destroy', (req,res)=>{
-    req.session.destroy((e)=>{
-        res.send("Berhasil dihapus !");
-    });
-});
 
-app.get('/session', (req,res)=>{
-    req.session.regenerate(function (err) {
-        if (err) next(err)
-    
-        // store user information in session, typically a user id
-        req.session.user = {
-            nama : "chandra"
-        }
-        var hour = 3600000
-        req.session.cookie.expires = new Date(Date.now() + hour)
-        req.session.cookie.maxAge = hour
-    
-        // save the session before redirection to ensure page
-        // load does not happen before session is saved
-        req.session.save(function (err) {
-            if (err) return next(err)
-            else res.send("berhasil" + req.session.user);
-        })
-      })
-    
-});
+
 
 app.get('/test', function(req, res, next) {
     if (req.session.views) {
       req.session.views++
       res.setHeader('Content-Type', 'text/html')
-      res.write('<p>total: ' + req.session.user['nama'] + '</p>')
+      res.write('<p>total: ' + req.session.user['user_id'] + '</p>')
       res.write('<p>views: ' + req.sessionID + '</p>')
       res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
       res.end()
