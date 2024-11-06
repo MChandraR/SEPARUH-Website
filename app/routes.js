@@ -6,6 +6,7 @@ const sessionController = require('./controllers/sessionController');
 
 route.get('/', (req,res)=>res.send(View('index')));
 route.get('/login',(req,res)=>loginController.index(req,res));
+route.get('/login2',(req,res)=>loginController.alternateIndex(req,res));
 
 //Route untuk user
 route.get('/api/users', async(req,res)=>await userController.index(req,res));
