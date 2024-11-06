@@ -1,4 +1,3 @@
-const getClient = require('./mongo');
 const model = require('./model');
 
 class Users extends model{
@@ -7,7 +6,6 @@ class Users extends model{
         this.table = "users";
     }
 
-    
 }
 
 module.exports = new Users();

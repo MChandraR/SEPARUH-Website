@@ -1,26 +1,64 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session')
 const { body, validationResult } = require('express-validator');
 const utils = require('./utils/utils');
 const app = express()
 const path = require('path');
 const router = require('./app/routes');
-app.use(express.json());
+var sess = {
+    secret: 'keyboard cat',
+    cookie: {
 
+    }
+}
+
+app.use(express.json());
+app.use(session(sess))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/",router);
-app.get("/env", (req,res)=>{
-    res.send({
-        username : process.env.MONGO_USER,
-        pass : process.env.MONGO_PASS
+
+app.get('/destroy', (req,res)=>{
+    req.session.destroy((e)=>{
+        res.send("Berhasil dihapus !");
     });
 });
 
+app.get('/session', (req,res)=>{
+    req.session.regenerate(function (err) {
+        if (err) next(err)
+    
+        // store user information in session, typically a user id
+        req.session.user = {
+            nama : "chandra"
+        }
+        var hour = 3600000
+        req.session.cookie.expires = new Date(Date.now() + hour)
+        req.session.cookie.maxAge = hour
+    
+        // save the session before redirection to ensure page
+        // load does not happen before session is saved
+        req.session.save(function (err) {
+            if (err) return next(err)
+            else res.send("berhasil" + req.session.user);
+        })
+      })
+    
+});
 
-
-
-
-
+app.get('/test', function(req, res, next) {
+    if (req.session.views) {
+      req.session.views++
+      res.setHeader('Content-Type', 'text/html')
+      res.write('<p>total: ' + req.session.user['nama'] + '</p>')
+      res.write('<p>views: ' + req.sessionID + '</p>')
+      res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+      res.end()
+    } else {
+      req.session.views = 1
+      res.end('welcome to the session demo. refresh!')
+    }
+  })
 
 app.post('/api/login', [
     body('user_id').trim().isLength({ min: 1 }).withMessage('Username is required!'),

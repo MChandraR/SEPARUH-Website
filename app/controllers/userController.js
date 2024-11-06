@@ -3,11 +3,13 @@ const Response = require('../../utils/utils').sendResponse;
 const Users = require('../models/users');
 
 class userController{
-    async get(req,res){
-        Response(res, 200, "Berhasil mengambil data !", await Users.get());
+
+    async index(req,res){
+        if(req.session.user)Response(res, 200, "Berhasil mengambil data !", await Users.get());
+        else Response(res, 201, "Anda tidak memiliki hak akses !", null);
     }
 
-    async post(req,res){
+    async insert(req,res){
         const data = req.body;
         console.log(data);
 
@@ -20,7 +22,7 @@ class userController{
         }));
     }
 
-    async put(req,res){
+    async update(req,res){
         const data = req.body;
         Response(res, 200, "Berhasil mengupdate !", await Users.update(
             {user_id:data.user_id},
@@ -32,7 +34,6 @@ class userController{
 
     async delete(req,res){
         const data = req.body;
-        // const result = await sql`DELETE FROM users WHERE user_id = ${data.user_id};`;
         Response(res,200, "Berhasil menghapus data !", await Users.delete(
             {user_id : data.user_id}
         ));
