@@ -3,9 +3,8 @@ const Response = require('../../utils/utils').sendResponse;
 const Users = require('../models/users');
 
 class userController{
-
     async index(req,res){
-        if(req.session.user)Response(res, 200, "Berhasil mengambil data !", await Users.get());
+        if(req.session.user)Response(res, 200, "Berhasil mengambil data !", await Users.orderBy('user_id', "ASC").get());
         else Response(res, 201, "Anda tidak memiliki hak akses !", null);
     }
 
@@ -38,8 +37,6 @@ class userController{
             {user_id : data.user_id}
         ));
     }
-
-
 
 }
 
