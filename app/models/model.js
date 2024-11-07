@@ -4,18 +4,18 @@ class Model{
     table = "";
     state = {};
     fillable = [];
+    orderState = {};
 
     async get(){
         let result = null;
         await getClient(this.table, async (db, client)=>{
             try{
-                result = await db.find(this.state).toArray();
+                result = await db.find(this.state).sort(this.orderState).toArray();
             } finally {
                 if(client!=null)await client.close();
             }
         });
         return result;
-        
     }
 
     async first(){
@@ -28,7 +28,6 @@ class Model{
             }
         });
         return result;
-        
     }
 
     async create(data){
@@ -73,6 +72,11 @@ class Model{
         this.state = state;
         return this;
     };
+
+    orderBy(field, mode){
+        this.orderState[field] = mode=="ASC" ? 1 : -1;
+        return this;
+    }
 }
 
 module.exports =  Model;

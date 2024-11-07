@@ -14,6 +14,10 @@ class loginController{
     login2(req,res){
         return res.send(View('login2'));
     }
+
+    beranda(req,res){
+        return res.send(View('home'));
+    }
 }
 
 module.exports = new loginController();
