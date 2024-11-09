@@ -1,27 +1,19 @@
 body{
     padding : 0;
     margin : 0;
+    overflow-y: scroll;
     font-family: "Ubuntu", serif;
 }
 
-.container{
-    padding: 0;
-    margin: 0;
-    width: 100vw; 
-    min-height: 100vh; 
-    position: relative
-}
 
 .body{
-    margin: 0;
-    padding : 0;
-    width: 100vw; 
+    width: 100%; 
     min-height: 100vh;  
-    background: #ECF6F6
+    background: #ECF6F6;
 }
 
 .navbar{
-    width: 100vw; 
+    width: 100%; 
     height: 80px; 
 }
 
@@ -35,7 +27,7 @@ body{
     top: 20px;
 }
 
-.main{
+.mains{
     margin-top: 12vh;
     font-size: 2.5em;
     font-weight: 600;
@@ -58,13 +50,12 @@ body{
     display: flex;
     align-self: self-end;
     justify-self: end;
-    margin-right: 2rem;
+    margin-right: .5rem;
     margin-top: -2rem;
 }
 
-.list-item{
+.list-items{
     position: relative;
-    width: 100%;
     margin-top: 2rem;
     display: flex;
     row-gap: 1rem;
@@ -78,4 +69,20 @@ body{
     align-items: center; 
     gap: 8px; 
     display: inline-flex
+}
+
+.footer{
+    position:relative;
+    padding: 2rem 5rem;
+    font-size: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sosmed{
+    column-gap: 1rem;
+    row-gap: 1rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
