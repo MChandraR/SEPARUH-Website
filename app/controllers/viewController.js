@@ -3,7 +3,7 @@ const Response = require('../../utils/utils').sendResponse;
 
 class loginController{
     index(req,res){
-        return res.send(View('index'));
+        return res.send(View('home'));
     }
 
     login(req,res){

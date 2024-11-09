@@ -3,9 +3,17 @@ const Response = require('../../utils/utils').sendResponse;
 const Users = require('../models/users');
 
 class userController{
+    validate(req,res){
+        if(req.session.user) return true;
+        else {
+            Response(res, 201, "Anda tidak memiliki hak akses !", null);
+            return false;
+        }
+
+    }
+
     async index(req,res){
-        if(req.session.user)Response(res, 200, "Berhasil mengambil data !", await Users.orderBy('user_id', "ASC").get());
-        else Response(res, 201, "Anda tidak memiliki hak akses !", null);
+        if(this.validate(req,res))Response(res, 200, "Berhasil mengambil data !", await Users.orderBy('user_id', "DESC").get());
     }
 
     async insert(req,res){

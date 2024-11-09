@@ -1,20 +1,27 @@
 const getClient = require('./mongo');
 
 class Model{
+
     table = "";
     state = {};
     fillable = [];
     orderState = {};
+    filtered = false;
+
 
     async get(){
         let result = null;
         await getClient(this.table, async (db, client)=>{
             try{
-                result = await db.find(this.state).sort(this.orderState).toArray();
+                console.log(this.state);
+                if(this.filtered)result = await db.find(this.state).sort(this.orderState).toArray();
+                else result = await db.find().sort(this.orderState).toArray();
             } finally {
                 if(client!=null)await client.close();
+                this.filtered = false;
             }
         });
+        
         return result;
     }
 
@@ -26,6 +33,8 @@ class Model{
             } finally {
                 if(client!=null)await client.close();
             }
+            this.filtered = false;
+
         });
         return result;
     }
@@ -70,6 +79,7 @@ class Model{
 
     where(state){
         this.state = state;
+        this.filtered = true;
         return this;
     };
 
