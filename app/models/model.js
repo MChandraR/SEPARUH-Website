@@ -8,7 +8,6 @@ class Model{
     orderState = {};
     filtered = false;
 
-
     async get(){
         let result = null;
         await getClient(this.table, async (db, client)=>{
@@ -51,32 +50,34 @@ class Model{
         return result;
     }
 
-    async update(state,data){
+    async update(data){
         let result = null;
         await getClient(this.table, async(db,client)=>{
             try{
-                result = await db.updateOne(state, 
+                result = await db.updateOne(this.state, 
                     {
                         $set:data
                     }
                 );
             } finally {
                 if(client!=null)await client.close();
+                this.state = {};
             }
-        });
+        });return result;
     }
 
-    async delete(state,data){
+    async delete(){
         let result = null;
         await getClient(this.table, async(db,client)=>{
             try{
-                result = await db.deleteOne(state);
+                result = await db.deleteOne(this.state);
             } finally {
                 if(client!=null)await client.close();
+                this.state = {};
             }
-        });
+        });return result;
     }
-
+    
     where(state){
         this.state = state;
         this.filtered = true;

@@ -31,8 +31,7 @@ class userController{
 
     async update(req,res){
         const data = req.body;
-        Response(res, 200, "Berhasil mengupdate !", await Users.update(
-            {user_id:data.user_id},
+        Response(res, 200, "Berhasil mengupdate !", await Users.where({user_id:data.user_id}).update(
             {
                 password : data.password
             }
@@ -41,9 +40,7 @@ class userController{
 
     async delete(req,res){
         const data = req.body;
-        Response(res,200, "Berhasil menghapus data !", await Users.delete(
-            {user_id : data.user_id}
-        ));
+        Response(res,200, "Berhasil menghapus data !", await Users.where({user_id : data.user_id}).delete());
     }
 
 }

@@ -418,7 +418,7 @@ input:focus {
   display: grid;
   grid-template-columns: 30% 30% 30%;
   top: 735px;
-  width: 95vw;
+  width: 85vw;
 }
 
 .beranda .info-card {
@@ -461,7 +461,10 @@ input:focus {
 }
 
 .beranda .info-image {
-  width: 100%;
+  width: 20vw;
+  height: 25vh;
+  position: relative;
+  object-fit: contain;
 }
 
 .beranda .info-aset-EnGZFo {

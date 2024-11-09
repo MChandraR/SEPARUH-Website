@@ -18,6 +18,10 @@ class loginController{
     beranda(req,res){
         return res.send(View('home'));
     }
+
+    peminjaman(req,res){
+        return res.send(View('peminjaman'));
+    }
 }
 
 module.exports = new loginController();

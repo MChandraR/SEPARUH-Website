@@ -16,11 +16,13 @@ class sessionController {
                 if (err) next(err)
                 req.session.user = {
                     user_id : data.user_id,
-                    username : data.username
+                    username : data.username,
+                    role : data.role
                 };
                 var hour = 3600000
                 req.session.cookie.expires = new Date(Date.now() + hour)
                 req.session.cookie.maxAge = hour
+                console.log(req.session.user);
                 req.session.save((err) => Response(res,200, err ? "Err : Session not saved  !" : "Berhasil login !", null));
             })
         }else Response(res,200, "Username atau password salah !", null);
