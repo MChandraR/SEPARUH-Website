@@ -8,6 +8,13 @@ class sessionController {
         Response(res,200, "Berhasil mendapat data !", await sessions.get());
     }
 
+    // Middleware untuk validasi sesi, redirect user ke login jika sesi tidak ada
+    validateSession(req,res,next){
+        if(req.session && req.session.user){
+            return next();
+        } else return res.redirect('/login');
+    }
+
     async login(req,res){
         const body = req.body;
         let data = await Users.where({username:body.username, password:body.password}).first();

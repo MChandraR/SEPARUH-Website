@@ -1,7 +1,7 @@
 const View = require('../../utils/views').view;
 const Response = require('../../utils/utils').sendResponse;
 
-class loginController{
+class viewController{
     index(req,res){
         return res.send(View('home'));
     }
@@ -24,4 +24,4 @@ class loginController{
     }
 }
 
-module.exports = new loginController();
+module.exports = new viewController();
