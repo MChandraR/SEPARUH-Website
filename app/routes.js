@@ -19,6 +19,8 @@ route.get(
     (req,res)=>viewController.beranda(req,res)
 );
 
+route.get('/peminjaman', (req,res)=>viewController.peminjaman(req,res,true));
+
 //Route untuk user dengan role 'admin'
 route.get(
     '/api/users', 
