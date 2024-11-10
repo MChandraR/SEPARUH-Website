@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/login2.css">
     <title>Login</title>
     <script src="/js/jquery-3.7.1.js"></script>
+    <script src="/js/sweetalert2@11.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -26,7 +27,7 @@
                 </label>
                 <label aria-labelledby="Email|Username">
                     Password<br />
-                    <input type="text" name="Email|Username" id="password"
+                    <input type="password" name="Email|Username" id="password"
                     placeholder="Masukkan password" />
                 </label>
                 <a href="#">Lupa Password</a>
@@ -63,8 +64,13 @@
             }
 
             const data = await response.json();
-            alert(data.message);
-            if(data.status == 200){
+            let res = await Swal.fire({
+                title: data.status == 200 ? 'Sukses' : 'Error',
+                text: data.message,
+                icon: data.status == 200 ? 'success' : 'error',
+                confirmButtonText: 'Oke',
+              });
+            if(data.status == 200 && res){
                 window.location.href = "/";
             }
         } catch (err) {
