@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/login2.css">
     <title>Login</title>
+    <script src="/js/jquery-3.7.1.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -20,24 +21,54 @@
             <form id="form">
                 <label aria-labelledby="Email|Username">
                     Email atau Username<br />
-                    <input type="text" name="Email|Username"
-                    placeholder="Masukkan email atau username" />
+                    <input type="text" name="Email|Username" id="username"
+                    placeholder="Masukkan email atau username"  />
                 </label>
                 <label aria-labelledby="Email|Username">
                     Password<br />
-                    <input type="text" name="Email|Username"
+                    <input type="text" name="Email|Username" id="password"
                     placeholder="Masukkan password" />
                 </label>
                 <a href="#">Lupa Password</a>
                 <button type="submit">Login</button>
-                <a href="#" id="google-login-btn">
+                <div href="#" id="google-login-btn">
                     Lanjutkan dengan akun google
                     <div id="icon-container">
                         <img src="/assets/img/logo-google.png" alt="icon-google">
                     </div>
-                </a>
+                </div>
             </form>
         </div>
     </div>
 </body>
 </html>
+<script>
+    document.getElementById('form').addEventListener('submit', async function() {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+
+            const data = await response.json();
+            alert(data.message);
+            if(data.status == 200){
+                window.location.href = "/";
+            }
+        } catch (err) {
+            document.getElementById('Error').innerText = err.message;
+        }
+    });
+</script>

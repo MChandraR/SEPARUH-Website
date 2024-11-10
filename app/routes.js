@@ -9,8 +9,7 @@ const { validateSession, authorizeAdmin,  } = require('./middlewares/index.js');
 
 //Route untuk view
 route.get('/', (req,res)=>viewController.index(req,res, true));
-route.get('/login', (req,res)=>viewController.login(req,res));
-route.get('/login2', (req,res)=>viewController.login2(req,res));
+route.get('/login', (req,res)=>viewController.login2(req,res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession,(req,res)=>viewController.peminjaman(req,res));
 
