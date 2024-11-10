@@ -1,3 +1,5 @@
 <a href="https://www.flaticon.com/free-icons/male" title="male icons">Male icons created by Freepik - Flaticon</a>
 
 <a href="https://www.flaticon.com/free-icons/notification" title="notification icons">Notification icons created by ghufronagustian - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/user-account" title="user account icons">User account icons created by kawalanicon - Flaticon</a>

@@ -26,9 +26,9 @@
         <div class="mac-book-air-1-LN8ZrO" data-id="101:2" style="margin: 0;padding : 0;">
           <div class="navbar" data-id="106:3" style="margin: 0;padding : 0;">
             <div class="nav-item">
-              <div class="navbar-list" data-id="107:11">Kontak</div>
-              <div class="navbar-list" data-id="107:13">Pinjam</div>
-              <div class="navbar-list" data-id="107:15">Beranda</div>
+              <a class="navbar-list" href="/kontak">Kontak</a><div></div>
+              <a class="navbar-list" href="/peminjaman">Pinjam</a><div></div>
+              <a class="navbar-list" href="/">Beranda</a><div></div>
               <a class="daftar" href="/register">Daftar</a><div></div>
               <a class="daftar" href="/login">Masuk</a><div></div>
             </div>
@@ -47,10 +47,10 @@
           </div>
 
           <center>
-            <div class="info-group" data-id="111:494">
+            <div class="info-group content" data-id="111:494">
               <center>
               <div class="info-card" data-id="111:485">
-                  <img class="info-image group" data-id="111:408" src="/assets/images/icon/gedung.png" alt="Group">
+                  <img class="info-image group" style="object-fit: contain;" src="/assets/images/icon/gedung.png" alt="Group">
                   <h2 class="info-value" id="ruanganCount">8</h2>
                   <img class="info-line" data-id="111:483" src="/assets/images/shape/line.svg" alt="Line 1">
                   <p class="info-title montserrat-normal-tundora-14px" data-id="111:484">Ruangan yang sedia untuk digunakan</p>
@@ -58,7 +58,7 @@
               </center>
               <center>
               <div class="info-card" data-id="111:489">
-                  <img class="info-image group" src="/assets/images/icon/rules.png" alt="Group">
+                  <img class="info-image group" style="object-fit: contain;" src="/assets/images/icon/asset.png" alt="Group">
                   <h2 class="info-value" id="assetCount">10</h2>
                   <img class="info-line" src="/assets/images/shape/line.svg" alt="Line 2">
                   <p class="info-title montserrat-normal-tundora-14px" data-id="111:487">Aset dan peralatan yang sedia untuk digunakan</p>
@@ -66,8 +66,8 @@
               </center>
               <center>
               <div class="info-card" data-id="111:493">
-                  <img class="info-image" style="object-fit: contain;" src="/assets/images/icon/user2.png" alt="Group">
-                  <h2 class="info-value">58</h2>
+                  <img class="info-image" style="object-fit: contain;" src="/assets/images/icon/user-account-b.png" alt="Group">
+                  <h2 class="info-value" id="userCount">58</h2>
                   <img class="info-line" src="/assets/images/shape/line.svg" alt="Line 3">
                   <div class="info-title montserrat-normal-tundora-14px" data-id="111:491">Mahasiswa yang sudah mendaftar</div>
                 </div>
@@ -111,7 +111,22 @@
 <script>
   const assetCount = document.getElementById("assetCount");
   const ruanganCount = document.getElementById("ruanganCount");
+  const userCount = document.getElementById("userCount");
   const mainButton = document.getElementById("mainButton");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }, {
+    threshold: 0.5 // Memicu jika 50% dari elemen terlihat di viewport
+  });
+
+  document.querySelectorAll('.content').forEach(section => {
+    observer.observe(section);
+  });
 
   $.ajax({
     url : "/api/stat",
@@ -120,6 +135,7 @@
     console.log(e);
     assetCount.innerHTML = e.data.assetCount;
     ruanganCount.innerHTML = e.data.ruanganCount;
+    userCount.innerHTML = e.data.userCount;
     mainButton.innerHTML = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
   });
 </script>

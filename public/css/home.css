@@ -300,6 +300,8 @@ input:focus {
   letter-spacing: 0.00px;
   line-height: normal;
   text-align: center;
+  text-decoration: none;
+  color : #1a5daa;
   width: 88px;
 }
 
