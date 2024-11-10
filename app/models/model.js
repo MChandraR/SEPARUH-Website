@@ -77,6 +77,18 @@ class Model{
             }
         });return result;
     }
+
+    async count(){
+        let result = null;
+        await getClient(this.table, async(db,client)=>{
+            try{
+                result = await db.estimatedDocumentCount(this.state);
+            } finally {
+                if(client!=null)await client.close();
+                this.state = {};
+            }
+        });return result;
+    }
     
     where(state){
         this.state = state;

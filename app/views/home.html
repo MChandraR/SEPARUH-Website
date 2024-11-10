@@ -3,12 +3,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=1280, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png">
     <meta name="og:type" content="website">
     <meta name="twitter:card" content="photo">
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/font/ubuntu.css">
     <script id="anima-load-script" src="load.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
     <script id="anima-hotspots-script" src="hotspots.js"></script>
     <script id="anima-overrides-script" src="overrides.js"></script>
     <script src="https://animaapp.s3.amazonaws.com/js/timeline.js"></script>
@@ -17,6 +19,12 @@
       @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
       /* The following line is used to measure usage of this code. You can remove it if you want. */
       @import url("https://px.animaapp.com/66b2431c531632489b7df2e7.66b2431d531632489b7df2ea.wUFPc4c.hch.png");
+      body{
+        font-family: "Ubuntu", serif;
+        padding : 0;
+        margin : 0;
+        width: 100%;
+      }
     </style>      
   </head>
   <body style="margin: 0;padding : 0;">
@@ -24,69 +32,104 @@
     <div class="container-center-horizontal" style="margin: 0;padding : 0;">
       <div class="beranda screen " data-id="109:183" style="margin: 0;padding : 0;">
         <div class="mac-book-air-1-LN8ZrO" data-id="101:2" style="margin: 0;padding : 0;">
-          <div class="frame-1-lMqR7K" data-id="106:3" style="margin: 0;padding : 0;">
-            <div class="daftar-bzYueH" data-id="106:4">Daftar</div>
-            <div class="kontak-bzYueH montserrat-normal-tundora-14px" data-id="107:11">Kontak</div>
-            <div class="pinjam-bzYueH montserrat-normal-tundora-14px" data-id="107:13">Pinjam</div>
-            <div class="beranda-bzYueH montserrat-normal-tundora-14px" data-id="107:15">Beranda</div>
-            <img class="polygon-1-bzYueH" data-id="109:175" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/polygon-1.svg" alt="Polygon 1">
-            <img class="mask-group-bzYueH" data-id="112:499" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="/assets/images/logo/fttk_logo.png" alt="Mask group">
+          <div class="navbar" data-id="106:3" style="margin: 0;padding : 0;">
+            <div class="nav-item">
+              <div class="navbar-list" data-id="107:11">Kontak</div>
+              <div class="navbar-list" data-id="107:13">Pinjam</div>
+              <div class="navbar-list" data-id="107:15">Beranda</div>
+              <a class="daftar" href="/register">Daftar</a><div></div>
+              <a class="daftar" href="/login">Masuk</a><div></div>
+            </div>
+            <img class="logo-fttk" anima-src="/assets/images/logo/fttk_logo.png" alt="Mask group">
           </div>
-          <h1 class="title-lMqR7K" data-id="109:177">
-            <span class="span0-NLNTLx">Fasilitasi Aktivitasmu Tanpa Ribet.</span>
-            <span class="span1-NLNTLx montserrat-bold-tundora-48px">&nbsp;</span>
-            <span class="span2-NLNTLx">Pinjam Ruangan dan Aset Kampus Langsung Sat-Set!</span>
+
+          <h1 class="title">
+            <span class="span0">Fasilitasi Aktivitasmu Tanpa Ribet.</span>
+            <span class="span2">Pinjam Ruangan dan Aset Kampus Langsung Sat-Set!</span>
           </h1>
-          <div class="cta-button-lMqR7K" data-id="111:482">
-            <div class="rectangle-1-2iPXsa" data-id="109:180"></div>
-            <div class="daftar-sekarang-2iPXsa" data-id="109:182">Daftar Sekarang</div>
+
+          <div class="main-button">
+            <a href="/peminjaman">
+              <div class="daftar-button" data-id="109:182" id="mainButton">Daftar Sekarang</div>
+            </a>
           </div>
-          <div class="info-group" data-id="111:494">
-            <div class="info-card" data-id="111:485">
-              <img class="info-image group" data-id="111:408" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="/assets/images/icon/gedung.png" alt="Group">
-              <div class="info-value montserrat-bold-tundora-48px" data-id="111:473">8</div>
-              <img class="info-line" data-id="111:483" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/line-1.svg" alt="Line 1">
-              <p class="info-title montserrat-normal-tundora-14px" data-id="111:484">Ruangan yang sedia untuk digunakan</p>
+
+          <center>
+            <div class="info-group" data-id="111:494">
+              <center>
+              <div class="info-card" data-id="111:485">
+                  <img class="info-image group" data-id="111:408" src="/assets/images/icon/gedung.png" alt="Group">
+                  <h2 class="info-value" id="ruanganCount">8</h2>
+                  <img class="info-line" data-id="111:483" src="/assets/images/shape/line.svg" alt="Line 1">
+                  <p class="info-title montserrat-normal-tundora-14px" data-id="111:484">Ruangan yang sedia untuk digunakan</p>
+                </div>
+              </center>
+              <center>
+              <div class="info-card" data-id="111:489">
+                  <img class="info-image group" src="/assets/images/icon/rules.png" alt="Group">
+                  <h2 class="info-value" id="assetCount">10</h2>
+                  <img class="info-line" src="/assets/images/shape/line.svg" alt="Line 2">
+                  <p class="info-title montserrat-normal-tundora-14px" data-id="111:487">Aset dan peralatan yang sedia untuk digunakan</p>
+                </div>
+              </center>
+              <center>
+              <div class="info-card" data-id="111:493">
+                  <img class="info-image" style="object-fit: contain;" src="/assets/images/icon/user2.png" alt="Group">
+                  <h2 class="info-value">58</h2>
+                  <img class="info-line" src="/assets/images/shape/line.svg" alt="Line 3">
+                  <div class="info-title montserrat-normal-tundora-14px" data-id="111:491">Mahasiswa yang sudah mendaftar</div>
+                </div>
+              </center>
             </div>
-            <div class="info-card" data-id="111:489">
-              <img class="info-image group" data-id="111:386" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="/assets/images/icon/rules.png" alt="Group">
-              <div class="info-value  montserrat-bold-tundora-48px" data-id="111:474">10</div>
-              <img class="info-line" data-id="111:486" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/line-1.svg" alt="Line 2">
-              <p class="info-title montserrat-normal-tundora-14px" data-id="111:487">Aset dan peralatan yang sedia untuk digunakan</p>
+          </center>
+          <div style="background: #444343" class="footer">
+      
+            <div style="width: 265.46px; height: 169px; position:relative ">
+              <div style="width: 160.46px;  color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Legal</div>
+              <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Syarat dan ketentuan</div>
+              <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Copyright © 2025</div>
+              <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Kontrak</div>
             </div>
-            <div class="info-card" data-id="111:493">
-              <img class="info-image group" data-id="111:460" style="object-fit: contain;" src="/assets/images/icon/person.png" alt="Group">
-              <div class="info-value  montserrat-bold-tundora-48px" data-id="111:476">58</div>
-              <img class="info-line" data-id="111:490" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/line-1.svg" alt="Line 3">
-              <div class="info-title montserrat-normal-tundora-14px" data-id="111:491">Mahasiswa yang sudah mendaftar</div>
+      
+            <div style="width: 194.76px; height: 37px; position:relative;">
+              <div style="width: 194.76px; color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Bantuan</div>
+              <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">FAQ</div>
             </div>
+      
+            <div style="width: 238.85px; height: 55px; position: relative;">
+              <div style="width: 238.85px; color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Pelayanan</div>
+              <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">FTTK</div>
+              <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Akademik</div>
+            </div>
+            
+            <div class="sosmed" colspan="2">
+                <img src="/assets/images/logo/facebook.png" alt="" width="50" height="50">
+                <img src="/assets/images/logo/instagram.png" alt="" width="50" height="50">
+                <img src="/assets/images/logo/linkedin.png" alt="" width="50" height="50">
+                <img src="/assets/images/logo/youtube.png" alt="" width="50" height="50">
+                <img src="/assets/images/logo/twitter.png" alt="" width="50" height="50">
+            </div>
+            
+            <img style="position:absolute; left:2rem; bottom : 2rem; width: 100px; height: 42px;" src="/assets/images/logo/fttk_logo-w.png" />
           </div>
-          <div class="rectangle-3-lMqR7K" data-id="115:518"></div>
-          <div class="group-4-lMqR7K" data-id="115:816">
-            <div class="legal-ycaBGB inter-bold-white-14px" data-id="115:519">Legal</div>
-            <div class="syarat-dan-ketentuan-ycaBGB inter-normal-white-12px" data-id="115:526">Syarat dan ketentuan</div>
-            <div class="copyright-2025-ycaBGB inter-normal-white-12px" data-id="115:822">Copyright © 2025</div>
-            <div class="kontrak-ycaBGB inter-normal-white-12px" data-id="115:538">Kontrak</div>
-          </div>
-          <div class="group-3-lMqR7K" data-id="115:815">
-            <div class="bantuan-x8VYnT inter-bold-white-14px" data-id="115:520">Bantuan</div>
-            <div class="faq-x8VYnT inter-normal-white-12px" data-id="115:540">FAQ</div>
-          </div>
-          <div class="group-2-lMqR7K" data-id="115:814">
-            <div class="pelayanan-UGsxS8 inter-bold-white-14px" data-id="115:524">Pelayanan</div>
-            <div class="fttk-UGsxS8 inter-normal-white-12px" data-id="115:542">FTTK</div>
-            <div class="akademik-UGsxS8 inter-normal-white-12px" data-id="115:544">Akademik</div>
-          </div>
-          <img class="xmlid_1621_-lMqR7K" data-id="115:555" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/xmlid-1621-@2x.png" alt="XMLID_1621_">
-          <img class="xmlid_1631_-lMqR7K" data-id="115:796" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/xmlid-1631-@2x.png" alt="XMLID_1631_">
-          <img class="xmlid_1560_-lMqR7K" data-id="115:799" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/xmlid-1560-@2x.png" alt="XMLID_1560_">
-          <img class="xmlid_1518_-lMqR7K" data-id="115:806" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/xmlid-1518-@2x.png" alt="XMLID_1518_">
-          <img class="xmlid_1636_-lMqR7K" data-id="115:811" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/xmlid-1636-@2x.png" alt="XMLID_1636_">
-          <img class="image-1-lMqR7K" data-id="115:820" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="https://cdn.animaapp.com/projects/66b2431e531632489b7df2ec/releases/672b614425e2119b7db6785a/img/image-1.png" alt="image 1">
-        </div>
       </div>
     </div>
     <script src="launchpad-js/launchpad-banner.js" async></script>
     <script defer src="https://animaapp.s3.amazonaws.com/static/restart-btn.min.js"></script>
   </body>
 </html>
+<script>
+  const assetCount = document.getElementById("assetCount");
+  const ruanganCount = document.getElementById("ruanganCount");
+  const mainButton = document.getElementById("mainButton");
+
+  $.ajax({
+    url : "/api/stat",
+    method : "GET"
+  }).done((e)=>{
+    console.log(e);
+    assetCount.innerHTML = e.data.assetCount;
+    ruanganCount.innerHTML = e.data.ruanganCount;
+    mainButton.innerHTML = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
+  });
+</script>

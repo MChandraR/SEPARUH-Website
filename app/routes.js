@@ -4,6 +4,7 @@ const viewController = require('./controllers/viewController');
 const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController');
 const ruanganController = require('./controllers/ruanganController');
+const resourceController = require('./controllers/resourceController.js');
 const { validateSession, authorizeAdmin,  } = require('./middlewares/index.js');
 
 //Route untuk view
@@ -30,5 +31,7 @@ route.post('/api/ruangan', async(req,res)=>await ruanganController.addRuangan(re
 route.put('/api/ruangan', async(req,res)=>await ruanganController.updateRuangan(req,res));
 route.delete('/api/ruangan', async(req,res)=>await ruanganController.deleteRuangan(req,res));
 
+//Route untuk resources
+route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
 
 module.exports = route;
