@@ -61,6 +61,9 @@
 
                 const data = await response.json();
                 alert(data.message);
+                if(data.status == 200){
+                    window.location.href = "/";
+                }
             } catch (err) {
                 document.getElementById('Error').innerText = err.message;
             }

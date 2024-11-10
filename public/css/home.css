@@ -341,15 +341,16 @@ input:focus {
 
 .beranda .span0 {
   color: var(--fun-blue);
-  font-style: normal;
   font-weight: 700;
+  font-family: 'Ubuntu', serif;
 }
 
 
 .beranda .span2 {
   color: var(--tundora);
   font-size: var(--font-size-l);
-  font-style: normal;
+  font-family: 'Ubuntu', serif;
+
 }
 
 .beranda .main-button {
@@ -380,13 +381,14 @@ input:focus {
 .beranda .info-value {
   background-color: transparent;
   height: auto;
-  left: 100px;
   letter-spacing: 0.00px;
   font-weight: bold;
   line-height: normal;
   font-size: 3rem;
   text-align: center;
   width: auto;
+  margin-top: .5rem;
+  margin-bottom: 0;
 }
 
 .beranda .info-line {

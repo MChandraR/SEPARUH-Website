@@ -32,7 +32,7 @@ class sessionController {
                 console.log(req.session.user);
                 req.session.save((err) => Response(res,200, err ? "Err : Session not saved  !" : "Berhasil login !", null));
             })
-        }else Response(res,200, "Username atau password salah !", null);
+        }else Response(res,401, "Username atau password salah !", null);
 
     }
 
