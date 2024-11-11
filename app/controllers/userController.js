@@ -1,6 +1,7 @@
 const db = require('../models/mongo');
 const Response = require('../../utils/utils').sendResponse;
 const Users = require('../models/users');
+const sendEmail = require('../../utils/mailer');
 
 class userController{
     async index(req,res){
@@ -10,6 +11,12 @@ class userController{
     async insert(req,res){
         const data = req.body;
         console.log(data);
+
+        try{
+            await sendEmail(data.email, "Verifikasi Registrasi Kamu", "Berikut adalah link verifikasi registrasi kamu !");
+        }catch(e){
+            console.log(e);
+        }
 
         Response(res, 200, "Berhasil menambahkan data !",await Users.create({
             user_id : data.user_id,

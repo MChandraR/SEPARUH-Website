@@ -22,6 +22,10 @@ class viewController{
     peminjaman(req,res){
         return res.send(View('peminjaman'));
     }
+
+    register(req,res){
+        return res.send(View('register'));
+    }
 }
 
 module.exports = new viewController();

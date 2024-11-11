@@ -10,6 +10,7 @@ const { validateSession, authorizeAdmin,  } = require('./middlewares/index.js');
 //Route untuk view
 route.get('/', (req,res)=>viewController.index(req,res, true));
 route.get('/login', (req,res)=>viewController.login2(req,res));
+route.get('/register', (req,res)=>viewController.register(req,res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession,(req,res)=>viewController.peminjaman(req,res));
 
@@ -18,6 +19,7 @@ route.get('/api/users', authorizeAdmin, async(req,res)=>await userController.ind
 route.post('/api/users', authorizeAdmin, async(req,res)=>await userController.insert(req,res));
 route.put('/api/users', authorizeAdmin, async(req,res)=>await userController.update(req,res));
 route.delete('/api/users', authorizeAdmin, async(req, res)=>await userController.delete(req,res));
+route.post('/register', async(req,res)=>await userController.insert(req,res));
 
 //Route untuk session
 route.get('/api/session', async(req,res)=>await sessionController.index(req,res));
