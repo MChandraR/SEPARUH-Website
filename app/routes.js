@@ -37,6 +37,6 @@ route.delete('/api/ruangan', async(req,res)=>await ruanganController.deleteRuang
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
 
 //Route untuk verifikasi
-route.get('/api/user/verif', async(req,res)=>await verifyController.index(req,res) );
+route.get('/api/user/verify', async(req,res)=>await verifyController.index(req,res) );
 
 module.exports = route;

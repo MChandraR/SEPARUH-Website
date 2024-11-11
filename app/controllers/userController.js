@@ -21,7 +21,7 @@ class userController{
             return;
         }
 
-        let verifyToken = randToken(40);
+        let verifyToken = randToken(20);
         let newID = await Users.orderBy("user_id", "DESC").first();
         let html = `<h1>Terima kasih sudah mendaftar</h1>
                     <p>Berikut adalah tautan untuk memverifikasi akun anda , username : ${data.username}!</p>
