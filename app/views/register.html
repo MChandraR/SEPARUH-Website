@@ -40,7 +40,7 @@
                     <input type="password" name="Email|Username" id="password"
                     placeholder="Masukkan password sekali lagi" />
                 </label>
-                <a href="#">Lupa Password</a>
+                <a href="/login">Sudah punya akun ?</a>
                 <button type="submit">Buat Akun</button>
                 <div href="#" id="google-login-btn">
                     Lanjutkan dengan akun google
@@ -82,7 +82,7 @@
                 confirmButtonText: 'Oke',
               });
             if(data.status == 200 && res){
-                document.location.href = "/";
+                document.location.href = "/login";
             }
           
         } catch (err) {

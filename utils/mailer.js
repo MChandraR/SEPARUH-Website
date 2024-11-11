@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host : "smtp.mailersend.net",
-    port : 587,
+    host : "smtp.gmail.com",
+    port : 465,
     auth : {
         user : process.env.SMTP_USERNAME,
         pass : process.env.SMTP_PASS
     },
-    secure : false
+    secure : true
 });
 
 
