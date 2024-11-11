@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/cssLinkLoader.js"></script>
+    <script>loadCSS(['main', 'home2']);</script>
+    <title>Home</title>
+    <style>
+        /* Mencegah FOUC */
+        body {visibility: hidden;}
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
+</head>
+<body>
+    <div id="header-container">
+        <div class="logo-container">
+            <img src="/assets/images/logo/fttk_logo.png" />
+        </div>
+        <div class="nav-container">
+            <a>Beranda</a>
+            <a>Pinjam</a>
+            <a>Kontak</a>
+            <a class="selected">Daftar</a>
+        </div>
+    </div>
+    <div id="heading-container">
+        <h1 id="title-heading">
+            <span>Fasilitasi Aktivitasmu Tanpa Ribet.</span>
+            <span>Pinjam Ruangan dan Aset Kampus Langsung Sat-Set!</span>
+        </h1>
+        <div id="register-link">
+            <a>Daftar Sekarang</a>
+        </div>
+    </div>
+    <div id="stat-info-container">
+        <div class="info-card">
+            <div class="info-icon-container">
+                <img src="/assets/images/icon/gedung.png">
+            </div>
+            <span>0</span>
+            <hr/>
+            <p>Ruangan yang tersedia untuk digunakan</p>
+        </div>
+        <div class="info-card">
+            <div class="info-icon-container">
+                <img src="/assets/images/icon/rules.png">
+            </div>
+            <span>0</span>
+            <hr/>
+            <p>Aset dan peralatan yang sedia untuk digunakan</p>
+        </div>
+        <div class="info-card">
+            <div class="info-icon-container">
+                <img src="/assets/images/icon/person.png">
+            </div>
+            <span>0</span>
+            <hr/>
+            <p>Mahasiswa yang sudah mendaftar</p>
+        </div>
+    </div>
+    <div id="footer-container">
+        <div id="information-container">
+            <div class="column">
+                <h3>Legal</h3>
+                <hr/>
+                <a>Syarat dan Ketentuan</a>
+                <a>Kontrak</a>
+            </div>
+            <div class="column">
+                <h3>Bantuan</h3>
+                <hr/>
+                <a>FAQ</a>
+            </div>
+            <div class="column">
+                <h3>Pelayanan</h3>
+                <hr/>
+                <a>FTTK</a>
+                <a>Akademik</a>
+            </div>
+        </div>
+        <div id="social-media-container">
+            <a class="link-icon"><img src="/assets/images/logo/facebook.png"></a>
+            <a class="link-icon"><img src="/assets/images/logo/instagram.png"></a>
+            <a class="link-icon"><img src="/assets/images/logo/linkedin.png"></a>
+            <a class="link-icon"><img src="/assets/images/logo/youtube.png"></a>
+            <a class="link-icon"><img src="/assets/images/logo/twitter.png"></a>
+        </div>
+        <div id="copyright-container">
+            <div class="logo-container">
+                <!-- perlu ditukar dgn logo putih -->
+                <img src="/assets/images/logo/fttk_logo.png" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
