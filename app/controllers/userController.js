@@ -40,7 +40,7 @@ class userController{
             token : verifyToken
         });
 
-        Response(res, 200, "Berhasil menambahkan data !",await Users.create({
+        Response(res, 200, "Berhasil : silahkan periksa Email anda untuk melanjutkan registrasi !",await Users.create({
             user_id : newID.user_id+1,
             username: data.username,
             password : data.password,

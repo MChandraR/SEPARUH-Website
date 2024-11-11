@@ -18,7 +18,7 @@ class sessionController {
     async login(req,res){
         const body = req.body;
         let data = await Users.where({username:body.username, password:body.password}).first();
-        if(data){
+        if(data && data.verified_at != null){
             req.session.regenerate(function (err) {
                 if (err) next(err)
                 req.session.user = {
@@ -32,7 +32,7 @@ class sessionController {
                 console.log(req.session.user);
                 req.session.save((err) => Response(res,200, err ? "Err : Session not saved  !" : "Berhasil login !", null));
             })
-        }else Response(res,401, "Username atau password salah !", null);
+        }else Response(res,401,data.verified_at == null ? "Harap verifikasi terlebih dahulu akun anda !" : "Username atau password salah !", null);
 
     }
 

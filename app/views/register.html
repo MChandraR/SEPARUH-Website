@@ -81,6 +81,9 @@
                 icon: data.status == 200 ? 'success' : 'error',
                 confirmButtonText: 'Oke',
               });
+            if(data.status == 200 && res){
+                document.location.href = "/";
+            }
           
         } catch (err) {
             document.getElementById('Error').innerText = err.message;
