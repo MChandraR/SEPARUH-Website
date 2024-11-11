@@ -40,6 +40,7 @@
             <div class="info-icon-container">
                 <img src="/assets/images/icon/gedung.png">
             </div>
+            <span class="loader"></span>
             <span id="ruanganCount">0</span>
             <hr/>
             <p>Ruangan yang tersedia untuk digunakan</p>
@@ -48,6 +49,7 @@
             <div class="info-icon-container">
                 <img src="/assets/images/icon/asset.png">
             </div>
+            <span class="loader"></span>
             <span id="assetCount">0</span>
             <hr/>
             <p>Aset dan peralatan yang sedia untuk digunakan</p>
@@ -56,6 +58,7 @@
             <div class="info-icon-container">
                 <img src="/assets/images/icon/person.png">
             </div>
+            <span class="loader"></span>
             <span id="userCount">0</span>
             <hr/>
             <p>Mahasiswa yang sudah mendaftar</p>
@@ -96,20 +99,34 @@
         </div>
     </div>
     <script>
+        const loader       = document.getElementsByClassName("loader");
         const ruanganCount = document.getElementById("ruanganCount"); 
         const assetCount   = document.getElementById("assetCount");
         const userCount    = document.getElementById("userCount");
         const mainBtn      = document.getElementById("mainBtn");
 
+        const countView = [ruanganCount, assetCount, userCount];
+        
         $.ajax({
             url: "/api/stat",
             method: "GET"
         }).done((e) => {
             console.log(e);
-            ruanganCount.innerHTML = e.data.ruanganCount;
-            assetCount.innerHTML   = e.data.assetCount;
-            userCount.innerHTML    = e.data.userCount;
-            mainBtn.textContent    = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
+            
+            while (loader.length > 0) {
+                loader[0].remove();
+            }
+
+            const countData = [e.data.ruanganCount, e.data.assetCount, e.data.userCount];
+            
+            countView.forEach((element, index) => {
+                element.innerHTML        = countData[index];
+                element.style.opacity    = 1;
+                element.style.visibility = 'visible';
+                element.style.maxHeight  = 'none';
+            });
+
+            mainBtn.textContent = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
         });
     </script>
 </body>

@@ -186,6 +186,12 @@ hr {
 .info-card span {
     font-size: var(--font-size-l);
 }
+span#ruanganCount, span#assetCount, span#userCount {
+    opacity: 0;
+    max-height: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-out;
+}
 .info-card p {
     width: 95%;
     font-weight: 400;
@@ -196,6 +202,7 @@ hr {
     height: 100%;
     object-fit: contain;
 }
+
 
 /* section - footer */
 #footer-container {
@@ -256,4 +263,25 @@ hr {
 #copyright-container .logo-container {
     width: 120px;
     margin-left: -10px;
+}
+
+/* from cssloaders.github.io */
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    border-bottom-color: var(--fun-blue);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
