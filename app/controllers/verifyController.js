@@ -9,7 +9,9 @@ class verifyController {
         const param = url.parse(req.url, true).query;
         let data = await Verify.where({token : param.id}).first();
         if(data){
-            let query = await User.where({user_id : data.user_id}).update({verified_at : "now"});
+            let waktuSekarang = moment().tz('Asia/Jakarta');
+            const waktuFormatted = waktuSekarang.format('YYYY-MM-DD HH:mm:ss');
+            let query = await User.where({user_id : data.user_id}).update({verified_at : waktuFormatted});
             Response(res, 200, "Akun berhasil di verifikasi ", query);
             return;
         }
