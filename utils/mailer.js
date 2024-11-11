@@ -1,26 +1,33 @@
-const Recipient = require("mailersend").Recipient;
-const EmailParams = require("mailersend").EmailParams;
-const MailerSend = require("mailersend").MailerSend;
-const Sender = require("mailersend").Sender;
+const nodemailer = require('nodemailer');
 
-const mailersend = new MailerSend({
-    apiKey: process.env.MailerSendApiKey,
+const transporter = nodemailer.createTransport({
+    host : "smtp.mailersend.net",
+    port : 587,
+    auth : {
+        user : process.env.SMTP_USERNAME,
+        pass : process.env.SMTP_PASS
+    },
+    secure : false
 });
 
-const sentFrom = new Sender(process.env.EMAIL, "Separuh UMRAH");
 
 
-const sendEmail = async (recipient, subject, text)=>{
-    const recipients = [new Recipient(recipient, "Pengguna Baru")];
-    
-    const emailParams = new EmailParams()
-        .setFrom(sentFrom)
-        .setTo(recipients)
-        .setSubject(subject)
-        .setHtml("Pendaftaran Pengguna Baru")
-        .setText(text);
-    
-    await mailersend.email.send(emailParams);
+const sendEmail = (to, subject, text, html = null, attach = null )=>{
+    console.log( {
+        user : process.env.SMTP_USERNAME,
+        pass : process.env.SMTP_PASS
+    });
+    transporter.sendMail({
+        from : process.env.EMAIL,
+        to : to,
+        subject : subject,
+        text : text,
+        html : html,
+        attachments : attach
+    }, (err, info)=>{
+        if(err) console.log(err);
+        else console.log(info);
+    });
 }
 
-module.exports = sendEmail;
+module.exports = sendEmail
