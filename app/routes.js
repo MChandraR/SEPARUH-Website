@@ -2,6 +2,7 @@ const route = require('express').Router();
 const View = require('./../utils/views').view;
 const viewController = require('./controllers/viewController');
 const userController = require('./controllers/userController');
+const verifyController = require('./controllers/verifyController.js');
 const sessionController = require('./controllers/sessionController');
 const ruanganController = require('./controllers/ruanganController');
 const resourceController = require('./controllers/resourceController.js');
@@ -34,5 +35,8 @@ route.delete('/api/ruangan', async(req,res)=>await ruanganController.deleteRuang
 
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
+
+//Route untuk verifikasi
+route.get('/api/user/verif', async(req,res)=>await verifyController.index(req,res) );
 
 module.exports = route;

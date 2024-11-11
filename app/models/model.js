@@ -28,14 +28,14 @@ class Model{
         let result = null;
         await getClient(this.table, async (db, client)=>{
             try{
-                result = await db.findOne(this.state);
+                result = await db.find(this.state).sort(this.orderState).limit(1).toArray();
             } finally {
                 if(client!=null)await client.close();
             }
             this.filtered = false;
 
         });
-        return result;
+        return result[0];
     }
 
     async create(data){
