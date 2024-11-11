@@ -70,7 +70,7 @@ class Model{
         let result = null;
         await getClient(this.table, async(db,client)=>{
             try{
-                result = await db.deleteOne(this.state);
+                result = await db.deleteMany(this.state);
             } finally {
                 if(client!=null)await client.close();
                 this.state = {};
