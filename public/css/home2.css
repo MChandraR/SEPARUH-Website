@@ -118,22 +118,21 @@ hr {
     font-weight: 400;
     color: var(--tundora);
 }
-#heading-container #register-link {
+#heading-container #mainBtn {
     width: 182px;
     height: 46px;
     margin-top: 12px;
     border-radius: 10px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    font-size: var(--font-size-m);
+    font-family: var(--font-family-montserrat);
     background-color: var(--fun-blue);
     box-shadow: 2px 8px 16px #00000040;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-#register-link > a {
-    color: white;
-    font-size: var(--font-size-m);
-    font-family: var(--font-family-montserrat);
-    font-weight: 700;
 }
 
 /* section - stat info */
