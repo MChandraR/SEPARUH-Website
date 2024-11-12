@@ -2,7 +2,7 @@ const route = require('express').Router();
 const View = require('./../utils/views').view;
 const viewController = require('./controllers/viewController');
 const userController = require('./controllers/userController');
-const verifyController = require('./controllers/verifyController.js');
+const accController = require('./controllers/accController');
 const sessionController = require('./controllers/sessionController');
 const ruanganController = require('./controllers/ruanganController');
 const resourceController = require('./controllers/resourceController.js');
@@ -38,7 +38,11 @@ route.delete('/api/ruangan', async(req,res)=>await ruanganController.deleteRuang
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
 
-//Route untuk verifikasi
-route.get('/api/user/verify', async(req,res)=>await verifyController.index(req,res) );
+//Route untuk verifikasi & keamanan akun
+route.get('/api/user/verify', async(req,res)=>await accController.index(req,res) );
+route.get('/recovery', async(req,res)=>await accController.recoverAccount(req,res));
+route.post('/user/recovery', async(req,res)=>await accController.resetPassword(req,res));
+route.get('/api/password/reset', async(req,res)=>await accController.changePass(req,res));
+
 
 module.exports = route;
