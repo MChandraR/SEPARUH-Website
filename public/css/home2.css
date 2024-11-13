@@ -4,19 +4,6 @@
     --info-icon-height: 125px;
 }
 
-hr {
-    width: 95%;
-    /* border-top -> height */
-    border-top: 1px solid transparent;
-    background-color: black;
-}
-
-.span-fun-blue {
-    color: var(--fun-blue);
-    font-style: normal;
-    font-weight: 700;
-}
-
 /* section - heading */
 #heading-container {
     padding: 110px 0 110px 74px;
