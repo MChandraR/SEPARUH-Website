@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peminjaman</title>
+    <script src="/js/cssLinkLoader.js"></script>
+    <script src="/js/templateLoader.js"></script>
+    <style>
+        /* Mencegah FOUC */
+        body {visibility: hidden;}
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
+</head>
+<body>
+    <div id="template-header"></div>
+    <div id="template-footer"></div>
+    <script>
+        const template = new Template(['header', 'footer']);
+        loadCSS(['main', 'home2']);
+    </script>
+</body>
+</html>

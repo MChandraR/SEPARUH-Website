@@ -78,11 +78,15 @@ hr {
     padding: 10px 0;
     font-family: 'Montserrat', Helvetica;
     text-align: center;
+    text-decoration: none;
     user-select: none;
 }
 .nav-container a:not(.selected):hover {
     color: var(--fun-blue);
     cursor: pointer;
+}
+.nav-container a:visited {
+    color: inherit;
 }
 .nav-container a.selected {
     color: var(--fun-blue);

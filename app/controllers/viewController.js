@@ -19,13 +19,18 @@ class viewController{
         return res.send(View('home'));
     }
 
-    // desain dari nol
+    // Beranda 2.0
     beranda2(req,res){
         return res.send(View('home2'));
     }
 
     peminjaman(req,res){
         return res.send(View('peminjaman'));
+    }
+
+    // Peminjaman 2.0
+    peminjaman2(req,res){
+        return res.send(View('peminjaman2'));
     }
 
     register(req,res){

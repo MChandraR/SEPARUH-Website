@@ -16,6 +16,7 @@ route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession, (req,res)=>viewController.peminjaman(req,res));
 //Route view cadangan
 route.get('/home2', (req,res)=>viewController.beranda2(req,res));
+route.get('/peminjaman2', (req,res)=>viewController.peminjaman2(req,res));
 
 //Route untuk user dengan role 'admin'
 route.get('/api/users', authorizeAdmin, async(req,res)=>await userController.index(req,res));
