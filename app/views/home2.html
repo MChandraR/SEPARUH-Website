@@ -14,7 +14,7 @@
 </head>
 <body>
     <!-- Header/Navbar -->
-    <div id="template-header"></div>>
+    <div id="template-header"></div>
     <!-- Heading Title -->
     <div id="heading-container">
         <h1 id="title-heading">
@@ -57,7 +57,12 @@
     <div id="template-footer"></div>
     <script>
         const template = new Template(['header', 'footer']);
-        loadCSS(['main', 'home2']);
+        loadCSS([
+            'main',
+            'home2',
+            'template/header',
+            'template/footer'
+        ]);
 
         const loader       = document.getElementsByClassName("loader");
         const ruanganCount = document.getElementById("ruanganCount"); 

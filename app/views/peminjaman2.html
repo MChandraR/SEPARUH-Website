@@ -13,10 +13,18 @@
 </head>
 <body>
     <div id="template-header"></div>
+    <div id="heading-container">
+        <h1 id="title-heading">Peminjaman Ruangan dan Aset</h1>
+    </div>
     <div id="template-footer"></div>
     <script>
         const template = new Template(['header', 'footer']);
-        loadCSS(['main', 'home2']);
+        loadCSS([
+            'main',
+            'peminjaman2',
+            'template/header',
+            'template/footer'
+        ]);
     </script>
 </body>
 </html>
