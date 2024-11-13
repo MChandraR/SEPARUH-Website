@@ -44,6 +44,7 @@ route.get('/api/user/verify', async(req,res)=>await accController.index(req,res)
 route.get('/recovery', async(req,res)=>await accController.recoverAccount(req,res));
 route.post('/user/recovery', async(req,res)=>await accController.resetPassword(req,res));
 route.get('/api/password/reset', async(req,res)=>await accController.changePass(req,res));
+route.post('/api/password/reset', async(req,res)=>await accController.updateAccount(req,res));
 
 
 module.exports = route;

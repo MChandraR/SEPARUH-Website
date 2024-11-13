@@ -2,6 +2,8 @@ const sessions = require('../models/sessions');
 const Users = require('../models/users');
 const View = require('../../utils/views').view;
 const Response = require('../../utils/utils').sendResponse;
+const Encrypt = require('../../utils/encryptor');
+const Validate = require('../../utils/validator');
 
 class sessionController {
     async index(req,res){
@@ -17,7 +19,11 @@ class sessionController {
 
     async login(req,res){
         const body = req.body;
-        let data = await Users.where({username:body.username, password:body.password}).first();
+        if(!Validate(body.username) || !Validate(body.password)){
+            Response(res,401, "Username atau password salah !", null);
+            return;
+        }
+        let data = await Users.where({username:body.username, password:Encrypt.sha256(body.password)}).first();
         if(data && data.verified_at){
             req.session.regenerate(function (err) {
                 if (err) next(err)

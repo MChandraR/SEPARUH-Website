@@ -8,6 +8,7 @@ const GenerateToken = require('rand-token').generate;
 const PassReset = require('../models/password_reset');
 const sendEmail = require('../../utils/mailer');
 const validator = require('../../utils/validator');
+const Encrypt = require('../../utils/encryptor');
 
 class accController {
     //Aktivasi email
@@ -32,10 +33,10 @@ class accController {
             let waktuSekarang = moment().tz('Asia/Jakarta');
             const waktuFormatted = waktuSekarang.format('YYYY-MM-DD HH:mm:ss');
             let query = await User.where({user_id : data.user_id}).update({verified_at : waktuFormatted});
-            Response(res, 200, "Akun berhasil di verifikasi ", query);
+            res.send(View('change_pass'));  
             return;
         }
-        Response(res,401,"Not Found", null);
+        res.send(View('change_pass_error'));
     }
 
     async recoverAccount(req,res){
@@ -46,10 +47,7 @@ class accController {
     async resetPassword(req,res){
         let data = req.body;
         const token = GenerateToken(50);
-        const href = `https://separuh.site/api/password/reset?token=${token}`;
-        console.log(data);
         let dataUser = await User.where({email:data.email}).first();
-        console.log(dataUser);
         if(!validator(data.email) || dataUser == null) {
             Response(res, 401, "Email tidak ditemukan !", null);
             return;
@@ -63,6 +61,19 @@ class accController {
                       <a href="https://separuh.site/api/password/reset?token=${token}"> <button>Reset Password</button></a>`;
         sendEmail(data.email, "Konfirmasi Mengatur Ulang Kata Sandi", "", html);
         Response(res, 200, "Silahkan cek email anda untuk melanjutkan pemulihan akun !", null);
+    }
+
+    async updateAccount(req,res){
+        const data = req.body;
+        console.log(data);
+        const query = await PassReset.where({token:data.token}).first();
+        if(query){
+            await User.where({user_id : query.user_id}).update({password : Encrypt.sha256(data.newPass)});
+            Response(res, 200, "Berhasil mengubah sandi akun !", null);
+            await PassReset.where({token:data.token}).delete();
+            return;
+        }
+        Response(res, 401, "Error : Token tidak valid !", null);
     }
 
 }
