@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/font/ubuntu.css">
+    <link rel="stylesheet" href="/css/recover.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/sweetalert2@11.js"></script>
+</head>
+<body>
+    <div class="main">
+        <form action="/recovery" method="post" id="form">
+            <h3>Halaman Pemulihan Akun</h3>
+            <span>Konfirmasi penggantian password anda !</span><br><br>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Masukkan password baru :</label>
+                <input type="password" class="form-control" name="password" id="newPassInput" placeholder="Masukkan Password baru anda !">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Masukkan password sekali lagi :</label>
+                <input type="password" class="form-control" name="confirmpassword" id="newPassConfirm" placeholder="Konfirmasi password baru anda">
+            </div>
+            <button class="btn btn-primary" id="action-btn">Pulihkan</button>
+        </form>
+    </div>
+</body>
+</html>
+<script>
+    const actionButton = document.getElementById('action-btn');
+  
+    
+    actionButton.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        const newPass = document.getElementById('newPassInput').value;
+        const ConfirmnewPass = document.getElementById('newPassConfirm').value;
+        if(newPass != ConfirmnewPass || (newPass=='' || ConfirmnewPass=='')){
+            await Swal.fire({
+                title: "Error",
+                text: "Password tidak sesuai !",
+                icon: 'warning',
+                confirmButtonText: 'Oke',
+            });
+            return;
+        }
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        console.log(token);
+        const response = await fetch('/api/password/reset', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({newPass, token})
+        });
+
+        if (!response.ok) {
+            throw new Error('Login failed');
+        }
+        let data = await response.json();
+        if(data){
+            let res = await Swal.fire({
+                title: data.status == 200 ? 'Sukses' : 'Error',
+                text: data.message,
+                icon: data.status == 200 ? 'success' : 'error',
+                confirmButtonText: 'Oke',
+              });
+            if(data.status == 200) window.location.href = "/login"; 
+        }
+        
+    });
+</script>

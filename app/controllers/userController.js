@@ -4,6 +4,7 @@ const Users = require('../models/users');
 const Verify = require('../models/acc_verify');
 const sendEmail = require('../../utils/mailer');
 const validate = require('../../utils/validator');
+const Encrypt = require('../../utils/encryptor');
 const randToken = require('rand-token').generate;
 
 class userController{
@@ -43,7 +44,7 @@ class userController{
         Response(res, 200, "Berhasil : silahkan periksa Email anda untuk melanjutkan registrasi !",await Users.create({
             user_id : newID.user_id+1,
             username: data.username,
-            password : data.password,
+            password : Encrypt.sha256(data.password),
             role : "user",
             email : data.email,
             verified_at : null,
