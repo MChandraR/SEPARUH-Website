@@ -36,6 +36,10 @@ class viewController{
     register(req,res){
         return res.send(View('register'));
     }
+
+    pinjam(req,res){
+        
+    }
 }
 
 module.exports = new viewController();

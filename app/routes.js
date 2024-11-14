@@ -32,9 +32,12 @@ route.get('/logout', async(req,res)=>await sessionController.logout(req,res));
 
 //Route untuk ruangan
 route.get('/api/ruangan', async(req,res)=>await ruanganController.index(req,res));
-route.post('/api/ruangan', async(req,res)=>await ruanganController.addRuangan(req,res));
-route.put('/api/ruangan', async(req,res)=>await ruanganController.updateRuangan(req,res));
-route.delete('/api/ruangan', async(req,res)=>await ruanganController.deleteRuangan(req,res));
+route.post('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.addRuangan(req,res));
+route.put('/api/ruangan', authorizeAdmin,  async(req,res)=>await ruanganController.updateRuangan(req,res));
+route.delete('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.deleteRuangan(req,res));
+
+//Route untuk peminjaman
+route.get('/peminjaman/detail', validateSession, async(req,res)=>viewController.pinjam(req,res));
 
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
@@ -42,7 +45,7 @@ route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
 //Route untuk verifikasi & keamanan akun
 route.get('/api/user/verify', async(req,res)=>await accController.index(req,res) );
 route.get('/recovery', async(req,res)=>await accController.recoverAccount(req,res));
-route.post('/user/recovery', async(req,res)=>await accController.resetPassword(req,res));
+route.post('/recovery', async(req,res)=>await accController.resetPassword(req,res));
 route.get('/api/password/reset', async(req,res)=>await accController.changePass(req,res));
 route.post('/api/password/reset', async(req,res)=>await accController.updateAccount(req,res));
 
