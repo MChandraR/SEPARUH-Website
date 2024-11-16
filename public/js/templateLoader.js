@@ -4,20 +4,41 @@ class Template {
             'header': this.header,
             'footer': this.footer
         };
+        this.items = [];
 
-        this.script = Object.assign(document.createElement('script'), { src: 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.0/purify.min.js' });
-        // Note to self: function() {} dengan () => {} memiliki scope this yg berbeda
-        this.script.onload = () => {
-            console.log('DOMPurify script has loaded.');
+        this.scripts = {
+            'DOMPurify': () => { return Object.assign(document.createElement('script'), { src: 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.0/purify.min.js' }) },
+            'JQuery': () => { return Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' }) }
+        }
 
-            parts.forEach((part) => {
-                if (this.templateParts[part]) {
-                    this.templateParts[part].call(this);
+        for (let scriptName in this.scripts) {
+            if (this.scripts.hasOwnProperty(scriptName)) {
+                let script = this.scripts[scriptName]();
+                
+                // For template loader
+                if (scriptName === 'DOMPurify') {
+                    script.onload = () => {
+                        parts.forEach((part) => {
+                            if (this.templateParts[part]) {
+                                this.templateParts[part].call(this);
+                            }
+                        });
+                    };
                 }
-            });
-        };
+                
+                document.head.appendChild(script);
+                console.log(`${scriptName} script has loaded.`);
+            }
+        }
+        // this.script = Object.assign(document.createElement('script'), { src: 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.0/purify.min.js' });
+        // Note to self: function() {} dengan () => {} memiliki scope this yg berbeda
+        // this.script.onload = () => {
+        //     console.log('DOMPurify script has loaded.');
 
-        document.head.appendChild(this.script);
+            
+        // };
+
+        // document.head.appendChild(this.script);
     }
 
     header(){
@@ -121,5 +142,43 @@ class Template {
         // Menambahkan footer-container setelah div 'footer'
         document.getElementById(targetDiv).insertAdjacentElement('afterend', footer);
         document.getElementById(targetDiv).remove();
+    }
+
+    generateItems(data) {
+        const script = Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' });
+        script.onload = () => { console.log('JQuery script has loaded.'); };
+        document.head.appendChild(script);
+        
+        this.items = data;
+        console.log(this.items);
+
+        // Untuk membuat elemen beserta className
+        const createElement = (element_name, class_name) => {
+            return Object.assign(
+                document.createElement(element_name),
+                { className: class_name }
+            );
+        };
+
+        const itemContainer = document.getElementById('item-container');
+        this.items.forEach((item) => {
+            const itemCard = createElement('div', 'item-card');
+            const itemImageContainer = createElement('div', 'item-img-container');
+            const itemInfo = createElement('div', 'item-info');
+
+            // Item Image Container
+            itemImageContainer.appendChild(Object.assign(document.createElement('img'), { src: "/assets/images/room.jpg" }));
+            
+            // Item Info
+            itemInfo.appendChild(Object.assign(createElement('span', 'item-name'), { innerHTML: `${item.room_name}` }));
+            itemInfo.appendChild(Object.assign(createElement('span', 'item-score'), { innerHTML: `4.3 / 5.0` }));
+            itemInfo.appendChild(Object.assign(createElement('p', 'item-description'), { innerHTML: `${item.description}` }));
+
+            // Item Card
+            itemCard.appendChild(itemImageContainer);
+            itemCard.appendChild(itemInfo);
+            
+            itemContainer.appendChild(itemCard);
+        });
     }
 }
