@@ -96,7 +96,6 @@
     background-color: #174d8a;
     border: none;
     border-radius: 12px;
-    box-shadow: 0 5px #999;
     user-select: none;
 }
 #filter-container button:hover {

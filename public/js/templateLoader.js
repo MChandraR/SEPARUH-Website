@@ -53,7 +53,7 @@ class Template {
                 <a id="Peminjaman" href="/peminjaman2">Pinjam</a>
                 <a>Kontak</a>
                 <a>Daftar</a>
-                <a>Masuk</a>
+                <a id="Login" href="/login">Masuk</a>
             </div>
         `;
         
