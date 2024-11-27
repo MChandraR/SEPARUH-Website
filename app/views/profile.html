@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="/js/cssLinkLoader.js"></script>
+    <style>
+        /* Mencegah FOUC */
+        body {visibility: hidden;}
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar-container">
+            <div id="logo-container">
+                <img src="/assets/images/logo/fttk_logo.png" alt="logo_umrah">
+            </div>
+            <div id="profile_picture-container">
+                <img src="/assets/images/profile-picture.png" alt="profile_picture">
+            </div>
+            <div id="profile_info-container">
+                <div id="user-name">
+                    <span class="profile_label">Nama</span>
+                    <span class="profile_data">M. Zaidaan Nugroho</span>
+                </div>
+                <div id="user-nim">
+                    <span class="profile_label">NIM</span>
+                    <span class="profile_data">2201020011</span>
+                </div>
+                <div id="user-phone_number">
+                    <span class="profile_label">No. Whatsapp<span class="required-asterisk"></span></span>
+                    <span class="profile_data">-</span>
+                </div>
+                <div id="user-major">
+                    <span class="profile_label">Jurusan<span class="required-asterisk"></span></span>
+                    <span class="profile_data">-</span>
+                </div>
+                <div id="user-gender">
+                    <span class="profile_label">Jenis Kelamin<span class="required-asterisk"></span></span>
+                    <span class="profile_data">-</span>
+                </div>
+            </div>
+            <div id="profile_btn-container">
+                <button id="profile_edit-btn" title="Edit Profile" onclick="{alert('Click')}">Perbarui BioData</button>
+            </div>
+        </div>
+        <div id="main-container">
+            <div id="heading-container">
+                <span id="heading-title">Aset/Ruangan Anda</span>
+            </div>
+            <hr>
+            <div id="item-container">
+                <div class="item">
+                    <span class="item-date">17/10/2024 - 18/10/2024</span>
+                    <span class="item-name">Ruangan 1</span>
+                    <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
+                </div>
+                <div class="item">
+                    <span class="item-date">17/10/2024 - 18/10/2024</span>
+                    <span class="item-name">Spidol dan Penghapus</span>
+                    <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
+                </div>
+                <div class="item">
+                    <span class="item-date">27/10/2024 - 27/10/2024</span>
+                    <span class="item-name">Auditorium FTTK</span>
+                    <button class="item-btn item_requested">Batalkan Permohonan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        loadCSS([
+            'main',
+            'profile',
+            'font/ubuntu'
+        ])
+    </script>
+</body>
+</html>

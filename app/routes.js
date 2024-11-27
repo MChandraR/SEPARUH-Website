@@ -15,6 +15,7 @@ route.get('/register', (req,res)=>viewController.register(req,res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession, (req,res)=>viewController.peminjaman(req,res));
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>viewController.ruangan(req,res));
+route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
 //Route view cadangan
 route.get('/home2', (req,res)=>viewController.beranda2(req,res));
 route.get('/peminjaman2', (req,res)=>viewController.peminjaman2(req,res));
