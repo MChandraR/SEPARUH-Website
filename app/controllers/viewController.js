@@ -48,6 +48,10 @@ class viewController{
     pinjam(req,res){
         
     }
+
+    not_found(req,res){
+        return res.send(View('not_found'));
+    }
 }
 
 module.exports = new viewController();

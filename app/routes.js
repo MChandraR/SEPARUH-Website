@@ -67,5 +67,6 @@ route.post('/recovery', async(req,res)=>await accController.resetPassword(req,re
 route.get('/api/password/reset', async(req,res)=>await accController.changePass(req,res));
 route.post('/api/password/reset', async(req,res)=>await accController.updateAccount(req,res));
 
+route.get('*', (req,res)=>viewController.not_found(req,res));
 
 module.exports = route;
