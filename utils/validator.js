@@ -6,7 +6,7 @@ function includeXXS(input){
 }
 
 function validate(data){
-    if(data==null || data=="" || includeXXS(data))return false;
+    if(data==null || data.toString()=="" || includeXXS(data))return false;
     return true;
 }
 

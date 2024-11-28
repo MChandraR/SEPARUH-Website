@@ -9,6 +9,7 @@ const resourceController = require('./controllers/resourceController.js');
 const { validateSession, authorizeAdmin,  } = require('./middlewares/index.js');
 const validator = require('./middlewares/validator.js');
 const assetController = require('./controllers/assetController.js');
+const peminjamanController = require('./controllers/peminjamanController.js');
 
 //Route untuk view
 route.get('/', (req,res)=>viewController.index(req,res, true));
@@ -36,10 +37,10 @@ route.post('/login', async(req,res)=>await sessionController.login(req,res));
 route.get('/logout', async(req,res)=>await sessionController.logout(req,res));
 
 //Route untuk ruangan
-route.get('/api/ruangan', validateSession,async(req,res)=>await ruanganController.index(req,res));
-route.post('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.addRuangan(req,res));
-route.put('/api/ruangan', authorizeAdmin,  async(req,res)=>await ruanganController.updateRuangan(req,res));
-route.delete('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.deleteRuangan(req,res));
+route.get('/api/room', validateSession,async(req,res)=>await ruanganController.index(req,res));
+route.post('/api/room', authorizeAdmin, async(req,res)=>await ruanganController.addRuangan(req,res));
+route.put('/api/room', authorizeAdmin,  async(req,res)=>await ruanganController.updateRuangan(req,res));
+route.delete('/api/room', authorizeAdmin, async(req,res)=>await ruanganController.deleteRuangan(req,res));
 
 //Route untuk asset
 route.get('/api/asset', validateSession,async(req,res)=>await assetController.index(req,res));
@@ -47,10 +48,12 @@ route.post('/api/asset', authorizeAdmin, async(req,res)=>await assetController.c
 route.put('/api/asset', authorizeAdmin,  async(req,res)=>await assetController.update(req,res));
 route.delete('/api/asset', authorizeAdmin, async(req,res)=>await assetController.delete(req,res));
 
-
-
 //Route untuk peminjaman
 route.get('/peminjaman/detail', validateSession, async(req,res)=>viewController.pinjam(req,res));
+route.get('/api/request', validateSession, async(req,res)=>await peminjamanController.index(req,res));
+route.post('/api/request', validateSession, async(req,res)=>await peminjamanController.create(req,res));
+route.put('/api/request', authorizeAdmin, async(req,res)=>await peminjamanController.update(req,res));
+route.delete('/api/request', authorizeAdmin, async(req,res)=>await peminjamanController.delete(req,res));
 
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
