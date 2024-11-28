@@ -12,7 +12,7 @@ class Model{
         let result = null;
         await getClient(this.table, async (db, client)=>{
             try{
-                console.log(this.state);
+                // console.log(this.state);
                 if(this.filtered)result = await db.find(this.state).sort(this.orderState).toArray();
                 else result = await db.find().sort(this.orderState).toArray();
             } finally {
