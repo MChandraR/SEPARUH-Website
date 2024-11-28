@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peminjaman Ruangan</title>
+    <script src="/js/templateLoader.js"></script>
+    <script src="/js/cssLinkLoader.js"></script>
+    <style>
+        /* Mencegah FOUC */
+        body {visibility: hidden;}
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
+</head>
+<body>
+    <div id="template-header"></div>
+    <div id="heading-container">
+        <div id="title-heading">
+            <span>Ruangan</span>
+        </div>
+        <hr />
+    </div>
+    <div id="content-container">
+        <div id="image-container">
+            <img src="/assets/images/room.jpg" alt="gambar_ruangan">
+        </div>
+        <div id="info-container">
+            <div id="about-room">
+                <span>Tentang</span>
+                <p>Ruangan dengan fasilitas 2 Air Conditioner, berkapasitas hingga 40 orang, Proyektor, Papan tulis.</p>
+            </div>
+            <button id="reservation-btn" title="Buat reservasi">Buat reservasi</button>
+            <div id="review-container">
+                <span>Ulasan</span>
+                <div class="review">
+                    <div class="rv-user-profile">
+                        <img alt="Gambar_profile" src="/assets/images/umrah.png">
+                        <span class="rv-username">FTTK Umrah</span>
+                    </div>
+                    <div class="rv-rating-and-date">
+                        <div class="rv-rating-star">
+                            <img src="/assets/images/icon/rating-star.png">
+                            <img src="/assets/images/icon/rating-star.png">
+                            <img src="/assets/images/icon/rating-star.png">
+                            <img src="/assets/images/icon/rating-star-empty.png">
+                            <img src="/assets/images/icon/rating-star-empty.png">
+                        </div>
+                        <div class="rv-date-created">
+                            <span>17/10/2024</span>
+                        </div>
+                    </div>
+                    <div class="rv-message">
+                        <p>Lorem ipsum dolor blablablablablablablablab blablabal ablablablabla balblabalba ablablabla.</p>
+                    </div>
+                </div>
+                <div class="review">
+                    <div class="rv-user-profile">
+                        <img alt="Gambar_profile" src="/assets/images/umrah.png">
+                        <span class="rv-username">FTTK Umrah</span>
+                    </div>
+                    <div class="rv-rating-and-date">
+                        <div class="rv-rating-star">
+                            <img src="/assets/images/icon/rating-star.png">
+                            <img src="/assets/images/icon/rating-star.png">
+                            <img src="/assets/images/icon/rating-star.png">
+                            <img src="/assets/images/icon/rating-star-empty.png">
+                            <img src="/assets/images/icon/rating-star-empty.png">
+                        </div>
+                        <div class="rv-date-created">
+                            <span>17/10/2024</span>
+                        </div>
+                    </div>
+                    <div class="rv-message">
+                        <p>Lorem ipsum dolor blablablablablablablablab blablabal ablablablabla balblabalba ablablabla.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="template-footer"></div>
+</body>
+<script>
+    const template = new Template(['header', 'footer']);
+    loadCSS([
+        'main',
+        'ruangan',
+        'template/header',
+        'template/footer',
+        'font/ubuntu'
+    ])
+</script>
+</html>

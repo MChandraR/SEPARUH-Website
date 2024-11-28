@@ -5,8 +5,9 @@
 
 /* section - heading */
 #heading-container {
-    padding: 55px 74px;
+    padding: 55px 74px 0 74px;
     display: flex;
+    align-items: flex-end;
     justify-content: center;
     position: relative;
     animation: fadeInHeading 1s ease-in forwards;
@@ -18,40 +19,160 @@
 #heading-container #title-heading {
     width: var(--column-one-width);
     color: var(--fun-blue);
+    padding: 23px 0;
+    text-align: center;
     font-size: var(--font-size-l);
     font-family: var(--font-family-montserrat);
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 #heading-container #search-nav-container {
     width: var(--column-two-width);
+    height: 73px;
     padding: 0 48px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px 6px 0 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     background-color: var(--fun-blue);
 }
-#search-nav-container h2 {
+#search-nav-container div {
+    width: 210px;
     color: white;
     margin-right: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 #content-container {
     padding: 0 74px 55px;
-    height: 200px;
+    height: auto;
+    min-height: 200px;
+    font-family: var(--font-family-inter);
     display: flex;
     justify-content: center;
     position: relative;
-    border: solid salmon;
 }
+
 #content-container #filter-container {
     width: var(--column-one-width);
-    height: 100%;
-    border: solid gold;
+    height: auto;
+    padding: 20px;
+    background-color: #e4eaea;
+    position: relative;
+    border: 1px solid var(--fun-blue);
+    border-right: none;
+    border-radius: 12px 0px 0px 12px;
 }
+#filter-container h3, #filter-container hr:first-of-type {
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-align: center;
+}
+#filter-container section {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+#filter-container span {
+    width: 100%;
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+#filter-container button {
+    flex: 1 1 auto;
+    height: 40px;
+    min-width: 120px;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Ubuntu', serif;
+    font-weight: 400;
+    background-color: #174d8a;
+    border: none;
+    border-radius: 12px;
+    user-select: none;
+}
+#filter-container button:hover {
+    color: white;
+    background-color: var(--fun-blue);
+}
+#filter-container button:active {
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+}
+
 #content-container #item-container {
     width: var(--column-two-width);
+    height: 706px;
+    padding: 20px;
+    border: 1px solid var(--fun-blue);
+    display: flex;
+    flex-flow: row wrap;
+    gap: 16px;
+    overflow-y: auto;
+}
+#item-container .item-card {
+    width: calc(25% - 12px);
+    height: 324px;
+    border: 2px solid #D9D9D9;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    overflow: hidden;
+}
+/* calculating flexbox layout and gap
+   (container width - total gap space) / total distributed items
+   example: (100% - 48px) / 4 = 25% - 12px
+*/
+#item-container .item-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+.item-card .item-img-container {
+    position: relative;
+    border-bottom: 1px solid #D9D9D9;
+}
+.item-img-container img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+.item-card .item-info {
+    position: relative;
     height: 100%;
-    border: solid seagreen;
+    padding: 10px 10px 14px 10px;
+    font-size: 16px;
+    font-family: var(--font-family-montserrat);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.item-info > *:not(:last-child) {
+    margin-bottom: 8px;
+    display: block;
+}
+.item-info .item-name {
+    font-weight: 700;
+    text-overflow: ellipsis;
+}
+.item-info .item-score {
+    color: green;
+    font-weight: 700;
+}
+#item-container .item-description {
+    color: #757575;
+    word-spacing: -1px;
+    text-overflow: ellipsis;
+    font-family: var(--font-family-inter);
+    overflow: hidden;
 }

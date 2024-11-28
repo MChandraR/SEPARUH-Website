@@ -33,6 +33,14 @@ class viewController{
         return res.send(View('peminjaman2'));
     }
 
+    ruangan(req,res){
+        return res.send(View('ruangan'));
+    }
+
+    profile(req,res){
+        return res.send(View('profile'));
+    }
+
     register(req,res){
         return res.send(View('register'));
     }

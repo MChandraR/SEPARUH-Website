@@ -5,6 +5,7 @@
     <title>Peminjaman</title>
     <script src="/js/cssLinkLoader.js"></script>
     <script src="/js/templateLoader.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
     <style>
         /* Mencegah FOUC */
         body {visibility: hidden;}
@@ -18,13 +19,39 @@
             <span>Peminjaman Ruangan dan Aset</span>
         </div>
         <div id="search-nav-container">
-            <h2>Filter utama: Ruangan dan Asset disini</h2>
+            <div>
+                <h2>Kategori: </h2>
+                <button>Semua</button>
+                <button>Ruangan</button>
+                <button>Aset</button>
+            </div>
             <input type="text" id="search-input" placeholder="Placeholder search input" />
         </div>
     </div>
     <div id="content-container">
-        <div id="filter-container">Filter item disini</div>
-        <div id="item-container">List item disini</div>
+        <div id="filter-container">
+            <h3>FILTER ITEMS</h3>
+            <hr>
+            <section>
+                <span>Status</span>
+                <button>Tersedia</button>
+                <button>Tidak Tersedia</button>
+                <button>Dipinjam</button>
+            </section>
+            <section>
+                <span>Rating</span>
+                <button>Paling banyak rating</button>
+                <button>Paling sedikit rating</button>
+            </section>
+            <section>
+                <span>Peminjaman</span>
+                <button>Paling banyak dipinjam</button>
+                <button>Paling sedikit dipinjam</button>
+            </section>
+        </div>
+        <div id="item-container">
+            
+        </div>
     </div>
     <div id="template-footer"></div>
     <script>
@@ -33,8 +60,24 @@
             'main',
             'peminjaman2',
             'template/header',
-            'template/footer'
+            'template/footer',
+            'font/ubuntu'
         ]);
+
+        const itemContainer = document.getElementById('item-container');
+        let items = [];
+
+        $.ajax({
+            url: '/api/ruangan',
+            method: 'GET',
+        }).done((e) => {
+            if (!e.data && e.status == 201) {
+                console.log(e.message);
+                return;
+            }
+
+            template.generateItems(e.data);
+        });
     </script>
 </body>
 </html>
