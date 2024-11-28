@@ -7,6 +7,7 @@ const app = express()
 const path = require('path');
 const router = require('./app/routes');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@mydb.rvfulzg.mongodb.net/pemweb?retryWrites=true&w=majority&appName=myDB`;
 
@@ -24,7 +25,9 @@ var sess = {
     }
 }
 
+
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(session(sess))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/",router);

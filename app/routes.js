@@ -7,6 +7,7 @@ const sessionController = require('./controllers/sessionController');
 const ruanganController = require('./controllers/ruanganController');
 const resourceController = require('./controllers/resourceController.js');
 const { validateSession, authorizeAdmin,  } = require('./middlewares/index.js');
+const validator = require('./middlewares/validator.js');
 
 //Route untuk view
 route.get('/', (req,res)=>viewController.index(req,res, true));
@@ -31,7 +32,7 @@ route.post('/login', async(req,res)=>await sessionController.login(req,res));
 route.get('/logout', async(req,res)=>await sessionController.logout(req,res));
 
 //Route untuk ruangan
-route.get('/api/ruangan', async(req,res)=>await ruanganController.index(req,res));
+route.get('/api/ruangan', validateSession,async(req,res)=>await ruanganController.index(req,res));
 route.post('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.addRuangan(req,res));
 route.put('/api/ruangan', authorizeAdmin,  async(req,res)=>await ruanganController.updateRuangan(req,res));
 route.delete('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.deleteRuangan(req,res));
@@ -41,6 +42,8 @@ route.get('/peminjaman/detail', validateSession, async(req,res)=>viewController.
 
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
+route.get('/uploads', async(req,res)=>await resourceController.getImage(req,res));
+route.post('/uploads', async(req,res)=>await resourceController.uploadFile(req,res));
 
 //Route untuk verifikasi & keamanan akun
 route.get('/api/user/verify', async(req,res)=>await accController.index(req,res) );
