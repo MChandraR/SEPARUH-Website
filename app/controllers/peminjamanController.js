@@ -5,6 +5,8 @@ const Validator = require('../../utils/validator');
 const Ruangan = require('../models/ruangan');
 const Asset = require('../models/asset');
 const moment = require('moment-timezone');
+const { generate } = require('rand-token');
+const randToken = require('rand-token').generate;
 
 class peminjamanController {
 
@@ -58,8 +60,21 @@ class peminjamanController {
     //Payload yang dibutuhkan : [ request_id ]
     //Payload opsional : [ status ]
     async update(req,res){
-        res.send("Hallo");
+        const data = req.body;
+        let update = {};
+        let waktuSekarang = moment().tz('Asia/Jakarta');
 
+        // Membuat string dengan format yang diinginkan
+        const waktuFormatted = waktuSekarang.format('YYYY-MM-DD HH:mm:ss');
+    
+        if(Validator(data.request_id)){
+            update["update_at"] = waktuFormatted;
+            update["code"] = generate("6").toUpperCase();
+            if(Validator(data.status) && (data.status=="accepted" || data.status=="rejected")) update["status"] = data.status;
+            return Response(res, 200, "Berhasil mengupdate data !", await Peminjaman.where({request_id : data.request_id}).update(update));
+        }
+
+        return Response(res, 400, "Gagal mengupdate data : field tidak lengkap !");
     }
 
     //Fungsi untuk menghapus data peminjaman oleh admin
