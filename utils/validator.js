@@ -1,5 +1,7 @@
+
+
 function includeXXS(input){
-    return input.includes("<") || input.includes(">");
+    return input.toString().includes("<") || input.toString().includes(">");
 
 }
 

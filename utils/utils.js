@@ -1,5 +1,5 @@
 class utils{
-    sendResponse(res, code, msg, data){
+    sendResponse(res, code, msg, data=null){
         res.send({
             status : code, 
             message : msg,

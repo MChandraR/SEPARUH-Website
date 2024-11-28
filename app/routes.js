@@ -8,6 +8,7 @@ const ruanganController = require('./controllers/ruanganController');
 const resourceController = require('./controllers/resourceController.js');
 const { validateSession, authorizeAdmin,  } = require('./middlewares/index.js');
 const validator = require('./middlewares/validator.js');
+const assetController = require('./controllers/assetController.js');
 
 //Route untuk view
 route.get('/', (req,res)=>viewController.index(req,res, true));
@@ -17,6 +18,7 @@ route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession, (req,res)=>viewController.peminjaman(req,res));
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>viewController.ruangan(req,res));
 route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
+
 //Route view cadangan
 route.get('/home2', (req,res)=>viewController.beranda2(req,res));
 route.get('/peminjaman2', (req,res)=>viewController.peminjaman2(req,res));
@@ -38,6 +40,14 @@ route.get('/api/ruangan', validateSession,async(req,res)=>await ruanganControlle
 route.post('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.addRuangan(req,res));
 route.put('/api/ruangan', authorizeAdmin,  async(req,res)=>await ruanganController.updateRuangan(req,res));
 route.delete('/api/ruangan', authorizeAdmin, async(req,res)=>await ruanganController.deleteRuangan(req,res));
+
+//Route untuk asset
+route.get('/api/asset', validateSession,async(req,res)=>await assetController.index(req,res));
+route.post('/api/asset', authorizeAdmin, async(req,res)=>await assetController.create(req,res));
+route.put('/api/asset', authorizeAdmin,  async(req,res)=>await assetController.update(req,res));
+route.delete('/api/asset', authorizeAdmin, async(req,res)=>await assetController.delete(req,res));
+
+
 
 //Route untuk peminjaman
 route.get('/peminjaman/detail', validateSession, async(req,res)=>viewController.pinjam(req,res));
