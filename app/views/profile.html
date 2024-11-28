@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div id="profile_btn-container">
-                <button id="profile_edit-btn" title="Edit Profile" onclick="{alert('Click')}">Perbarui BioData</button>
+                <button id="profile_edit-btn" title="Edit Profile" onclick="showModal()">Perbarui BioData</button>
             </div>
         </div>
         <div id="main-container">
@@ -51,25 +51,90 @@
             </div>
             <hr>
             <div id="item-container">
+                <div id="item-header-title">
+                    <span>Tanggal</span>
+                    <span>Jenis</span>
+                    <span>Request ID</span>
+                </div>
                 <div class="item">
                     <span class="item-date">17/10/2024 - 18/10/2024</span>
                     <span class="item-name">Ruangan 1</span>
+                    <span class="item-request_id">I08R01</span>
                     <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
                 </div>
                 <div class="item">
                     <span class="item-date">17/10/2024 - 18/10/2024</span>
                     <span class="item-name">Spidol dan Penghapus</span>
+                    <span class="item-request_id">I08A06</span>
                     <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
                 </div>
                 <div class="item">
                     <span class="item-date">27/10/2024 - 27/10/2024</span>
                     <span class="item-name">Auditorium FTTK</span>
+                    <span class="item-request_id">I08RS1</span>
                     <button class="item-btn item_requested">Batalkan Permohonan</button>
+                </div>
+            </div>
+        </div>
+        <div id="modal-wrapper">
+            <div id="modal-edit_profile">
+                <form id="form-edit_profile" autocomplete="off">
+                    <div id="edit-profile_picture">
+                        <span>Foto Profil</span>
+                        <img src="/assets/images/profile-picture.png" alt="profile-picture">
+                    </div>
+                    <div id="edit-profile_data">
+                        <!-- Input nama -->
+                        <label for="username">Nama</label>
+                        <input type="text" id="username" name="username">
+                        <!-- Input NIM -->
+                        <label for="nim">NIM</label>
+                        <input type="text" id="nim" name="nim">
+                        <!-- Input No.WA -->
+                        <label for="wanum">No. Whatsapp</label>
+                        <input type="text" id="wanum" name="wanum">
+                        <div>
+                            <label for="major">Jurusan</label>
+                            <label for="gender">Jenis Kelamin</label>
+                            <!-- Input Jurusan -->
+                            <select id="major" name="major">
+                                <option value="" selected>Pilih Jurusan</option>
+                                <option value="1">Teknik Elektro</option>
+                                <option value="2">Teknik Informatika</option>
+                                <option value="3">Teknik Perkapalan</option>
+                            </select>
+                            <!-- Input Gender -->
+                            <select id="gender" name="gender">
+                                <option value="">Pilih gender</option>
+                                <option value="1">Laki-Laki</option>
+                                <option value="2">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" title="Edit dan Simpan Data Profil">Simpan</button>
+                </form>
+                <div class="exit-modal">
+                    <img src="/assets/images/icon/cross-exit.png">
                 </div>
             </div>
         </div>
     </div>
     <script>
+        const form = document.getElementById('form-edit_profile');
+        const modal = document.getElementById('modal-wrapper');
+        const close_btn = document.getElementsByClassName('exit-modal')[0];
+
+        function showModal() {
+            modal.classList.add('active');
+        }
+
+        function hideModal() {
+            modal.classList.remove('active');
+            form.reset();
+        }
+
+        close_btn.addEventListener('click', hideModal);
+
         loadCSS([
             'main',
             'profile',
