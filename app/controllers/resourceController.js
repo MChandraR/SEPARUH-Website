@@ -67,16 +67,14 @@ class resourceController {
                 Key: newFile, 
 
             }, function (err, data) {
-                this.deleteFile(oldFile);
+                
                 if (err) {
                     console.error('Error copying file:', err);
                 } else {
                     console.log('File copied successfully to new name:', newFileName);
-                
-                    
-                
                 }
           });
+          this.deleteFile(oldFile);
     }
 
     deleteFile = (oldFile)=>{

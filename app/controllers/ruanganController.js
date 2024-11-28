@@ -38,12 +38,28 @@ class ruanganController {
     }
 
     async updateRuangan(req,res){
-        const data = req.body;
-
-        Response(res, 200, "Berhasil mengupdate data ruangan !", await Ruangan.where({room_id : data.room_id}).create({
-            room_name : data.room_name
-        }));
+     
         
+        await resourceController.roomUpload.single('file')(req, res, async(err) => {
+
+            const update = {};
+            const data = req.body;
+            
+            if(!Validator(data.room_id)){
+                return Response(res, 400, "Gagal mengupdate data ruangan : room_id tidak ditemukan !" );
+            }
+            
+            if(!err && req.file){
+                const file = req.file;
+                var originalName = file.originalname;
+                resourceController.rename(originalName, data.room_id + ".png" );
+            }
+            if(Validator(data.room_name))update["room_name"] = data.room_name;
+            if(Validator(data.description))update["description"] = data.description;
+            if(Validator(data.capacity))update["capacity"] = data.capacity;
+            return Response(res, 200, "Berhasil mengupdate data ruangan !", await Ruangan.where({room_id : data.room_id}).update(update));
+        });
+
     }   
 
 
