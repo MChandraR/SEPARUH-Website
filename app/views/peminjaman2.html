@@ -18,39 +18,82 @@
         <div id="title-heading">
             <span>Peminjaman Ruangan dan Aset</span>
         </div>
-        <div id="search-nav-container">
-            <div>
-                <h2>Kategori: </h2>
-                <button>Semua</button>
-                <button>Ruangan</button>
-                <button>Aset</button>
-            </div>
-            <input type="text" id="search-input" placeholder="Placeholder search input" />
-        </div>
+        <hr>
     </div>
     <div id="content-container">
         <div id="filter-container">
-            <h3>FILTER ITEMS</h3>
-            <hr>
             <section>
-                <span>Status</span>
-                <button>Tersedia</button>
-                <button>Tidak Tersedia</button>
-                <button>Dipinjam</button>
+                <span>Jenis</span>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    Ruangan
+                </button>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    Aset
+                </button>
             </section>
             <section>
                 <span>Rating</span>
-                <button>Paling banyak rating</button>
-                <button>Paling sedikit rating</button>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    Tertinggi
+                </button>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    Terendah
+                </button>
+                <button class="flex-f">
+                    <img src="/assets/images/icon/checkmark.png">
+                    Paling sering dipinjam
+                </button>
             </section>
             <section>
-                <span>Peminjaman</span>
-                <button>Paling banyak dipinjam</button>
-                <button>Paling sedikit dipinjam</button>
+                <span>Lainnya</span>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    Ready
+                </button>
             </section>
         </div>
         <div id="item-container">
-            
+            <div class="item-card">
+                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
+                <div class="item-info"><span class="item-name">Auditorium FTTK</span><span class="item-score">4.3 / 5.0</span>
+                    <p class="item-description">Ruangan audit dengan 4 AC dan juga Proyektor</p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
+                <div class="item-info"><span class="item-name">Lab TI</span><span class="item-score">4.3 / 5.0</span>
+                    <p class="item-description">Ruangan laboratorium untuk praktikum </p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
+                <div class="item-info"><span class="item-name">Lab TI 2</span><span class="item-score">4.3 / 5.0</span>
+                    <p class="item-description">Ruangan laboratorium untuk praktikum </p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
+                <div class="item-info"><span class="item-name">Lab TI 3</span><span class="item-score">4.3 / 5.0</span>
+                    <p class="item-description">Ruangan laboratorium untuk praktikum </p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
+                <div class="item-info"><span class="item-name">Lab TI 4</span><span class="item-score">4.3 / 5.0</span>
+                    <p class="item-description">Ruangan laboratorium untuk praktikum</p>
+                </div>
+            </div>
+            <div id="pagination">
+                <button class="page-btn">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">5</button>
+            </div>
         </div>
     </div>
     <div id="template-footer"></div>
@@ -64,19 +107,32 @@
             'font/ubuntu'
         ]);
 
-        const itemContainer = document.getElementById('item-container');
-        let items = [];
+        function toggleFilter(element) {
+            if (!element) {
+                console.log("Filter button not found!");
+                return;
+            }
+            element.classList.toggle('active');
+        }
+
+        const filterButtons = document.querySelectorAll('#filter-container button');
+        filterButtons.forEach((btn) => {
+            btn.addEventListener('click', function() {
+                toggleFilter(btn);
+            });
+        });
 
         $.ajax({
-            url: '/api/ruangan',
-            method: 'GET',
-        }).done((e) => {
-            if (!e.data && e.status == 201) {
-                console.log(e.message);
+            url: '/api/room',
+            method: 'GET'
+        })
+        .done(function(e, textStatus, xhr) {
+            if (!e.data) {
+                console.log("Data not found!");
                 return;
             }
 
-            template.generateItems(e.data);
+            // template.generateItems(e.data);
         });
     </script>
 </body>
