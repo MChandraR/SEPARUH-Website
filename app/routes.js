@@ -16,7 +16,7 @@ route.get('/', (req,res)=>viewController.index(req,res, true));
 route.get('/login', (req,res)=>viewController.login2(req,res));
 route.get('/register', (req,res)=>viewController.register(req,res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
-route.get('/peminjaman', validateSession, (req,res)=>viewController.peminjaman(req,res));
+route.get('/peminjaman', validateSession, (req,res)=>viewController.peminjaman2(req,res));
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>viewController.ruangan(req,res));
 route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
 
@@ -30,6 +30,10 @@ route.post('/api/users', authorizeAdmin, async(req,res)=>await userController.in
 route.put('/api/users', authorizeAdmin, async(req,res)=>await userController.update(req,res));
 route.delete('/api/users', authorizeAdmin, async(req, res)=>await userController.delete(req,res));
 route.post('/register', async(req,res)=>await userController.insert(req,res));
+
+//Route untuk user/profile
+route.get('/api/profile', validateSession, async(req,res)=>await userController.getUserProfile(req,res));
+route.post('/api/profile', validateSession, async(req,res)=>await userController.updateUserProfile(req,res));
 
 //Route untuk session
 route.get('/api/session', async(req,res)=>await sessionController.index(req,res));
@@ -54,6 +58,8 @@ route.get('/api/request', validateSession, async(req,res)=>await peminjamanContr
 route.post('/api/request', validateSession, async(req,res)=>await peminjamanController.create(req,res));
 route.put('/api/request', authorizeAdmin, async(req,res)=>await peminjamanController.update(req,res));
 route.delete('/api/request', authorizeAdmin, async(req,res)=>await peminjamanController.delete(req,res));
+//Peminjaman untuk user
+route.get('/api/user/request', validateSession, async(req,res)=>await peminjamanController.getUserRequest(req,res));
 
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
