@@ -22,23 +22,23 @@
             <div id="profile_info-container">
                 <div id="user-name">
                     <span class="profile_label">Nama</span>
-                    <span class="profile_data">M. Zaidaan Nugroho</span>
+                    <span class="profile_data"  id="name_field">M. Zaidaan Nugroho</span>
                 </div>
                 <div id="user-nim">
                     <span class="profile_label">NIM</span>
-                    <span class="profile_data">2201020011</span>
+                    <span class="profile_data"  id="nim_field">2201020011</span>
                 </div>
                 <div id="user-phone_number">
-                    <span class="profile_label">No. Whatsapp<span class="required-asterisk"></span></span>
-                    <span class="profile_data">-</span>
+                    <span class="profile_label" >No. Whatsapp<span class="required-asterisk"></span></span>
+                    <span class="profile_data" id="phone_field">-</span>
                 </div>
                 <div id="user-major">
-                    <span class="profile_label">Jurusan<span class="required-asterisk"></span></span>
-                    <span class="profile_data">-</span>
+                    <span class="profile_label" >Jurusan<span class="required-asterisk"></span></span>
+                    <span class="profile_data" id="major_field">-</span>
                 </div>
                 <div id="user-gender">
-                    <span class="profile_label">Jenis Kelamin<span class="required-asterisk"></span></span>
-                    <span class="profile_data">-</span>
+                    <span class="profile_label" >Jenis Kelamin<span class="required-asterisk"></span></span>
+                    <span class="profile_data" id="gender_field">-</span>
                 </div>
             </div>
             <div id="profile_btn-container">
@@ -86,13 +86,13 @@
                     <div id="edit-profile_data">
                         <!-- Input nama -->
                         <label for="username">Nama</label>
-                        <input type="text" id="username" name="username">
+                        <input type="text" id="name" name="name">
                         <!-- Input NIM -->
                         <label for="nim">NIM</label>
                         <input type="text" id="nim" name="nim">
                         <!-- Input No.WA -->
                         <label for="wanum">No. Whatsapp</label>
-                        <input type="text" id="wanum" name="wanum">
+                        <input type="text" id="phone" name="wanum">
                         <div>
                             <label for="major">Jurusan</label>
                             <label for="gender">Jenis Kelamin</label>
@@ -111,7 +111,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" title="Edit dan Simpan Data Profil">Simpan</button>
+                    <button type="submit" id="updateProfile" title="Edit dan Simpan Data Profil">Simpan</button>
                 </form>
                 <div class="exit-modal">
                     <img src="/assets/images/icon/cross-exit.png">
@@ -119,10 +119,25 @@
             </div>
         </div>
     </div>
+    <script src="/js/sweetalert2@11.js"></script>
     <script>
         const form = document.getElementById('form-edit_profile');
         const modal = document.getElementById('modal-wrapper');
         const close_btn = document.getElementsByClassName('exit-modal')[0];
+        const username_field = document.getElementById('username_field');
+        const name_field = document.getElementById('name_field');
+        const nim_field = document.getElementById('nim_field');
+        const phone_field = document.getElementById('phone_field');
+        const major_field = document.getElementById('major_field');
+        const gender_field = document.getElementById('gender_field');
+        const btn_update = document.getElementById('updateProfile');
+
+        //element dalam input form
+        const name = document.getElementById('name');
+        const nim = document.getElementById('nim');
+        const phone = document.getElementById('phone');
+        const major = document.getElementById('major');
+        const gender = document.getElementById('gender');
 
         function showModal() {
             modal.classList.add('active');
@@ -134,12 +149,70 @@
         }
 
         close_btn.addEventListener('click', hideModal);
+        btn_update.addEventListener('click', async(e)=>{
+            e.preventDefault();
+            btn_update.disabled = true;
+            console.log("test");
+            let res = await fetch(
+                '/api/profile',{
+                    method : "POST",
+                    headers : {
+                        "content-type" : "application/json"
+                    },
+                    body: JSON.stringify({
+                        name : name.value,
+                        nim : nim.value,
+                        phone : phone.value,
+                        major : major.value,
+                        gender : gender.value
+                    })
+                }
+            );
+
+            if(!res.ok)console.log(res.statusText);
+            let data = await res.json();
+            fetchUserData();
+            let confirm = await Swal.fire({
+                title: data.status == 200 ? "Berhasil" : "Gagal",
+                text: data.message,
+                icon: data.status == 200 ? "success" : "error"
+            });
+            btn_update.disabled = false;
+
+        });
 
         loadCSS([
             'main',
             'profile',
             'font/ubuntu'
         ])
+
+        async function fetchUserData(){
+            try{
+                let res = await fetch(
+                    '/api/profile',
+                    );
+
+                if(!res.ok) console.log(res.statusText);
+                res = await res.json();
+                let profile = res.data.profile ;
+                name_field.innerHTML = profile.name ?? "-";
+                nim_field.innerHTML = profile.nim ?? "-";
+                phone_field.innerHTML = profile.phone ?? "-";
+                major_field.innerHTML = profile.major ?? "-";
+                gender_field.innerHTML = profile.gender ?? "-";
+                name.value = profile.name ?? "-";
+                nim.value = profile.nim ?? "-";
+                phone.value = profile.phone ?? "-";
+                major.value = profile.major ?? "-";
+                gender.value = profile.gender ?? "-";
+
+            }catch(e){
+                console.log(e);
+            }
+        }
+
+        fetchUserData();
     </script>
 </body>
 </html>

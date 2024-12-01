@@ -3,7 +3,7 @@ const Response = require('../../utils/utils').sendResponse;
 const Users = require('../models/users');
 const Verify = require('../models/acc_verify');
 const sendEmail = require('../../utils/mailer');
-const validate = require('../../utils/validator');
+const Validate = require('../../utils/validator');
 const Encrypt = require('../../utils/encryptor');
 const randToken = require('rand-token').generate;
 
@@ -17,7 +17,7 @@ class userController{
         console.log(data);
 
         
-        if( !validate(data.username) || !validate(data.password) || !validate(data.email)){
+        if( !Validate(data.username) || !Validate(data.password) || !Validate(data.email)){
             Response(res, 401, "Data tidak valid, lengkapi data anda !",null);
             return;
         }
@@ -61,6 +61,44 @@ class userController{
                 password : data.password
             }
         ));
+    }
+
+    //Fungsi untuk mengupdate profile user 
+    //Payload nama, no-hp , nim , jurusan, jenis_kelamin
+    async updateUserProfile(req,res){
+        let body = req.body;
+        if(Validate([body.name, body.nim, body.phone, body.major, body.gender])){
+            let data = await Users.where({user_id : req.session.user.user_id}).update({
+                profile : {
+                    name : body.name,
+                    nim : body.nim,
+                    phone : body.phone,
+                    major : body.major,
+                    gender : body.gender
+                }
+            });
+            return Response(
+                res,
+                200,
+                "Successfully update user data !"
+            );
+        }
+        return Response(
+            res,
+            400,
+            "Failed to update user data : payload sent not valid !"
+        );
+        
+    }
+
+    async getUserProfile(req,res){
+        let data = await Users.where({user_id : req.session.user.user_id}).first();
+        return Response(res, 200 , "Berhasil mengambil data user !",{
+            username : data.username,
+            role : data.role,
+            email : data.email,
+            profile : data.profile
+        } );
     }
 
     async delete(req,res){
