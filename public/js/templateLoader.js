@@ -5,7 +5,7 @@ class Template {
             'footer': this.footer
         };
         this.items = [];
-
+        console.log('KERUN');
         this.scripts = {
             'DOMPurify': () => { return Object.assign(document.createElement('script'), { src: 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.0/purify.min.js' }) },
             'JQuery': () => { return Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' }) }
@@ -144,41 +144,95 @@ class Template {
         document.getElementById(targetDiv).remove();
     }
 
+    generateItemPages(itemCount = 0, itemCollection = null) {
+        if (!document.getElementById('pagination-container')) {
+            console.error("Err: element not found!!");
+            return;
+        }
+
+        const pageNumContainer = document.getElementById('pagination-container');
+        // Previous button
+        const prevBtn = Object.assign(document.createElement('button'), { id: 'prevPageBtn', className: 'disabled', disabled: true });
+        prevBtn.appendChild(Object.assign(document.createElement('span'), { innerHTML: 'Previous' }));
+        prevBtn.insertAdjacentElement('afterbegin', Object.assign(document.createElement('img'), { src: '/assets/images/icon/arrow-left.png' }));
+
+        // Next button
+        const nextBtn = Object.assign(document.createElement('button'), { id: 'nextPageBtn' });
+        nextBtn.appendChild(Object.assign(document.createElement('span'), { innerHTML: 'Next' }));
+        nextBtn.insertAdjacentElement('beforeend', Object.assign(document.createElement('img'), { src: '/assets/images/icon/arrow-right.png' }));
+        pageNumContainer.append(prevBtn, nextBtn);
+
+        if (itemCount < 0 || !itemCollection) {
+            console.error('Err: Item data is invalid!!');
+            return;
+        }
+        // console.log("Collection: \n", itemCollection);
+
+        // Iterasi setiap halaman
+        let itemPage;
+        let itemPages = [];
+        for (let i = 0; i < itemCount; i++) {
+            if (i%6 == 0) {
+                // Buat button/link untuk setiap page
+                const pageNum = i/6+1;
+                const pageBtn = Object.assign(document.createElement('button'), { className: 'page-btn', innerHTML: `${pageNum}` });
+                pageBtn.setAttribute('data-page', `${pageNum}`);
+                if (pageBtn.getAttribute('data-page') === "1") pageBtn.classList.add('active');
+                pageNumContainer.insertBefore(pageBtn, pageNumContainer.lastChild);
+
+                itemPage = Object.assign(document.createElement('div'), { className: 'item-page', id: `page-${pageNum}` });
+                itemPages.push(itemPage);
+            }
+            
+            // Untuk konten item per page
+            itemPage.appendChild(itemCollection[i]);
+        }
+        // itemPages.forEach(page => console.log(page));
+
+        return itemPages;
+    }
+
     generateItems(data) {
         const script = Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' });
         script.onload = () => { console.log('JQuery script has loaded.'); };
         document.head.appendChild(script);
         
         this.items = data;
-        console.log(this.items);
+        console.log(this.items, this.items.length);
 
-        // Untuk membuat elemen beserta className
+        // Arrow function untuk membuat elemen beserta className
         const createElement = (element_name, class_name) => {
-            return Object.assign(
-                document.createElement(element_name),
-                { className: class_name }
-            );
+            return Object.assign(document.createElement(element_name), { className: class_name });
         };
 
         const itemContainer = document.getElementById('item-container');
-        this.items.forEach((item) => {
-            const itemCard = createElement('div', 'item-card');
+        let itemCollection = [];
+        this.items.forEach((item, idx) => {
+            const itemCard = createElement('a', 'item-card');
             const itemImageContainer = createElement('div', 'item-img-container');
             const itemInfo = createElement('div', 'item-info');
 
             // Item Image Container
-            itemImageContainer.appendChild(Object.assign(document.createElement('img'), { src: "/assets/images/room.jpg" }));
+            itemImageContainer.appendChild(Object.assign(document.createElement('img'), { src: `https://separuh.s3.ap-southeast-2.amazonaws.com/${item.room_id ?? item.asset_id}.png?time=${new Date().getHours()}` }));
             
             // Item Info
-            itemInfo.appendChild(Object.assign(createElement('span', 'item-name'), { innerHTML: `${item.room_name}` }));
+            itemInfo.appendChild(Object.assign(createElement('span', 'item-name'), { innerHTML: `${item.room_name ?? item.asset_name}` }));
             itemInfo.appendChild(Object.assign(createElement('span', 'item-score'), { innerHTML: `4.3 / 5.0` }));
             itemInfo.appendChild(Object.assign(createElement('p', 'item-description'), { innerHTML: `${item.description}` }));
 
             // Item Card
+            itemCard.href = `/peminjaman/${item.req_type?"asset":"ruangan"}?id=${item.room_id ?? item.asset_id}`;
+            itemCard.style.animationDelay = `${(idx % 6) * 0.125}s`;
             itemCard.appendChild(itemImageContainer);
             itemCard.appendChild(itemInfo);
             
-            itemContainer.appendChild(itemCard);
+            // itemContainer.appendChild(itemCard);
+            itemCollection.push(itemCard);
+        });
+
+        this.generateItemPages(this.items.length, itemCollection).forEach((collection) => {
+            if (collection.id === 'page-1') collection.classList.add('show-page');
+            itemContainer.insertAdjacentElement('afterbegin', collection);
         });
     }
 }

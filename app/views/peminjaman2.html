@@ -57,43 +57,7 @@
             </section>
         </div>
         <div id="item-container">
-            <div class="item-card">
-                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
-                <div class="item-info"><span class="item-name">Auditorium FTTK</span><span class="item-score">4.3 / 5.0</span>
-                    <p class="item-description">Ruangan audit dengan 4 AC dan juga Proyektor</p>
-                </div>
-            </div>
-            <div class="item-card">
-                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
-                <div class="item-info"><span class="item-name">Lab TI</span><span class="item-score">4.3 / 5.0</span>
-                    <p class="item-description">Ruangan laboratorium untuk praktikum </p>
-                </div>
-            </div>
-            <div class="item-card">
-                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
-                <div class="item-info"><span class="item-name">Lab TI 2</span><span class="item-score">4.3 / 5.0</span>
-                    <p class="item-description">Ruangan laboratorium untuk praktikum </p>
-                </div>
-            </div>
-            <div class="item-card">
-                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
-                <div class="item-info"><span class="item-name">Lab TI 3</span><span class="item-score">4.3 / 5.0</span>
-                    <p class="item-description">Ruangan laboratorium untuk praktikum </p>
-                </div>
-            </div>
-            <div class="item-card">
-                <div class="item-img-container"><img src="/assets/images/room.jpg"></div>
-                <div class="item-info"><span class="item-name">Lab TI 4</span><span class="item-score">4.3 / 5.0</span>
-                    <p class="item-description">Ruangan laboratorium untuk praktikum</p>
-                </div>
-            </div>
-            <div id="pagination">
-                <button class="page-btn">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">4</button>
-                <button class="page-btn">5</button>
-            </div>
+            <div id="pagination-container"></div>
         </div>
     </div>
     <div id="template-footer"></div>
@@ -117,6 +81,39 @@
             element.classList.toggle('active');
         }
 
+        let currentPage = 1;
+        function getCurrentPage(dataPage) {
+            return document.getElementById(`page-${dataPage}`);
+        }
+
+        function getActiveButton() {
+            return document.getElementsByClassName('page-btn active')[0];
+        }
+
+        function updatePagination(btnCount, pageNum = 1) {
+            currentPage = pageNum;
+            console.log(currentPage);
+            let prevBtn = document.getElementById('prevPageBtn');
+            if (currentPage > 1) {
+                prevBtn.classList.remove('disabled');
+                prevBtn.disabled = false;
+            }
+            else {
+                prevBtn.classList.add('disabled');
+                prevBtn.disabled = true;
+            }
+
+            let nextBtn = document.getElementById('nextPageBtn');
+            if (currentPage < btnCount) {
+                nextBtn.classList.remove('disabled');
+                nextBtn.disabled = false;
+            }
+            else {
+                nextBtn.classList.add('disabled');
+                nextBtn.disabled = true;
+            }
+        }
+
         const filterButtons = document.querySelectorAll('#filter-container button');
         filterButtons.forEach((btn) => {
             btn.addEventListener('click', function() {
@@ -133,19 +130,59 @@
                 console.log("Data not found!");
                 return;
             }
-            container.innerHTML = "";
-            e.data.forEach((item)=>{
-                console.log(item);
-                container.innerHTML += `
-                <a class="item-card" href="/peminjaman/${item.req_type?"asset":"ruangan"}?id=${item.room_id ?? item.asset_id}">
-                    <div class="item-img-container"><img src="https://separuh.s3.ap-southeast-2.amazonaws.com/${item.room_id ?? item.asset_id}.png?time=${new Date().getHours()}"></div>
-                    <div class="item-info"><span class="item-name">${item.room_name ?? item.asset_name}</span><span class="item-score">4.3 / 5.0</span>
-                        <p class="item-description">${item.description}</p>
-                    </div>
-                </a>
-                `;
+
+            template.generateItems(e.data);
+            const pageButtons = document.getElementById('pagination-container').getElementsByClassName('page-btn');
+            Array.from(pageButtons).forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+                    // console.log(getCurrentPage(getActiveButton().getAttribute('data-page')));
+                    // console.log(getActiveButton());
+                    // Hide current page
+                    getCurrentPage(getActiveButton().getAttribute('data-page')).classList.toggle('show-page');
+                    getActiveButton().classList.toggle('active');
+
+                    // Show selected page
+                    document.getElementById(`page-${this.getAttribute('data-page')}`).classList.toggle('show-page');
+                    this.classList.toggle('active');
+                    
+                    updatePagination(pageButtons.length, parseInt(this.getAttribute('data-page')));
+                })
             });
-            // template.generateItems(e.data);
+            
+            document.getElementById('prevPageBtn').addEventListener('click', function() {
+                let activeBtn = getActiveButton();
+                currentPage = parseInt(activeBtn.getAttribute('data-page'));
+                if (currentPage <= 0) { return; }
+                else if (currentPage - 1 === 1) {
+                    this.disabled = true;
+                    this.classList.toggle('disabled');
+                }
+                // Hide current page
+                getCurrentPage(getActiveButton().getAttribute('data-page')).classList.remove('show-page');
+                activeBtn.classList.remove('active');
+                // Show previous page
+                document.getElementById(`page-${currentPage-1}`).classList.add('show-page');
+                document.querySelectorAll(`.page-btn[data-page="${currentPage-1}"]`)[0].classList.add('active');
+                updatePagination(pageButtons.length, currentPage-1);
+            });
+
+            document.getElementById('nextPageBtn').addEventListener('click', function() {
+                let activeBtn = getActiveButton();
+                currentPage = parseInt(activeBtn.getAttribute('data-page'));
+                if (currentPage >= pageButtons.length) { return; }
+                else if (currentPage + 1 === pageButtons.length) {
+                    this.disabled = true;
+                    this.classList.toggle('disabled');
+                }
+                // Hide current page
+                getCurrentPage(getActiveButton().getAttribute('data-page')).classList.remove('show-page');
+                activeBtn.classList.remove('active');
+                // Show previous page
+                document.getElementById(`page-${currentPage+1}`).classList.add('show-page');
+                document.querySelectorAll(`.page-btn[data-page="${currentPage+1}"]`)[0].classList.add('active');
+                updatePagination(pageButtons.length, currentPage+1);
+            });
         });
     </script>
 </body>

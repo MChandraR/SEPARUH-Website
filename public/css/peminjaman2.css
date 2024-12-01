@@ -52,7 +52,7 @@
 } */
 
 #content-container {
-    padding: 0 74px 55px;
+    padding: 0 74px 0;
     height: auto;
     min-height: 200px;
     font-family: var(--font-family-inter);
@@ -137,15 +137,30 @@
     width: var(--column-two-width);
     /* height: 852px; */
     height: auto;
-    padding: 20px;
+    padding-top: 852px;
+    position: relative;
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+#content-container > #item-container > .item-page {
+    width: inherit;
+    max-height: 905.2px;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
     flex-flow: row wrap;
     gap: 32px 48px;
-    overflow: hidden;
 }
 #item-container .item-card {
     width: calc((100% - 96px) / 3);
+    min-width: 221.06px;
     height: 390px;
+    padding: 10px 10px 14px 10px;
+    color: black;
+    text-decoration: none;
     border: 2px solid #D9D9D9;
     border-radius: 6px;
     background-color: white;
@@ -156,20 +171,24 @@
     text-decoration: none;
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
     overflow: hidden;
+    animation: fadeInItemCard 1s ease-in forwards;
+    opacity: 0;
+}
+@keyframes fadeInItemCard {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 /* calculating flexbox layout and gap
    (container width - total gap space) / total distributed items
    example: (100% - 48px) / 4 = 25% - 12px
 */
 #item-container .item-card:hover {
-    transform: scale(1.01);
-    box-shadow: 2px 8px 12px 0 rgba(0,0,0,0.2);
+    box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.4);
     cursor: pointer;
 }
 .item-card .item-img-container {
-    padding: 10px 10px 0;
+    margin-bottom: 10px;
     position: relative;
-    border-bottom: 1px solid #D9D9D9;
 }
 .item-img-container img {
     width: 100%;
@@ -178,7 +197,6 @@
 .item-card .item-info {
     position: relative;
     height: 100%;
-    padding: 10px 10px 14px 10px;
     font-size: 14px;
     font-family: var(--font-family-montserrat);
     display: flex;
@@ -204,6 +222,50 @@
     font-family: var(--font-family-inter);
     overflow: hidden;
 }
-#item-container > #pagination {
+
+#content-container > #item-container > #pagination-container {
     width: 100%;
+    height: 120px;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    /* border: solid red; */
+}
+#content-container > #item-container > #pagination-container > button {
+    min-width: 32px;
+    max-width: 120px;
+    height: 32px;
+    font-size: 16px;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#content-container > #item-container > #pagination-container > button:not(button.active, #prevPageBtn.disabled, #nextPageBtn.disabled):hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#content-container > #item-container > #pagination-container > button.active {
+    color: white;
+    background-color: #2c2c2c;
+}
+#content-container > #item-container > #pagination-container > button img {
+    height: 16px;
+}
+#content-container > #item-container > #pagination-container > button img:first-child { margin-right: 8px; }
+#content-container > #item-container > #pagination-container > button img:last-child { margin-left: 8px; }
+
+
+
+.item-page.show-page {
+    display: flex !important;
+}
+button#prevPageBtn.disabled, button#nextPageBtn.disabled {
+    opacity: 0.5;
 }
