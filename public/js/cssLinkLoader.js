@@ -24,7 +24,7 @@ function loadCSS(cssFiles) {
             cssLoader(src(cssFile));
         });
         // Montserrat/Inter Font
-        cssLoader("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+        cssLoader("https://fonts.googleapis.com/css?family=Montserrat:700,400,300,200|Inter:700,400,300,200");
     });
 
     // mencegah flash of unstyled content (fouc)
