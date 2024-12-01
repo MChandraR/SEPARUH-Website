@@ -139,6 +139,8 @@
         const major = document.getElementById('major');
         const gender = document.getElementById('gender');
 
+        const container = document.getElementById('item-container');
+
         function showModal() {
             modal.classList.add('active');
         }
@@ -212,7 +214,36 @@
             }
         }
 
+        async function getUserRequest(){
+            try{
+                let res = await fetch('/api/user/request');
+                if(!res.ok) console.log(res.statusText);
+
+                let data = await res.json();
+                console.log(data.data);
+                container.innerHTML = ` <div id="item-header-title">
+                    <span>Tanggal</span>
+                    <span>Jenis</span>
+                    <span>Request ID</span>
+                </div>`;
+                data.data.forEach((e)=>{
+                    container.innerHTML += `
+                    <div class="item">
+                        <span class="item-date">${e.req_start.substring(0,10)} - <br> ${e.req_end.substring(0,10)}</span>
+                        <span class="item-name">${e.req_type ? "Asset" : "Ruangan"}</span>
+                        <span class="item-request_id">${e.request_id}</span>
+                        <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
+                     </div>
+                    `;
+                });
+
+            }catch(e){
+                console.log(e);
+            }
+        }
+
         fetchUserData();
+        getUserRequest();
     </script>
 </body>
 </html>

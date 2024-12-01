@@ -58,6 +58,8 @@ route.get('/api/request', validateSession, async(req,res)=>await peminjamanContr
 route.post('/api/request', validateSession, async(req,res)=>await peminjamanController.create(req,res));
 route.put('/api/request', authorizeAdmin, async(req,res)=>await peminjamanController.update(req,res));
 route.delete('/api/request', authorizeAdmin, async(req,res)=>await peminjamanController.delete(req,res));
+//Peminjaman untuk user
+route.get('/api/user/request', validateSession, async(req,res)=>await peminjamanController.getUserRequest(req,res));
 
 //Route untuk resources
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));

@@ -91,6 +91,8 @@ class userController{
         
     }
 
+    //Fungsi untuk mengambil data profile user
+    //User id didapat otomatis melalu session jadi tidak perlu dimasukkan ke dalam parameter atau payload
     async getUserProfile(req,res){
         let data = await Users.where({user_id : req.session.user.user_id}).first();
         return Response(res, 200 , "Berhasil mengambil data user !",{

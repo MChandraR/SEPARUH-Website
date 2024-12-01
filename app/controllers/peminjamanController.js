@@ -83,6 +83,15 @@ class peminjamanController {
         let result = await Peminjaman.delete();
         return Response(res, 200, "Berhasil menghapus data peminjaman !");
     }
+
+
+    //Fungsi untk mendapatkan data peminjaman 
+    //ID user didapat otomatis dari session
+    async getUserRequest(req,res){
+        let data = await Peminjaman.where({user_id : req.session.user.user_id}).get();
+
+        return Response(res, 200, "Sucessfully get user request !", data);
+    }
 }
 
 module.exports = new peminjamanController();
