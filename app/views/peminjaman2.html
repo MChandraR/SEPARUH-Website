@@ -99,6 +99,8 @@
     <div id="template-footer"></div>
     <script>
         const template = new Template(['header', 'footer']);
+        const container = document.getElementById('item-container');
+
         loadCSS([
             'main',
             'peminjaman2',
@@ -131,7 +133,18 @@
                 console.log("Data not found!");
                 return;
             }
-
+            container.innerHTML = "";
+            e.data.forEach((item)=>{
+                console.log(item);
+                container.innerHTML += `
+                <a class="item-card" href="/peminjaman/${item.req_type?"asset":"ruangan"}?id=${item.room_id ?? item.asset_id}">
+                    <div class="item-img-container"><img src="https://separuh.s3.ap-southeast-2.amazonaws.com/${item.room_id ?? item.asset_id}.png?time=${new Date().getHours()}"></div>
+                    <div class="item-info"><span class="item-name">${item.room_name ?? item.asset_name}</span><span class="item-score">4.3 / 5.0</span>
+                        <p class="item-description">${item.description}</p>
+                    </div>
+                </a>
+                `;
+            });
             // template.generateItems(e.data);
         });
     </script>

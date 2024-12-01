@@ -1,4 +1,5 @@
 const View = require('../../utils/views').view;
+const Compact = require('../../utils/views').compact;
 const Response = require('../../utils/utils').sendResponse;
 
 class viewController{
@@ -34,7 +35,9 @@ class viewController{
     }
 
     ruangan(req,res){
-        return res.send(View('ruangan'));
+        return res.send(Compact('ruangan', {
+            room_name : "Ruangan 1"
+        }));
     }
 
     profile(req,res){
