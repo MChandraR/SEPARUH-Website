@@ -1,16 +1,27 @@
 const Ruangan = require('../models/ruangan');
 const View = require('../../utils/views').view;
+const Compact = require('../../utils/views').compact;
 const Response = require('../../utils/utils').sendResponse;
 const resourceController = require('./resourceController');
 const Validator = require('../../utils/validator');
-
+const url = require('url');
 
 class ruanganController {
+    //Fungsi untuk mengembalikan informasi ruangan 
+    //ID ruangan didapat dari url parameter
+    async view(req,res){
+        const param = url.parse(req.url, true).query;
+        let data = await Ruangan.where({room_id : param.id}).first();
+        return res.send(Compact('ruangan', data));
+    }
 
+    //Fungsi untuk mengambil list dtaa seluruh ruangan
     async index(req,res){
         Response(res,200, "Berhasil mengambil data ruangan !", await Ruangan.get());
     };
 
+    //Fungsi untuk menambahkan data ruangan baru oleh admin
+    //Content-type yang didukung untuk payload adalah multipart/form-data
     async addRuangan(req,res){
         await resourceController.roomUpload.single('file')(req, res, async(err) => {
             if (err) return Response(res, 400, "File Upload Error !", err.message);
@@ -37,9 +48,10 @@ class ruanganController {
     
     }
 
+    //Fungsi untuk mengupdate data ruangn oleh admin
+    //Content-type yang didukung untuk payload adalah multipart/form-data
     async updateRuangan(req,res){
-     
-        
+    
         await resourceController.roomUpload.single('file')(req, res, async(err) => {
 
             const update = {};
@@ -62,7 +74,7 @@ class ruanganController {
 
     }   
 
-
+    //FUngsi untuk mengahpus data ruangan oleh admin
     async deleteRuangan(req,res){
         const data = req.body;
         resourceController.deleteFile(data.room_id + ".png");
