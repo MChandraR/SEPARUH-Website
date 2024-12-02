@@ -5,9 +5,9 @@
     <title>Profile</title>
     <link rel="stylesheet" href="/css/font/ubuntu.css">
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/cssLinkLoader.js"></script>
    
 </head>
@@ -120,12 +120,7 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    
       <div class="modal-body">
         <div id="info">
             <h2 >Detail Peminjaman</h2>
@@ -133,16 +128,23 @@
             <div id="info-detail">
                 <img id="item_image" src="https://separuh.s3.ap-southeast-2.amazonaws.com/${reqData[idx].item_id}.png">
                 <div id="detail-text">
-                    <h3>Request ID : <span id="req_id"></span></h3>
-                    <h3>ID <span id="req_type"></span> : <span id="item_id"></span></h3>
-                    <h3>Status : <span id="req_status"></span></h3>
+                    <span id="detail-title">Request ID </span><span>: </span><input type="text" disabled id="req_id">
+                    <span id="detail-title">ID <span id="req_type"></span></span> <span>:</span>  <input type="text" disabled id="item_id">
+                    <span id="detail-title">Status </span><span>:</span><input type="text" disabled id="req_status">
+                    <span id="detail-title">Note</span><span>:</span><input type="text" disabled id="req_note">
+                    <span id="detail-title">Tanggal Peminjaman</span><span>:</span>
+                    <div id="detail-time">
+                        <input type="datetime" disabled id="req_start">
+                        <b>-</b>
+                        <input type="datetime" disabled id="req_end">
+                    </div>
+                    <span id="detail-title">Tujuan </span> <span>:</span> <textarea disabled id="req_reason"></textarea>
                 </div>
             </div>     
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -170,6 +172,10 @@
 
         //info peminjaman
         const req_id = document.getElementById('req_id');
+        const req_start = document.getElementById('req_start');
+        const req_end = document.getElementById('req_end');
+        const req_note = document.getElementById('req_note');
+        const req_reason = document.getElementById('req_reason');
         const req_type = document.getElementById('req_type');
         const req_status = document.getElementById('req_status');
         const item_id = document.getElementById('item_id');
@@ -283,7 +289,7 @@
                         <td class="item-name">${status[e.status]}</td>
                         <td>
                             <button class="item-btn item_borrowed">Pengembalian</button>
-                            <button onClick="showDetail(${idx-1})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Show </button>
+                            <button onClick="showDetail(${idx-1})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Detail </button>
                         </td>
                     </tr>
                     `;
@@ -298,10 +304,14 @@
         getUserRequest();
 
         function showDetail(idx){
-            req_id.innerHTML = reqData[idx].request_id;
-            item_id.innerHTML = reqData[idx].item_id;
+            req_id.value = reqData[idx].request_id;
+            req_start.value = reqData[idx].req_start;
+            req_end.value = reqData[idx].req_end;
+            req_reason.value = reqData[idx].reason;
+            req_note.value = reqData[idx].note;
+            item_id.value = reqData[idx].item_id;
             req_type.innerHTML = reqData[idx].req_type ? "Asset" : "Ruangan";
-            req_status.innerHTML = status[reqData[idx].status];
+            req_status.value = status[reqData[idx].status];
             item_image.src = `https://separuh.s3.ap-southeast-2.amazonaws.com/${reqData[idx].item_id}.png`;
             return;
             Swal.fire({
