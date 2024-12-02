@@ -26,33 +26,33 @@
                 <span>Jenis</span>
                 <button>
                     <img src="/assets/images/icon/checkmark.png">
-                    Ruangan
+                    <span>Ruangan</span>
                 </button>
                 <button>
                     <img src="/assets/images/icon/checkmark.png">
-                    Aset
+                    <span>Aset</span>
                 </button>
             </section>
             <section>
                 <span>Rating</span>
                 <button>
                     <img src="/assets/images/icon/checkmark.png">
-                    Tertinggi
+                    <span>Tertinggi</span>
                 </button>
                 <button>
                     <img src="/assets/images/icon/checkmark.png">
-                    Terendah
+                    <span>Terendah</span>
                 </button>
                 <button class="flex-f">
                     <img src="/assets/images/icon/checkmark.png">
-                    Paling sering dipinjam
+                    <span>Paling sering dipinjam</span>
                 </button>
             </section>
             <section>
                 <span>Lainnya</span>
                 <button>
                     <img src="/assets/images/icon/checkmark.png">
-                    Ready
+                    <span>Ready</span>
                 </button>
             </section>
         </div>
@@ -72,6 +72,15 @@
             'template/footer',
             'font/ubuntu'
         ]);
+
+        // viwport viewer
+        console.log(`Viewport Width: ${window.innerWidth}px`);
+        console.log(`Viewport Height: ${window.innerHeight}px`);
+        window.addEventListener('resize', function(event) {
+            console.clear();
+            console.log(`Viewport Width: ${window.innerWidth}px`);
+            console.log(`Viewport Height: ${window.innerHeight}px`);
+        });
 
         function toggleFilter(element) {
             if (!element) {
