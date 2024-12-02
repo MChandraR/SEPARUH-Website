@@ -51,8 +51,6 @@ class viewController{
     pinjam(req,res){
         
     }
-
-
     // Admin view
     dashboard(req,res){
         return res.send(View('dashboard'));
