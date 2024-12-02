@@ -12,6 +12,12 @@ class ruanganController {
     async view(req,res){
         const param = url.parse(req.url, true).query;
         let data = await Ruangan.where({room_id : param.id}).first();
+        data["req_state"] = "Buat Reservasi";
+        if(data.status){
+            data["req_style"] = `style="background-color : grey;"`;
+            data["req_state"] = "Dipinjam";
+            data["state"] = "disabled";
+        }
         return res.send(Compact('ruangan', data));
     }
 
