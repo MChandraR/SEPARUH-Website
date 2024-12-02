@@ -52,6 +52,12 @@ class viewController{
         
     }
 
+
+    // Admin view
+    dashboard(req,res){
+        return res.send(View('dashboard'));
+    }
+
     not_found(req,res){
         return res.send(View('not_found'));
     }
