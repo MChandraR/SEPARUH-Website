@@ -33,12 +33,15 @@ class peminjamanController {
         if((Validator(data.asset_id) || Validator(data.room_id))){
             let newID = await Peminjaman.orderBy('request_id', "DESC").first();
             newID = newID == null ? "P000000001" : "P"+("000000000" + (parseInt(newID.request_id.slice(-9))+1)).slice(-9);
-            if(Validator(data.req_type) && Validator(data.req_start) && Validator(data.req_end)){
-                let datas = data.req_type ? await Asset.where({asset_id : data.asset_id}).count() : await Ruangan.where({room_id : data.room_id}).count();
+            if(Validator(data.req_type) && Validator(data.req_start) && Validator(data.req_end) && Validator(data.reason) ){
+                let datas = data.req_type ? await Asset.where({asset_id : data.asset_id}).first() : await Ruangan.where({room_id : data.room_id}).first();
                 console.log(datas);
-                if(!datas) return Response(res, 200, "Gagal melakukan peminjaman : ruangan atau asset tidak ditemukan !");
+                if(!datas ) return Response(res, 400, "Gagal melakukan peminjaman : ruangan atau asset tidak ditemukan !");
+                if(datas.status ) return Response(res, 400, "Gagal melakukan peminjaman : ruangan atau asset sedang dipinjam !");
                 let start = new Date(data.req_start);
                 let end = new Date(data.req_end);
+
+                data.req_type ? await Asset.where({asset_id : data.asset_id}).update({status : 1}) : await Ruangan.where({room_id : data.room_id}).update({status : 1});
 
                 return Response(res, 200, "Berhasil melakukan peminjaman !", await Peminjaman.create({
                     request_id : newID,
@@ -49,8 +52,8 @@ class peminjamanController {
                     note : "-", 
                     created_at : waktuFormatted,
                     req_start : `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()} ${start.getHours()}:${start.getMinutes()}:${start.getSeconds()}`,
-                    req_end : `${end.getFullYear()}-${end.getMonth()+1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}:${end.getSeconds()}`
-
+                    req_end : `${end.getFullYear()}-${end.getMonth()+1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}:${end.getSeconds()}`,
+                    reason : data.reason
                 }));
             }
             return Response(res, 400, "Gagal melakukan peminjaman : Field tidak lengkap !");
@@ -73,7 +76,10 @@ class peminjamanController {
         if(Validator(data.request_id)){
             update["update_at"] = waktuFormatted;
             update["code"] = generate("6").toUpperCase();
-            if(Validator(data.status) && (data.status=="accepted" || data.status=="rejected")) update["status"] = data.status;
+            if(Validator(data.status) && (data.status=="accepted" || data.status=="rejected" || data.status=="returned")) update["status"] = data.status;
+            let peminjaman = await Peminjaman.where({request_id : data.request_id}).first();
+            if(peminjaman.item_id.includes("R")) await Ruangan.where({room_id : peminjaman.item_id}).update({status : 0});
+            else await Asset.where({asset_id : peminjaman.item_id}).update({status : 0});
             return Response(res, 200, "Berhasil mengupdate data !", await Peminjaman.where({request_id : data.request_id}).update(update));
         }
 
