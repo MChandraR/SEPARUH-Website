@@ -161,6 +161,7 @@
 }
 #item-container .item-card {
     width: calc((100% - 6em) / 3);
+    position: relative;
     height: auto;
     max-height: 24.375em;
     padding: 0.625em 0.625rem 0.875em 0.625em;
@@ -220,6 +221,23 @@
     color: green;
     font-weight: 700;
 }
+.item-status{
+    position : absolute;
+    top : 1rem;
+    right : 1rem;
+    color : white;
+    border-radius: .5rem;
+    border: solid green 2px;
+    color : green;
+    background-color: rgba(255, 255, 255, 0.701);
+    padding : .2rem .5rem;
+}
+
+.item-status.inorder{
+    border: solid rgb(255, 0, 0) 2px;
+    color : rgb(255, 0, 0);
+}
+
 #item-container .item-description {
     color: #757575;
     word-spacing: -1px;

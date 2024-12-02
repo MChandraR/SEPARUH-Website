@@ -3,13 +3,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="/css/font/ubuntu.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/cssLinkLoader.js"></script>
-    <style>
-        /* Mencegah FOUC */
-        body {visibility: hidden;}
-        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
-    </style>
+   
 </head>
+<style>
+    /* Mencegah FOUC */
+    body {visibility: hidden;}
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+</style>
 <body>
     <div id="wrapper">
         <div id="sidebar-container">
@@ -22,11 +28,11 @@
             <div id="profile_info-container">
                 <div id="user-name">
                     <span class="profile_label">Nama</span>
-                    <span class="profile_data"  id="name_field">M. Zaidaan Nugroho</span>
+                    <span class="profile_data"  id="name_field"></span>
                 </div>
                 <div id="user-nim">
                     <span class="profile_label">NIM</span>
-                    <span class="profile_data"  id="nim_field">2201020011</span>
+                    <span class="profile_data"  id="nim_field"></span>
                 </div>
                 <div id="user-phone_number">
                     <span class="profile_label" >No. Whatsapp<span class="required-asterisk"></span></span>
@@ -47,34 +53,24 @@
         </div>
         <div id="main-container">
             <div id="heading-container">
-                <span id="heading-title">Aset/Ruangan Anda</span>
+                <h2 id="heading-title" style="font-weight: bold;">History Peminjaman</h2>
             </div>
-            <hr>
-            <div id="item-container">
-                <div id="item-header-title">
-                    <span>Tanggal</span>
-                    <span>Jenis</span>
-                    <span>Request ID</span>
-                </div>
-                <div class="item">
-                    <span class="item-date">17/10/2024 - 18/10/2024</span>
-                    <span class="item-name">Ruangan 1</span>
-                    <span class="item-request_id">I08R01</span>
-                    <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
-                </div>
-                <div class="item">
-                    <span class="item-date">17/10/2024 - 18/10/2024</span>
-                    <span class="item-name">Spidol dan Penghapus</span>
-                    <span class="item-request_id">I08A06</span>
-                    <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
-                </div>
-                <div class="item">
-                    <span class="item-date">27/10/2024 - 27/10/2024</span>
-                    <span class="item-name">Auditorium FTTK</span>
-                    <span class="item-request_id">I08RS1</span>
-                    <button class="item-btn item_requested">Batalkan Permohonan</button>
-                </div>
-            </div>
+            <br>
+            <table  id="request-table">
+                <thead id="">
+                    <td>No</td>
+                    <td>Request ID</td>
+                    <td>Start</td>
+                    <td>End</td>
+                    <td>Jenis</td>
+                    <td>Status</td>
+                </thead>
+                <tbody id="item-container">
+                
+                
+                </tbody>
+            </table>
+            
         </div>
         <div id="modal-wrapper">
             <div id="modal-edit_profile">
@@ -118,7 +114,40 @@
                 </div>
             </div>
         </div>
+
     </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="info">
+            <h2 >Detail Peminjaman</h2>
+            <hr>
+            <div id="info-detail">
+                <img id="item_image" src="https://separuh.s3.ap-southeast-2.amazonaws.com/${reqData[idx].item_id}.png">
+                <div id="detail-text">
+                    <h3>Request ID : <span id="req_id"></span></h3>
+                    <h3>ID <span id="req_type"></span> : <span id="item_id"></span></h3>
+                    <h3>Status : <span id="req_status"></span></h3>
+                </div>
+            </div>     
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <script src="/js/sweetalert2@11.js"></script>
     <script>
         const form = document.getElementById('form-edit_profile');
@@ -138,6 +167,16 @@
         const phone = document.getElementById('phone');
         const major = document.getElementById('major');
         const gender = document.getElementById('gender');
+
+        //info peminjaman
+        const req_id = document.getElementById('req_id');
+        const req_type = document.getElementById('req_type');
+        const req_status = document.getElementById('req_status');
+        const item_id = document.getElementById('item_id');
+        const item_image = document.getElementById('item_image');
+
+        //all data
+        let reqData = [];
 
         const container = document.getElementById('item-container');
 
@@ -214,6 +253,14 @@
             }
         }
 
+        let status = [
+            "Pending",
+            "Ditolak",
+            "Diterima",
+            "Pengembalian",
+            "Dikembalikan"
+        ];
+
         async function getUserRequest(){
             try{
                 let res = await fetch('/api/user/request');
@@ -221,19 +268,24 @@
 
                 let data = await res.json();
                 console.log(data.data);
-                container.innerHTML = ` <div id="item-header-title">
-                    <span>Tanggal</span>
-                    <span>Jenis</span>
-                    <span>Request ID</span>
-                </div>`;
+
+                let idx = 0;
+                reqData = data.data;
                 data.data.forEach((e)=>{
+                    idx++;
                     container.innerHTML += `
-                    <div class="item">
-                        <span class="item-date">${e.req_start.substring(0,10)} - <br> ${e.req_end.substring(0,10)}</span>
-                        <span class="item-name">${e.req_type ? "Asset" : "Ruangan"}</span>
-                        <span class="item-request_id">${e.request_id}</span>
-                        <button class="item-btn item_borrowed">Ajukan Pengembalian</button>
-                     </div>
+                    <tr>
+                        <td class="item-date">${idx}</td>
+                        <td class="item-request_id">${e.request_id}</dt>
+                        <td class="item-date">${e.req_start.substring(0,10)} </td>
+                        <td class="item-date">${e.req_end.substring(0,10)}</td>
+                        <td class="item-name">${e.req_type ? "Asset" : "Ruangan"}</td>
+                        <td class="item-name">${status[e.status]}</td>
+                        <td>
+                            <button class="item-btn item_borrowed">Pengembalian</button>
+                            <button onClick="showDetail(${idx-1})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Show </button>
+                        </td>
+                    </tr>
                     `;
                 });
 
@@ -244,6 +296,32 @@
 
         fetchUserData();
         getUserRequest();
+
+        function showDetail(idx){
+            req_id.innerHTML = reqData[idx].request_id;
+            item_id.innerHTML = reqData[idx].item_id;
+            req_type.innerHTML = reqData[idx].req_type ? "Asset" : "Ruangan";
+            req_status.innerHTML = status[reqData[idx].status];
+            item_image.src = `https://separuh.s3.ap-southeast-2.amazonaws.com/${reqData[idx].item_id}.png`;
+            return;
+            Swal.fire({
+                html : `
+                <div id="info">
+                    <h2>Detail Peminjaman</h2>
+                    <hr>
+                    <div id="info-detail">
+                        <img src="https://separuh.s3.ap-southeast-2.amazonaws.com/${reqData[idx].item_id}.png">
+                        <div id="detail-text">
+                            <h3>Request ID : ${reqData[idx].request_id}</h3>
+                            <h3>ID ${reqData[idx].req_type ? "Asset" : "Ruangan"} : ${reqData[idx].item_id}</h3>
+                            <h3>Status : ${status[reqData[idx].status]}</h3>
+                        </div>
+                    </div>     
+                </div>
+                `,
+                confirmButtonText : "Oke"
+            });
+        }
     </script>
 </body>
 </html>

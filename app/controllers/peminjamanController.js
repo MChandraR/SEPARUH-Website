@@ -48,7 +48,7 @@ class peminjamanController {
                     user_id : req.session.user.user_id,
                     req_type : data.req_type,
                     item_id : data.req_type ? data.asset_id : data.room_id,
-                    status : "pending",
+                    status : 0,
                     note : "-", 
                     created_at : waktuFormatted,
                     req_start : `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()} ${start.getHours()}:${start.getMinutes()}:${start.getSeconds()}`,
@@ -78,8 +78,12 @@ class peminjamanController {
             update["code"] = generate("6").toUpperCase();
             if(Validator(data.status) && (data.status=="accepted" || data.status=="rejected" || data.status=="returned")) update["status"] = data.status;
             let peminjaman = await Peminjaman.where({request_id : data.request_id}).first();
-            if(peminjaman.item_id.includes("R")) await Ruangan.where({room_id : peminjaman.item_id}).update({status : 0});
-            else await Asset.where({asset_id : peminjaman.item_id}).update({status : 0});
+            
+            //Validasi kondisi saat ni 
+            if(data.status=="returned" || data.status == "rejected"){
+                if(peminjaman.item_id.includes("R")) await Ruangan.where({room_id : peminjaman.item_id}).update({status : 0});
+                else await Asset.where({asset_id : peminjaman.item_id}).update({status : 0});
+            }
             return Response(res, 200, "Berhasil mengupdate data !", await Peminjaman.where({request_id : data.request_id}).update(update));
         }
 
