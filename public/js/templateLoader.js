@@ -145,7 +145,7 @@ class Template {
         document.getElementById(targetDiv).remove();
     }
 
-    generateItemPages(itemCount = 0, itemCollection = null) {
+    async generateItemPages(itemCount = 0, itemCollection = null) {
         if (!document.getElementById('pagination-container')) {
             console.error("Err: element not found!!");
             return;
@@ -193,7 +193,7 @@ class Template {
         return itemPages;
     }
 
-    generateItems(data) {
+    async generateItems(data) {
         const script = Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' });
         script.onload = () => { console.log('JQuery script has loaded.'); };
         document.head.appendChild(script);
@@ -232,7 +232,7 @@ class Template {
             itemCollection.push(itemCard);
         });
 
-        this.generateItemPages(this.items.length, itemCollection).forEach((collection) => {
+        await this.generateItemPages(this.items.length, itemCollection).forEach((collection) => {
             if (collection.id === 'page-1') collection.classList.add('show-page');
             itemContainer.insertAdjacentElement('afterbegin', collection);
         });

@@ -134,13 +134,13 @@
             url: '/api/room',
             method: 'GET'
         })
-        .done(function(e, textStatus, xhr) {
+        .done(async function(e, textStatus, xhr) {
             if (!e.data) {
                 console.log("Data not found!");
                 return;
             }
 
-            template.generateItems(e.data);
+            await template.generateItems(e.data);
             const pageButtons = document.getElementById('pagination-container').getElementsByClassName('page-btn');
             Array.from(pageButtons).forEach((btn) => {
                 btn.addEventListener('click', function() {
