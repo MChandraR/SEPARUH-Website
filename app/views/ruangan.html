@@ -22,7 +22,7 @@
     </div>
     <div id="content-container">
         <div id="image-container">
-            <img src="/assets/images/room.jpg" alt="gambar_ruangan">
+            <img src="https://separuh.s3.ap-southeast-2.amazonaws.com/$room_id.png" alt="gambar_ruangan">
         </div>
         <div id="info-container">
             <div id="about-room">
@@ -80,6 +80,8 @@
     </div>
     <div id="template-footer"></div>
 </body>
+<script src="/js/sweetalert2@11.js"></script>
+
 <script>
     const template = new Template(['header', 'footer']);
     loadCSS([
@@ -89,5 +91,31 @@
         'template/footer',
         'font/ubuntu'
     ])
+
+    let create_reserv = document.getElementById('reservation-btn');
+    
+    create_reserv.addEventListener('click',(e)=>{
+        const url = window.location.href;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        $.ajax({
+            url : "/api/request",
+            method : "POST",
+            data :{
+                room_id : urlParams.get('id'),
+                req_type : parseInt(url.includes('asset') ? 1 : 0),
+                req_start : new Date().toDateString(),
+                req_end : new Date().toDateString()
+            }
+        }).done(async (data)=>{
+            let confirm = await Swal.fire({
+                title: data.status == 200 ? "Berhasil" : "Gagal",
+                text: data.message,
+                icon: data.status == 200 ? "success" : "error"
+            });
+        });
+    });
+
+
 </script>
 </html>

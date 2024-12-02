@@ -27,12 +27,15 @@ class peminjamanController {
         // Membuat string dengan format yang diinginkan
         const waktuFormatted = waktuSekarang.format('YYYY-MM-DD HH:mm:ss');
     
-        const data = req.body;
+        let data = req.body;
+        data['req_type'] = parseInt(data['req_type']);
+        console.log(data);
         if((Validator(data.asset_id) || Validator(data.room_id))){
             let newID = await Peminjaman.orderBy('request_id', "DESC").first();
             newID = newID == null ? "P000000001" : "P"+("000000000" + (parseInt(newID.request_id.slice(-9))+1)).slice(-9);
             if(Validator(data.req_type) && Validator(data.req_start) && Validator(data.req_end)){
                 let datas = data.req_type ? await Asset.where({asset_id : data.asset_id}).count() : await Ruangan.where({room_id : data.room_id}).count();
+                console.log(datas);
                 if(!datas) return Response(res, 200, "Gagal melakukan peminjaman : ruangan atau asset tidak ditemukan !");
                 let start = new Date(data.req_start);
                 let end = new Date(data.req_end);
