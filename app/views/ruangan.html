@@ -93,7 +93,8 @@
         'ruangan',
         'template/header',
         'template/footer',
-        'font/ubuntu'
+        'font/ubuntu',
+        
     ])
 
     let create_reserv = document.getElementById('reservation-btn');
@@ -140,6 +141,7 @@
                 text: data.message,
                 icon: data.status == 200 ? "success" : "error"
             });
+            window.location.reload();
         });
     });
 

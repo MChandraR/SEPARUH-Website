@@ -12,6 +12,10 @@ class ruanganController {
     async view(req,res){
         const param = url.parse(req.url, true).query;
         let data = await Ruangan.where({room_id : param.id}).first();
+        if(!data){
+            return res.send(Compact('ruangan'));
+        }
+        
         data["req_state"] = "Buat Reservasi";
         if(data.status){
             data["req_style"] = `style="background-color : grey;"`;
@@ -75,6 +79,7 @@ class ruanganController {
             if(Validator(data.room_name))update["room_name"] = data.room_name;
             if(Validator(data.description))update["description"] = data.description;
             if(Validator(data.capacity))update["capacity"] = data.capacity;
+            if(Validator(data.status))update["status"] = data.status;
             return Response(res, 200, "Berhasil mengupdate data ruangan !", await Ruangan.where({room_id : data.room_id}).update(update));
         });
 
