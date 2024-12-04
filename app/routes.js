@@ -12,7 +12,7 @@ const assetController = require('./controllers/assetController.js');
 const peminjamanController = require('./controllers/peminjamanController.js');
 
 //Route untuk view
-route.get('/', ValidateRole(viewController), (req,res)=>viewController.index(req,res, true));
+route.get('/', (req,res)=>viewController.index(req,res, true));
 route.get('/login', (req,res)=>viewController.login2(req,res));
 route.get('/register', (req,res)=>viewController.register(req,res));
 route.get('/dashboard', validateSession, authorizeAdmin, (req, res) => viewController.dashboard(req, res));

@@ -65,13 +65,16 @@
 
             const data = await response.json();
             let res = await Swal.fire({
-                title: data.status == 200 ? 'Sukses' : 'Error',
+                title: (data.status == 200 || 300) ? 'Sukses' : 'Error',
                 text: data.message,
-                icon: data.status == 200 ? 'success' : 'error',
+                icon: (data.status == 200 || 300) ? 'success' : 'error',
                 confirmButtonText: 'Oke',
               });
             if(data.status == 200 && res){
                 window.location.href = "/";
+            }
+            if(data.status == 300 && res){
+                window.location.href = "/dashboard"
             }
         } catch (err) {
             document.getElementById('Error').innerText = err.message;
