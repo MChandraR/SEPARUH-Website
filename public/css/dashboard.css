@@ -1,41 +1,21 @@
+/* Override bootstrap styles */
+body {
+    height: 100vh;
+    min-height: 100vh;
+}
 
-/* SIDEBAR SECTION */
-#sidebar-container {
-    height: 100%;
-    width: 20%;
-    padding: 0 32px;
-    box-shadow: 6px 0 32px 0 rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    position: relative;
+#wrapper > #sidebar {
+    width: 16.25rem !important;
+    background-color:#222e3c !important;
+    transition: margin 0.5s ease;
 }
-/* Website Logo */
-#sidebar-container > #logo-container {
-    width: 100%;
-    padding: 12px 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+#wrapper > #main {
+    background-color: #fff;
 }
-#sidebar-container > #logo-container > img {
-    width: 158px;
-    -webkit-user-drag: none;
+#wrapper > #main > #navbar {
+    height: 4.063rem;
 }
-/* Profile Info */
-#sidebar-container > #profile_info-container {
-    font-size: 16px;
-    font-family: var(--font-family-montserrat);
-}
-/* Profile Info -> Child Element */
-#sidebar-container > #profile_info-container > div {
-    display: flex;
-    flex-direction: column;
-}
-#sidebar-container > #profile_info-container > div:not(:last-child) {
-    margin-bottom: 32px;
-}
-#sidebar-container > #profile_info-container > div > span:nth-child(2) {
-    margin: 8px 0 0;
-    font-weight: 700;
+#wrapper > #main > #main-content {
+    background-color: #f3f5fc;
 }
