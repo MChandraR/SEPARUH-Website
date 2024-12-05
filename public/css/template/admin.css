@@ -68,3 +68,14 @@
 #sidebar-container > .navigation_button:hover > div > img{
     filter: brightness(0) invert(1);
 }
+
+#sidebar-container > .navigation_button > div > #counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ECF6F6;
+    background-color: #C3271A;
+    margin-left: 6rem;
+    width: 2rem;
+    border-radius: 3rem;
+}

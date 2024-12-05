@@ -65,6 +65,7 @@ class Template {
                     <div>
                         <img src="assets/images/icon/mail-d.png" id="icon-permohonan">
                         <span class="button_label">Permohonan</span>
+                        <div id="counter">15</div>
                     </div>
                 </div>
                 <div class="navigation_button" id="logout-button">
