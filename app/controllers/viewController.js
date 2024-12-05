@@ -13,6 +13,10 @@ class viewController{
 
     // desain login versi figma
     login2(req,res){
+        // Jika user sudah login redirect ke home
+        if (req.session && req.session.user)
+            return res.redirect('/');
+
         return res.send(View('login2'));
     }
 
