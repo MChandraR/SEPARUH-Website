@@ -108,11 +108,12 @@ class Template {
                 // Check if the ID matches the current page or part of it
                 if (currentPage.includes(item.id.replace("-button", ""))) {
                     item.classList.add("active");
+                }else{
+                    item.classList.remove("active"); // Remove active class from others
                 }
                 
                 // Add click event to manually highlight items
                 item.addEventListener("click", () => {
-                    sidebarItems.forEach(i => i.classList.remove("active")); // Remove active class from others
                     item.classList.add("active");
                     item.id = item.id.replace("-button", "");
                     window.location.href = "/"+item.id;

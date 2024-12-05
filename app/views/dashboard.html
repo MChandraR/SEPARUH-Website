@@ -10,16 +10,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="template-sidebar"></div>
+    <div id="wrapper">
+        <div id="template-sidebar"></div>
+        <div id="dashboard-container">
+            <div id="card-container">
+                <div class="card" id="asset">
+                    <div class="card_counter" id="asset-counter">0</div>
+                    <div id="inner-card">
+                        Aset yang siap untuk digunakan
+                        <img src="assets/images/icon/chevron-right-d.png">
+                    </div>
+                </div>
+                <div class="card" id="asset">
+                    <div class="card_counter" id="ruangan-counter">0</div>
+                    <div id="inner-card">
+                        Ruangan yang siap untuk digunakan
+                        <img src="assets/images/icon/chevron-right-d.png">
+                    </div>
+                </div>
+                <div class="card" id="permohonan">
+                    <div class="card_counter" id="permohonan-counter">0</div>
+                    <div id="inner-card">
+                        Permohonan sedang dalam antrian
+                        <img src="assets/images/icon/chevron-right-d.png">
+                    </div>
+                </div>
+            </div>
+            <hr class="divider">
+        </div>
+    </div>
     <Script>
         document.addEventListener("DOMContentLoaded", () => {
             const template = new Template(['sidebar']);
+
+            const cardItems = document.querySelectorAll(".card");
+
+            cardItems.forEach(item => {   
+                item.addEventListener("click", () => {
+                    window.location.href = "/"+item.id;
+                    sidebarItems.forEach(i => i.classList.remove("active")); // Remove active class from others
+                    item.classList.add("active");
+                });
+        });
         });
 
         loadCSS([
             'main',
-            'template/admin',
-            'font/ubuntu'
+            'template/admin-sidebar',
+            'dashboard',
+            'font/ubuntu',
         ])
     </Script>
 </body>
