@@ -37,12 +37,8 @@ class sessionController {
                 req.session.cookie.expires = new Date(Date.now() + hour)
                 req.session.cookie.maxAge = hour
                 console.log(req.session.user);
-                if (req.session.user.role === 'user'){
-                    req.session.save((err) => Response(res,200, err ? "Err : Session not saved  !" : "Berhasil login !", null));
-                }
-                if (req.session.user.role === 'admin'){
-                    req.session.save((err) => Response(res,300, err ? "Err : Session not saved  !" : "Berhasil login sebagai admin!", null));
-                }    
+                req.session.save((err) => Response(res, 200, err ? 
+                    "Err: Session not saved!" : `Berhasil login${req.session.user.role === 'admin' ? " sebagai admin" : ""}!`, {"userRole": req.session.user.role}))  
             })
         }else Response(res,401, data && !data.verified_at ? "Harap verifikasi terlebih dahulu akun anda !" : "Username atau password salah !", null);
 

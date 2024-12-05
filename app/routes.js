@@ -15,9 +15,9 @@ const peminjamanController = require('./controllers/peminjamanController.js');
 route.get('/', (req,res)=>viewController.index(req,res, true));
 route.get('/login', (req,res)=>viewController.login2(req,res));
 route.get('/register', (req,res)=>viewController.register(req,res));
-route.get('/dashboard', validateSession, authorizeAdmin, (req, res) => viewController.dashboard(req, res));
+route.get('/dashboard', validateSession, ValidateRole(viewController), (req,res)=>viewController.dashboard(req, res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
-route.get('/peminjaman', validateSession, ValidateRole(viewController), viewController.peminjaman2);
+route.get('/peminjaman', validateSession, viewController.peminjaman2);
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>ruanganController.view(req,res));
 route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
 
