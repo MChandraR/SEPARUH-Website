@@ -57,6 +57,14 @@ class viewController{
         return res.send(View('dashboard'));
     }
 
+    edit(req,res){
+        return res.send(View('asset'));
+    }
+
+    permohonan(req,res){
+        return res.send(View('permohonan'));
+    }
+
     not_found(req,res){
         return res.send(View('not_found'));
     }
