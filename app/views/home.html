@@ -14,7 +14,54 @@
         margin : 0;
         width: 100%;
       }
-    </style>      
+    </style>    
+    <!-- Accessibility Code for "separuh.site" -->
+<script>
+  /*
+  
+  Want to customize your button? visit our documentation page:
+  
+  https://login.equalweb.com/custom-button.taf
+  
+  */
+  window.interdeal = {
+      "sitekey": "cc64a3f98a3edcbf27e4d9f3f9d71b22",
+      "Position": "right",
+      "domains": {
+          "js": "https://cdn.equalweb.com/",
+          "acc": "https://access.equalweb.com/"
+      },
+      "Menulang": "ID",
+      "btnStyle": {
+          "vPosition": [
+              "95%",
+              "95%"
+          ],
+          "scale": [
+              "0.5",
+              "0.5"
+          ],
+          "color": {
+              "main": "#1c4bb6",
+              "second": "#ffffff"
+          },
+          "icon": {
+              "outline": false,
+              "type": 10,
+              "shape": "circle"
+          }
+      }
+  };
+  (function(doc, head, body){
+      var coreCall             = doc.createElement('script');
+      coreCall.src             = interdeal.domains.js + 'core/5.0.9/accessibility.js';
+      coreCall.defer           = true;
+      coreCall.integrity       = 'sha512-dxjHZQgpVIG70EQus4+1KR3oj2KGyrtwR/nr4lY+tcMjrQ1Yb9V1SCKNVLGhD3CcPMgANKAqOk4ldI8WWNnQTw==';
+      coreCall.crossOrigin     = 'anonymous';
+      coreCall.setAttribute('data-cfasync', true );
+      body? body.appendChild(coreCall) : head.appendChild(coreCall);
+  })(document, document.head, document.body);
+  </script>  
   </head>
   <body style="margin: 0;padding : 0;">
     <input type="hidden" id="anPageName" name="page" value="beranda">

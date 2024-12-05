@@ -41,6 +41,7 @@ class viewController{
     }
 
     profile(req,res){
+        res.set('Content-Type', 'text/html');
         return res.send(View('profile'));
     }
 
