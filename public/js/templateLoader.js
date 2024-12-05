@@ -2,7 +2,8 @@ class Template {
     constructor(parts = []) {
         this.templateParts = {
             'header': this.header,
-            'footer': this.footer
+            'footer': this.footer,
+            'sidebar': this.sidebar,
         };
         this.items = [];
         console.log('KERUN');
@@ -40,6 +41,84 @@ class Template {
 
         // document.head.appendChild(this.script);
     }
+
+    sidebar() {
+        // Sidebar target div and content
+        const targetDiv = 'template-sidebar';
+        const content = `
+                <div id="logo-container">
+                    <img src="/assets/images/logo/fttk_logo.png" alt="logo_umrah">
+                </div>
+                <div class="navigation_button" id="dashboard-button">
+                    <div>
+                        <img src="assets/images/icon/dashboard-d.png" id="icon-dashboard">
+                        <span class="button_label">Dashboard</span>
+                    </div>
+                </div>
+                <div class="navigation_button" id="asset-button">
+                    <div>
+                        <img src="assets/images/icon/asset-d.png" id="icon-asset">
+                        <span class="button_label">Aset dan Ruangan</span>
+                    </div>
+                </div>
+                <div class="navigation_button" id="permohonan-button">
+                    <div>
+                        <img src="assets/images/icon/mail-d.png" id="icon-permohonan">
+                        <span class="button_label">Permohonan</span>
+                    </div>
+                </div>
+                <div class="navigation_button" id="logout-button">
+                    <div>
+                        <img src="assets/images/icon/logout-d.png" id="icon-logout">
+                        <span class="button_label">Logout</span>
+                    </div>
+                </div>
+        `;
+    
+        // Check if DOMPurify is loaded
+        if (typeof DOMPurify === 'undefined') {
+            console.log('DOMPurify is undefined.');
+            return;
+        } else if (document.getElementById(targetDiv) === null) {
+            console.log(`Unable to add sidebar. Target position not found: div[id=${targetDiv}]`);
+            return;
+        }
+    
+        // Sanitize the content
+        let sanitizedContent = DOMPurify.sanitize(content, {
+            ALLOWED_ATTR: ['class', 'style', 'id', 'src', 'alt'],
+        });
+        ;
+    
+        // Create the sidebar container
+        const sidebar = Object.assign(document.createElement('div'), { id: 'sidebar-container' });
+        sidebar.innerHTML = sanitizedContent;
+    
+        // Insert the sidebar in the DOM
+        document.getElementById(targetDiv).insertAdjacentElement('afterend', sidebar);
+        document.getElementById(targetDiv).remove();
+
+        const sidebarItems = document.querySelectorAll(".navigation_button");
+
+            // Logic to detect the current page
+            const currentPage = window.location.pathname;
+
+            sidebarItems.forEach(item => {
+                // Check if the ID matches the current page or part of it
+                if (currentPage.includes(item.id.replace("-button", ""))) {
+                    item.classList.add("active");
+                }
+                
+                // Add click event to manually highlight items
+                item.addEventListener("click", () => {
+                    sidebarItems.forEach(i => i.classList.remove("active")); // Remove active class from others
+                    item.classList.add("active");
+                    item.id = item.id.replace("-button", "");
+                    window.location.href = "/"+item.id;
+                });
+        });
+    }
+    
 
     header(){
         // Header content
