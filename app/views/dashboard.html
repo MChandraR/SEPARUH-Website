@@ -2,9 +2,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <script src="/js/cssLinkLoader.js"></script>
+    <style>
+        /* Mencegah FOUC */
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
 </head>
 <body>
-    <p>Hello, Admin!</p>
+    <div id="sidebar-container">
+        <div id="logo-container">
+            <img src="/assets/images/logo/fttk_logo.png" alt="logo_umrah">
+        </div>
+        <div id="navigation-container">
+            <span id="dashboard-button">
+                <img
+            </span>
+            <div id="user-nim">
+                <span class="profile_label">NIM</span>
+                <span class="profile_data"  id="nim_field">2201020011</span>
+            </div>
+        </div>
+    </div>
+    <Script>
+        loadCSS([
+            'main',
+            'dashboard',
+            'font/ubuntu'
+        ])
+    </Script>
 </body>
 </html>
