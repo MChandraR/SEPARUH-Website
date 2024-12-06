@@ -1,0 +1,183 @@
+.kontak {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+}
+
+.kontak .mac-book-air-1-LN8ZrO {
+  background-color: #ecf6f6;
+  min-height: 100vh;
+  left: 0px;
+  overflow: hidden;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.kontak .navbar {
+  background-color: transparent;
+  height: 80px;
+  left: 0px;
+  overflow: hidden;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.nav-item {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-items: flex-end;
+  column-gap: 1rem;
+}
+
+.kontak .daftar {
+  background-color: transparent;
+  color: var(--fun-blue);
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+  height: auto;
+  text-align: center;
+  text-decoration: underline;
+  width: 88px;
+}
+
+.kontak .navbar-list {
+  background-color: transparent;
+  height: auto;
+  text-align: center;
+  text-decoration: none;
+  color: var(--fun-blue);
+  width: 88px;
+}
+
+.kontak .logo-fttk {
+  background-color: transparent;
+  height: 66px;
+  left: 69px;
+  position: absolute;
+  top: 7px;
+  width: 158px;
+}
+
+.kontak .title {
+  margin: 0 5rem;
+  margin-top: 20vh;
+  background-color: transparent;
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  height: auto;
+  text-align: left;
+  width: 716px;
+}
+
+.kontak .span0 {
+  color: var(--fun-blue);
+  font-weight: 700;
+  font-family: 'Ubuntu', serif;
+}
+
+.kontak .span2 {
+  color: var(--tundora);
+  font-size: var(--font-size-l);
+  font-family: 'Ubuntu', serif;
+}
+
+.contact-form {
+  margin: 5rem 5rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: var(--font-size-m);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: var(--font-size-m);
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  height: 150px;
+  resize: none;
+}
+
+.contact-form .submit-button {
+  background-color: var(--fun-blue);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: var(--font-size-m);
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.contact-form .submit-button:hover {
+  background-color: #144b88;
+}
+
+.contact-info {
+  margin: 5rem 5rem;
+  text-align: center;
+  color: var(--tundora);
+}
+
+.contact-info h2 {
+  font-size: var(--font-size-l);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  font-size: var(--font-size-m);
+  margin-bottom: 0.5rem;
+}
+
+.footer {
+  position: relative;
+  padding: 2rem 5rem;
+  font-size: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.sosmed {
+  column-gap: 1rem;
+  display: grid;
+  width: 25%;
+  align-items: flex-start;
+  justify-content: start;
+  grid-template-columns: auto auto auto;
+}

@@ -53,6 +53,10 @@ class viewController{
         return res.send(View('register'));
     }
 
+    kontak(req,res){
+        return res.send(View('kontak'));
+    }
+
     pinjam(req,res){
         
     }

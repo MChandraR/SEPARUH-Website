@@ -20,6 +20,7 @@ route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession, viewController.peminjaman2);
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>ruanganController.view(req,res));
 route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
+route.get('/kontak', (req,res)=>viewController.kontak(req,res));
 
 //Route view cadangan
 route.get('/home2', (req,res)=>viewController.beranda2(req,res));

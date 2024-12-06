@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/kontak.css">
+    <link rel="stylesheet" href="/css/font/ubuntu.css">
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        font-family: "Ubuntu", serif;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <input type="hidden" id="anPageName" name="page" value="kontak">
+    <div class="container-center-horizontal" style="margin: 0; padding: 0;">
+      <div class="kontak screen" data-id="109:183" style="margin: 0; padding: 0;">
+        <div class="mac-book-air-1-LN8ZrO" data-id="101:2" style="margin: 0; padding: 0;">
+          <div class="navbar" data-id="106:3" style="margin: 0; padding: 0;">
+            <div class="nav-item">
+              <a class="navbar-list" href="/kontak">Kontak</a>
+              <a class="navbar-list" href="/peminjaman">Pinjam</a>
+              <a class="navbar-list" href="/">Beranda</a>
+              <a class="daftar" href="/register">Daftar</a>
+              <a class="daftar" href="/login">Masuk</a>
+            </div>
+            <img class="logo-fttk" src="/assets/images/logo/fttk_logo.png" alt="Mask group">
+          </div>
+
+          <h1 class="title">
+            <span class="span0">Hubungi Kami</span>
+            <span class="span2">Kami Siap Membantu Anda 24/7</span>
+          </h1>
+
+          <div class="contact-form">
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Nama</label>
+                <input type="text" id="name" name="name" placeholder="Masukkan Nama Anda" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan Email Anda" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Pesan</label>
+                <textarea id="message" name="message" placeholder="Tulis Pesan Anda" required></textarea>
+              </div>
+              <button type="submit" class="submit-button">Kirim</button>
+            </form>
+          </div>
+
+          <div class="contact-info">
+            <h2>Informasi Kontak</h2>
+            <p>Email: support@fttk.com</p>
+            <p>Telepon: +62 123 4567 890</p>
+            <p>Alamat: Jl. Senggarang, Tanjungpinang, Indonesia</p>
+          </div>
+
+          <div style="background: #444343" class="footer">
+            <div style="width: 265.46px; height: 169px; position: relative;">
+              <div style="width: 160.46px; color: white; font-size: 14px; font-weight: 700; text-decoration: underline; word-wrap: break-word;">Legal</div>
+              <div style="width: 160.46px; color: white; font-size: 12px; font-weight: 400; word-wrap: break-word;">Syarat dan ketentuan</div>
+              <div style="width: 160.46px; color: white; font-size: 12px; font-weight: 400; word-wrap: break-word;">Copyright © 2025</div>
+              <div style="width: 160.46px; color: white; font-size: 12px; font-weight: 400; word-wrap: break-word;">Kontrak</div>
+            </div>
+
+            <div style="width: 194.76px; height: 37px; position: relative;">
+              <div style="width: 194.76px; color: white; font-size: 14px; font-weight: 700; text-decoration: underline; word-wrap: break-word;">Bantuan</div>
+              <div style="width: 160.46px; color: white; font-size: 12px; font-weight: 400; word-wrap: break-word;">FAQ</div>
+            </div>
+
+            <div style="width: 238.85px; height: 55px; position: relative;">
+              <div style="width: 238.85px; color: white; font-size: 14px; font-weight: 700; text-decoration: underline; word-wrap: break-word;">Pelayanan</div>
+              <div style="width: 160.46px; color: white; font-size: 12px; font-weight: 400; word-wrap: break-word;">FTTK</div>
+              <div style="width: 160.46px; color: white; font-size: 12px; font-weight: 400; word-wrap: break-word;">Akademik</div>
+            </div>
+
+            <div class="sosmed" colspan="2">
+              <img src="/assets/images/logo/facebook.png" alt="" width="50" height="50">
+              <img src="/assets/images/logo/instagram.png" alt="" width="50" height="50">
+              <img src="/assets/images/logo/linkedin.png" alt="" width="50" height="50">
+              <img src="/assets/images/logo/youtube.png" alt="" width="50" height="50">
+              <img src="/assets/images/logo/twitter.png" alt="" width="50" height="50">
+            </div>
+
+            <img style="position: absolute; left: 2rem; bottom: 2rem; width: 100px; height: 42px;" src="/assets/images/logo/fttk_logo-w.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  $('#contactForm').on('submit', function(e) {
+    e.preventDefault();
+    alert('Pesan Anda telah dikirim!');
+    // Implementasikan pengiriman data ke server di sini
+  });
+</script>
