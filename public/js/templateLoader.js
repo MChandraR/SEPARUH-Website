@@ -8,7 +8,8 @@ class Template {
         console.log('KERUN');
         this.scripts = {
             'DOMPurify': () => { return Object.assign(document.createElement('script'), { src: 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.0/purify.min.js' }) },
-            'JQuery': () => { return Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' }) }
+            'JQuery': () => { return Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' }) },
+            'BootStrap': () => { return Object.assign(document.createElement('script'), { src: '/js/bootstrap/bootstrap.min.js' }) }
         }
 
         for (let scriptName in this.scripts) {
@@ -193,10 +194,6 @@ class Template {
     }
 
     generateItems(data) {
-        const script = Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' });
-        script.onload = () => { console.log('JQuery script has loaded.'); };
-        document.head.appendChild(script);
-        
         this.items = data;
         console.log(this.items, this.items.length);
 
@@ -219,12 +216,13 @@ class Template {
             itemInfo.appendChild(Object.assign(createElement('span', 'item-name'), { innerHTML: `${item.room_name ?? item.asset_name}` }));
             itemInfo.appendChild(Object.assign(createElement('span', 'item-score'), { innerHTML: `4.3 / 5.0` }));
             itemInfo.appendChild(Object.assign(createElement('p', 'item-description'), { innerHTML: `${item.description}` }));
-
+            
             // Item Card
             itemCard.href = `/peminjaman/${item.req_type?"asset":"ruangan"}?id=${item.room_id ?? item.asset_id}`;
             itemCard.style.animationDelay = `${(idx % 6) * 0.125}s`;
             itemCard.appendChild(itemImageContainer);
             itemCard.appendChild(itemInfo);
+            itemCard.appendChild(Object.assign(createElement('span', `item-status ${item.status ? "inorder" : ""}`), {innerHTML : `${item.status ? "Dipinjam"  : "Tersedia"}`}));
             
             // itemContainer.appendChild(itemCard);
             itemCollection.push(itemCard);

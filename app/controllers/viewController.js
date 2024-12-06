@@ -13,6 +13,10 @@ class viewController{
 
     // desain login versi figma
     login2(req,res){
+        // Jika user sudah login redirect ke home
+        if (req.session && req.session.user)
+            return res.redirect('/');
+
         return res.send(View('login2'));
     }
 
@@ -41,6 +45,7 @@ class viewController{
     }
 
     profile(req,res){
+        res.set('Content-Type', 'text/html');
         return res.send(View('profile'));
     }
 
@@ -48,11 +53,13 @@ class viewController{
         return res.send(View('register'));
     }
 
+    kontak(req,res){
+        return res.send(View('kontak'));
+    }
+
     pinjam(req,res){
         
     }
-
-
     // Admin view
     dashboard(req,res){
         return res.send(View('dashboard'));

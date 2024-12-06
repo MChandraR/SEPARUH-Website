@@ -9,10 +9,10 @@ const ValidateRole = function(func) {
 
         // Validate if user has 'admin' role
         if (req.session.user.role === 'admin') {
-            return func?.dashboard(req,res);
-        } 
+            return next();
+        }
         
-        next();
+        return func?.not_found(req,res);
     }
 }
 

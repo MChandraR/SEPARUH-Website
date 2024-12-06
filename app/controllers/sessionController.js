@@ -4,6 +4,7 @@ const View = require('../../utils/views').view;
 const Response = require('../../utils/utils').sendResponse;
 const Encrypt = require('../../utils/encryptor');
 const Validate = require('../../utils/validator');
+const { response } = require('express');
 
 class sessionController {
     async index(req,res){
@@ -36,7 +37,8 @@ class sessionController {
                 req.session.cookie.expires = new Date(Date.now() + hour)
                 req.session.cookie.maxAge = hour
                 console.log(req.session.user);
-                req.session.save((err) => Response(res,200, err ? "Err : Session not saved  !" : "Berhasil login !", null));
+                req.session.save((err) => Response(res, 200, err ? 
+                    "Err: Session not saved!" : `Berhasil login${req.session.user.role === 'admin' ? " sebagai admin" : ""}!`, {"userRole": req.session.user.role}))  
             })
         }else Response(res,401, data && !data.verified_at ? "Harap verifikasi terlebih dahulu akun anda !" : "Username atau password salah !", null);
 

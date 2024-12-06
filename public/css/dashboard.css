@@ -1,0 +1,21 @@
+/* Override bootstrap styles */
+body {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+#wrapper > #sidebar {
+    width: 16.25rem !important;
+    background-color:#222e3c !important;
+    transition: margin 0.5s ease;
+}
+
+#wrapper > #main {
+    background-color: #fff;
+}
+#wrapper > #main > #navbar {
+    height: 4.063rem;
+}
+#wrapper > #main > #main-content {
+    background-color: #f3f5fc;
+}

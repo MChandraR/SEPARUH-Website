@@ -1,5 +1,6 @@
 const Response = require('../../../utils/utils').sendResponse;
 
+
 // Autentikasi terhadap hak akses user, untuk API endpoint khusus admin
 const authorizeAdmin = function (req, res, next) {
     // Cek apakah user ada sesi, atau apakah user memiliki akun

@@ -6,7 +6,7 @@ const accController = require('./controllers/accController');
 const sessionController = require('./controllers/sessionController');
 const ruanganController = require('./controllers/ruanganController');
 const resourceController = require('./controllers/resourceController.js');
-const { validateSession, authorizeAdmin, ValidateRole  } = require('./middlewares/index.js');
+const { validateSession, authorizeAdmin, ValidateRole} = require('./middlewares/index.js');
 const validator = require('./middlewares/validator.js');
 const assetController = require('./controllers/assetController.js');
 const peminjamanController = require('./controllers/peminjamanController.js');
@@ -15,10 +15,12 @@ const peminjamanController = require('./controllers/peminjamanController.js');
 route.get('/', (req,res)=>viewController.index(req,res, true));
 route.get('/login', (req,res)=>viewController.login2(req,res));
 route.get('/register', (req,res)=>viewController.register(req,res));
+route.get('/dashboard', validateSession, ValidateRole(viewController), (req,res)=>viewController.dashboard(req, res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
-route.get('/peminjaman', validateSession, ValidateRole(viewController), viewController.peminjaman2);
+route.get('/peminjaman', validateSession, viewController.peminjaman2);
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>ruanganController.view(req,res));
 route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
+route.get('/kontak', (req,res)=>viewController.kontak(req,res));
 
 //Route view cadangan
 route.get('/home2', (req,res)=>viewController.beranda2(req,res));
