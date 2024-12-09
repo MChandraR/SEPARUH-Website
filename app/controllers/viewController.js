@@ -65,8 +65,9 @@ class viewController{
     // Admin view
     dashboard(req,res){
         const param = url.parse(req.url, true).query;
-        if(param.page == "peminjaman") return res.send(View('request'));
-        return res.send(View('dashboard'));
+        if(param.page == "peminjaman") return res.send(Compact('request', {username : req.session.user.username}));
+        if(param.page == "ruangan") return res.send(Compact('room', {username : req.session.user.username}));
+        return res.send(Compact('dashboard', {username : req.session.user.username}));
     }
 
     not_found(req,res){
