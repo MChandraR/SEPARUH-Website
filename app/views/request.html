@@ -43,6 +43,7 @@
                         <p class="mb-0 text-secondary">Ruangan dan Asset</p>
                     </li>
                 </a>
+
             </ul>
         </div>
         <div id="main" class="list-unstyled flex-grow-1">
@@ -61,15 +62,31 @@
                 </div>
             </nav>
             <main id="main-content" class="p-5">
-                <h2>Dashboard Admin</h2>
+                <h2>Peminjaman</h2>
+
+                <table class="table">
+                    <thead>
+                        <td>ID Peminjaman</td>
+                        <td>Item ID</td>
+                        <td>Tujuan</td>
+                        <td>Waktu Mulai</td>
+                        <td>Waktu Selesai</td>
+                        <td>Aksi</td>
+                    </thead>
+                    <tbody id="table-content">
+
+                    </tbody>
+                </table>
             </main>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>    <script>
+
+        
         // Load local css stylesheet
         loadCSS(['dashboard', 'font/ubuntu']);
-
         // Get and check element by id
         const getElementById = (id = '') => {
             const element = document.getElementById(id);
@@ -84,6 +101,60 @@
             let state = sidebar.classList.contains('collapsed');
             sidebar.style.marginLeft = (state) ? '-16.25rem' : '0rem';
         });
+
+
+        function accept(req_id){
+            $.ajax({
+                url : "/api/request",
+                method : "PUT",
+                data : {
+                    request_id : req_id,
+                    status : "accepted"
+                }
+            }).done((res)=>{
+                console.log(res);
+                fetchData();
+                Swal.fire({
+                    title: 'Alert',
+                    text: res.message,
+                    icon: res.status == 200 ? 'success':'error',
+                    confirmButtonText: 'Oke'
+                  })
+            });
+        }
+
+        
+        const btn_label = ["Terima", "Diterima"];
+
+        function fetchData(){
+            $.ajax({
+                url: "/api/request"
+            }).done((res)=>{
+                console.log(res);
+                if(res.status == 200){
+                    $("#table-content")[0].innerHTML = "";
+                    console.log(res.data);
+                    res.data.forEach((data)=>{
+                        console.log(data);
+                        $("#table-content")[0].innerHTML  += `
+                            <tr>
+                                <td>${data.request_id}</td>
+                                <td>${data.item_id}</td>
+                                <td>${data.reason}</td>
+                                <td>${data.req_start}</td>
+                                <td>${data.req_end}</td>
+                                <td>
+                                    <button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status]} </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+            });
+        }
+
+        fetchData();
+
     </script>
 </body>
 </html>

@@ -70,13 +70,21 @@ class peminjamanController {
         let update = {};
         let waktuSekarang = moment().tz('Asia/Jakarta');
 
+        const statuses = {
+            "pending" : 0,
+            "accepted" : 1,
+            "rejected" : 2,
+            "req_return" : 3,
+            "returned" : 4
+        };
+
         // Membuat string dengan format yang diinginkan
         const waktuFormatted = waktuSekarang.format('YYYY-MM-DD HH:mm:ss');
     
         if(Validator(data.request_id)){
             update["update_at"] = waktuFormatted;
             update["code"] = generate("6").toUpperCase();
-            if(Validator(data.status) && (data.status=="accepted" || data.status=="rejected" || data.status=="returned")) update["status"] = data.status;
+            if(Validator(data.status) && (data.status=="accepted" || data.status=="rejected" || data.status=="returned")) update["status"] = statuses[data.status];
             let peminjaman = await Peminjaman.where({request_id : data.request_id}).first();
             
             //Validasi kondisi saat ni 

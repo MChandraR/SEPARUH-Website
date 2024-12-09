@@ -1,6 +1,8 @@
 const View = require('../../utils/views').view;
 const Compact = require('../../utils/views').compact;
 const Response = require('../../utils/utils').sendResponse;
+const url = require('url');
+
 
 class viewController{
     index(req,res){
@@ -62,6 +64,8 @@ class viewController{
     }
     // Admin view
     dashboard(req,res){
+        const param = url.parse(req.url, true).query;
+        if(param.page == "peminjaman") return res.send(View('request'));
         return res.send(View('dashboard'));
     }
 
