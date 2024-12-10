@@ -67,21 +67,23 @@
                 </div>
             </nav>
             <main id="main-content" class="p-5">
-                <h2>Peminjaman</h2>
+                <h2>Data Asset</h2>
 
-                <table class="table">
-                    <thead>
-                        <td>ID Peminjaman</td>
-                        <td>Item ID</td>
-                        <td>Tujuan</td>
-                        <td>Waktu Mulai</td>
-                        <td>Waktu Selesai</td>
-                        <td>Aksi</td>
-                    </thead>
-                    <tbody id="table-content">
-
-                    </tbody>
-                </table>
+                <div id="table-area">
+                    <table class="table">
+                        <thead  id="table-head">
+                            <td>ID Asset</td>
+                            <td>Nama Asset</td>
+                            <td>Deskripsi</td>
+                            <td>Kapasitas</td>
+                            <td>Status </td>
+                            <td>Aksi </td>
+                        </thead>
+                        <tbody id="table-content">
+    
+                        </tbody>
+                    </table>
+                </div>
             </main>
         </div>
     </div>
@@ -91,7 +93,7 @@
 
         
         // Load local css stylesheet
-        loadCSS(['dashboard', 'font/ubuntu']);
+        loadCSS(['dashboard', 'font/ubuntu', 'room']);
         // Get and check element by id
         const getElementById = (id = '') => {
             const element = document.getElementById(id);
@@ -129,11 +131,11 @@
         }
 
         
-        const btn_label = ["Terima","Ditolak", "Diterima"];
+        const statuses = ["Kosong", "Dipakai", "Dipakai"];
 
         function fetchData(){
             $.ajax({
-                url: "/api/request?filter=peminjaman"
+                url: "/api/asset"
             }).done((res)=>{
                 console.log(res);
                 if(res.status == 200){
@@ -141,21 +143,28 @@
                     console.log(res.data);
                     res.data.forEach((data)=>{
                         console.log(data);
-                        let rejectBtn = `<button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status]} </button>`;
                         $("#table-content")[0].innerHTML  += `
                             <tr>
-                                <td>${data.request_id}</td>
-                                <td>${data.item_id}</td>
-                                <td>${data.reason}</td>
-                                <td>${data.req_start}</td>
-                                <td>${data.req_end}</td>
+                                <td>${data.assset_id}</td>
+                                <td>${data.asset_name}</td>
+                                <td>${data.description}</td>
+                                <td>${data.capacity ?? "0"}</td>
+                                <td>${statuses[data.status ?? 0]}</td>
+                                
                                 <td>
-                                    <button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status]} </button>
-                                    ${data.status == 0? rejectBtn : ''}
+                                    <button onClick="accept('${data.request_id}')"  class="btn btn-primary">Edit </button>
                                 </td>
                             </tr>
                         `;
                     });
+
+                    if(!res.data.length){
+                        $("#table-content")[0].innerHTML  = `
+                            <tr>
+                                <td colspan="6" style="text-align : center;">Belum ada data asset</td>
+                            </tr>
+                        `;
+                    }
                 }
             });
         }

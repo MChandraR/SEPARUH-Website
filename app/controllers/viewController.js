@@ -66,7 +66,9 @@ class viewController{
     dashboard(req,res){
         const param = url.parse(req.url, true).query;
         if(param.page == "peminjaman") return res.send(Compact('request', {username : req.session.user.username}));
+        if(param.page == "pengembalian") return res.send(Compact('returning', {username : req.session.user.username}));
         if(param.page == "ruangan") return res.send(Compact('room', {username : req.session.user.username}));
+        if(param.page == "asset") return res.send(Compact('asset', {username : req.session.user.username}));
         return res.send(Compact('dashboard', {username : req.session.user.username}));
     }
 

@@ -67,7 +67,7 @@
                 </div>
             </nav>
             <main id="main-content" class="p-5">
-                <h2>Peminjaman</h2>
+                <h2>Pengembalian</h2>
 
                 <table class="table">
                     <thead>
@@ -129,11 +129,11 @@
         }
 
         
-        const btn_label = ["Terima","Ditolak", "Diterima"];
+        const btn_label = ["Terima","Ditolak", "Dipakai", ""];
 
         function fetchData(){
             $.ajax({
-                url: "/api/request?filter=peminjaman"
+                url: "/api/request?filter=pengembalian"
             }).done((res)=>{
                 console.log(res);
                 if(res.status == 200){

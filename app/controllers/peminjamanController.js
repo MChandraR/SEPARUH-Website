@@ -7,12 +7,17 @@ const Asset = require('../models/asset');
 const moment = require('moment-timezone');
 const { generate } = require('rand-token');
 const randToken = require('rand-token').generate;
+const url = require('url');
 
 class peminjamanController {
 
     //Fungsi untuk mengambil data peminjaman dari database
     async index(req,res){
-        let data = await Peminjaman.get();
+        const param = url.parse(req.url, true).query;
+        let data = null;
+        if(Validator(param.filter) && param.filter == "peminjaman")  data = await Peminjaman.where({status : {$lt : 3}}).get();
+        if(Validator(param.filter) && param.filter == "pengembalian")  data = await Peminjaman.where({status : {$gt : 1}}).get();
+        else  data = await Peminjaman.get();
         return Response(res, 200, "Berhasil mengambil data !", data);
     }   
 
@@ -72,8 +77,8 @@ class peminjamanController {
 
         const statuses = {
             "pending" : 0,
-            "accepted" : 1,
-            "rejected" : 2,
+            "rejected" : 1,
+            "accepted" : 2,
             "req_return" : 3,
             "returned" : 4
         };
