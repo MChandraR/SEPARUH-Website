@@ -19,3 +19,12 @@ body {
 #wrapper > #main > #main-content {
     background-color: #f3f5fc;
 }
+#chart-area{
+    display : grid;
+    grid-template-columns : 50% 50%;
+    justify-content: center;
+}
+
+/* #chart-area div{
+    height : 30vh;
+} */

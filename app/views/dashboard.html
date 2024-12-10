@@ -68,13 +68,35 @@
             </nav>
             <main id="main-content" class="p-5">
                 <h2>Dashboard Admin</h2>
+                <div id="chart-area">
+                    <div>
+                        <canvas id="request_canvas">
+    
+                        </canvas>
+                    </div>
+                    
+                    
+                    <div >
+                        <center style="height : 50vh;">
+                            <canvas id="item_canvas">
+        
+                            </canvas>
+                        </center>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Load local css stylesheet
         loadCSS(['dashboard', 'font/ubuntu']);
+
+        let itemChart = null;
+        let itemData = [];
+        let reqChart = null;
 
         // Get and check element by id
         const getElementById = (id = '') => {
@@ -90,6 +112,76 @@
             let state = sidebar.classList.contains('collapsed');
             sidebar.style.marginLeft = (state) ? '-16.25rem' : '0rem';
         });
+
+
+        async function fetchItemData(){
+            await $.ajax({
+                url : "/api/room", 
+            }).done((res)=>{
+                if(res.status == 200){
+                    itemData[0] = res.data.length;
+                }
+            });
+
+            await $.ajax({
+                url : "/api/asset", 
+            }).done((res)=>{
+                if(res.status == 200){
+                    itemData[1] = res.data.length;
+                }
+            });
+
+            if(itemChart != null) itemChart.destroy();
+
+            itemChart = new Chart($("#item_canvas"), 
+            {
+                type : "pie",
+                data : {
+                    labels : ["Jumlah Ruangan", "Jumlah Asset"],
+                    datasets : [{
+                        label : "Test",
+                        data : [itemData[0], itemData[1]]
+                    }]
+                }
+            });
+        }
+
+        async function fetchRequestData(){
+            await $.ajax({
+                url : "/api/request",
+                success : (res)=>{
+                    let data = {};
+
+                    res.data.forEach((value)=>{
+                        if(data[value.created_at.substring(0, 10)] == null)data[value.created_at.substring(0, 10)] = 1;
+                        else data[value.created_at.substring(0, 10)] += 1;
+                        console.log(data[value.created_at.substring(0, 10)]);
+                        assignRequestChart(Object.keys(data),Object.values(data) );
+                    });
+                }
+            });
+        }
+
+        function assignRequestChart(label , data){
+            if(reqChart != null) reqChart.destroy();
+
+            reqChart = new Chart($("#request_canvas"), 
+            {
+                type : "line",
+                data : {
+                    labels : label,
+                    datasets : [{
+                        label : "Grafik Peminjaman",
+                        data : data
+                    }]
+                }
+            });
+        }
+
+
+        fetchItemData();
+        fetchRequestData();
+        
     </script>
 </body>
 </html>
