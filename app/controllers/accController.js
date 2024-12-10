@@ -10,6 +10,7 @@ const sendEmail = require('../../utils/mailer');
 const validator = require('../../utils/validator');
 const Encrypt = require('../../utils/encryptor');
 
+
 class accController {
     //Aktivasi email
     async index(req,res){
