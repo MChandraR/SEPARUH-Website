@@ -5,7 +5,7 @@ class Template {
             'footer': this.footer
         };
         this.items = [];
-        console.log('KERUN');
+        // console.log('Template constructed');
         this.scripts = {
             'DOMPurify': () => { return Object.assign(document.createElement('script'), { src: 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.0/purify.min.js' }) },
             'JQuery': () => { return Object.assign(document.createElement('script'), { src: '/js/jquery-3.7.1.min.js' }) },
@@ -53,8 +53,6 @@ class Template {
                 <a id="Home" href="/home2">Beranda</a>
                 <a id="Peminjaman" href="/peminjaman2">Pinjam</a>
                 <a>Kontak</a>
-                <a>Daftar</a>
-                <a id="Login" href="/login">Masuk</a>
             </div>
         `;
         
@@ -84,6 +82,34 @@ class Template {
             if (currentPage !== '' && currentPage === link){
                 let navbarLink = document.getElementById(link);
                 navbarLink?.classList.add('selected');
+            }
+        });
+
+        $.ajax({
+            url: '/api/user/session-check',
+            method: 'GET'
+        }).done((e) => {
+            const navContainer = document.getElementsByClassName('nav-container')[0];
+            if (e.data.userLogged === true) {
+                const dropdown = Object.assign(document.createElement('div'), { id: 'profile-dropdown', innerHTML: `${e.data.username}` });
+                const profileImg = Object.assign(document.createElement('img'), { src: '/assets/images/icon/user.png' });
+                
+                const navProfile = Object.assign(document.createElement('a'), { id: 'profile', href: '/profile', innerHTML: 'Profile' })
+                const navLogout = Object.assign(document.createElement('a'), { id: 'logout' , href: '/logout', innerHTML: 'Logout' });
+                const dropdownContent = Object.assign(document.createElement('div'), { id: 'dropdown-content'});
+                dropdownContent.append(navProfile, navLogout);
+                // dropdown.style.bottom = dropdown.clientHeight;
+                dropdown.addEventListener('click', function() {
+                    dropdownContent.classList.toggle('open');
+                });
+
+                dropdown.append(profileImg, dropdownContent);
+                navContainer.insertAdjacentElement('beforeend', dropdown);
+            }
+            else {
+                const navLogin = Object.assign(document.createElement('a'), { id: 'login', href: '/login', innerHTML: 'Masuk' });
+                const navRegister = Object.assign(document.createElement('a'), { id: 'register', href: '/register', innerHTML: 'Daftar' });
+                navContainer.append(navRegister, navLogin);
             }
         });
     }

@@ -11,6 +11,52 @@
         body {visibility: hidden;}
         @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
     </style>
+    <script>
+        /*
+        
+        Want to customize your button? visit our documentation page:
+        
+        https://login.equalweb.com/custom-button.taf
+        
+        */
+        window.interdeal = {
+            "sitekey": "cc64a3f98a3edcbf27e4d9f3f9d71b22",
+            "Position": "right",
+            "domains": {
+                "js": "https://cdn.equalweb.com/",
+                "acc": "https://access.equalweb.com/"
+            },
+            "Menulang": "ID",
+            "btnStyle": {
+                "vPosition": [
+                    "95%",
+                    "95%"
+                ],
+                "scale": [
+                    "0.5",
+                    "0.5"
+                ],
+                "color": {
+                    "main": "#1c4bb6",
+                    "second": "#ffffff"
+                },
+                "icon": {
+                    "outline": false,
+                    "type": 10,
+                    "shape": "circle"
+                }
+            }
+        };
+        (function(doc, head, body){
+            var coreCall             = doc.createElement('script');
+            coreCall.src             = interdeal.domains.js + 'core/5.0.9/accessibility.js';
+            coreCall.defer           = true;
+            coreCall.integrity       = 'sha512-dxjHZQgpVIG70EQus4+1KR3oj2KGyrtwR/nr4lY+tcMjrQ1Yb9V1SCKNVLGhD3CcPMgANKAqOk4ldI8WWNnQTw==';
+            coreCall.crossOrigin     = 'anonymous';
+            coreCall.setAttribute('data-cfasync', true );
+            body? body.appendChild(coreCall) : head.appendChild(coreCall);
+        })(document, document.head, document.body);
+    </script>
 </head>
 <body>
     <!-- Header/Navbar -->
@@ -61,11 +107,23 @@
             'main',
             'home2',
             'template/header',
-            'template/footer'
+            'template/footer',
+            'font/ubuntu'
         ]);
 
+        // Observer jika diperlukan
+        const infoContainer = document.getElementById('stat-info-container');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }, { threshold: 0.5 });
+        // observer.observe(infoContainer);
+
         const loader       = document.getElementsByClassName("loader");
-        const ruanganCount = document.getElementById("ruanganCount"); 
+        const ruanganCount = document.getElementById("ruanganCount");
         const assetCount   = document.getElementById("assetCount");
         const userCount    = document.getElementById("userCount");
         const mainBtn      = document.getElementById("mainBtn");
@@ -78,12 +136,13 @@
         }).done((e) => {
             console.log(e);
             
+            // Removes loading animation
             while (loader.length > 0) {
                 loader[0].remove();
             }
 
+            // Data viewer
             const countData = [e.data.ruanganCount, e.data.assetCount, e.data.userCount];
-            
             countView.forEach((element, index) => {
                 element.innerHTML        = countData[index];
                 element.style.opacity    = 1;
@@ -91,6 +150,7 @@
                 element.style.maxHeight  = 'none';
             });
 
+            // Button below title-heading
             mainBtn.textContent = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
         });
     </script>

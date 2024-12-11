@@ -6,12 +6,15 @@
 #header-container {
     width: 100%;
     padding: 0 70px;
+    color: var(--fun-blue);
     height: var(--header-height);
     background-color: transparent;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     animation: flyIn 0.8s ease-out forwards;
+    z-index: 1;
 }
 @keyframes flyIn {
     0% {
@@ -34,13 +37,18 @@
 .nav-container a {
     width: 88px;
     padding: 10px 0;
-    font-family: 'Montserrat', Helvetica;
+    color: var(--fun-blue);
+    font-size: 1rem;
+    font-family: 'Ubuntu', serif;
     text-align: center;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     user-select: none;
 }
 .nav-container a:not(.selected):hover {
-    color: var(--fun-blue);
+    color: #1f3b5c;
     cursor: pointer;
 }
 .nav-container a:visited {
@@ -49,5 +57,56 @@
 .nav-container a.selected {
     color: var(--fun-blue);
     font-weight: bold;
-    text-decoration: underline;
+}
+.nav-container > a:not(.selected)::after {
+    width: 0%;
+    display: block;
+    outline: 0px solid #1f3b5c;
+    transition: 0.3s;
+    content: "";
+}
+.nav-container > a:not(.selected):hover::after {
+    width: 80%;
+    outline-width: 1px;
+}
+.nav-container > #profile-dropdown {
+    font-size: 1rem;
+    font-family: 'Ubuntu', serif;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.nav-container > #profile-dropdown:hover {
+    cursor: pointer;
+}
+.nav-container > #profile-dropdown::before {
+    height: 60%;
+    margin-right: 20px;
+    outline: 1px solid var(--fun-blue);
+    content: "";
+}
+.nav-container > #profile-dropdown > img {
+    width: 2rem;
+    margin-left: 0.75rem;
+    border: 1px solid var(--fun-blue);
+    border-radius: 50%;
+    user-select: none;
+}
+.nav-container > #profile-dropdown > #dropdown-content {
+    background-color: #ececec;
+    outline: 1px solid var(--fun-blue);
+    border-radius: .5rem;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: block;
+}
+.nav-container > #profile-dropdown > #dropdown-content.open {
+    visibility: visible;
+}
+.nav-container > #profile-dropdown > #dropdown-content > a:hover {
+    background-color: #d7d6d6;
 }
