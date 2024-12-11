@@ -6,7 +6,7 @@ const url = require('url');
 
 class viewController{
     index(req,res){
-        return res.send(View('home'));
+        return res.send(View('home2'));
     }
 
     login(req,res){
