@@ -32,6 +32,7 @@ route.post('/api/users', authorizeAdmin, async(req,res)=>await userController.in
 route.put('/api/users', authorizeAdmin, async(req,res)=>await userController.update(req,res));
 route.delete('/api/users', authorizeAdmin, async(req, res)=>await userController.delete(req,res));
 route.post('/register', async(req,res)=>await userController.insert(req,res));
+route.get('/api/user/session-check', async(req,res)=>await userController.isUserLoggedIn(req,res));
 
 //Route untuk user/profile
 route.get('/api/profile', validateSession, async(req,res)=>await userController.getUserProfile(req,res));

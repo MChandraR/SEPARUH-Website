@@ -108,6 +108,14 @@ class userController{
         Response(res,200, "Berhasil menghapus data !", await Users.where({user_id : data.user_id}).delete());
     }
 
+    async isUserLoggedIn(req,res) {
+        const isLoggedIn = (req.session && req.session.user) ? true : false;
+        let data = (isLoggedIn) ? await Users.where({user_id: req.session.user.user_id}).first() : {username: null};
+        return Response(res, 200, "Berhasil mengecek sesi user !", {
+            username : data.username,
+            userLogged : isLoggedIn
+        });
+    }
 }
 
 module.exports = new userController();
