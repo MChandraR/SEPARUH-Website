@@ -9,3 +9,9 @@
     background-color : #f3f5fc;
     font-weight : bold;
 }
+
+#room-header{
+    display : flex;
+    flex-wrap : wrap;
+    justify-content: space-between;
+}

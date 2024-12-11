@@ -13,6 +13,48 @@
     </style>
 </head>
 <body>
+
+ 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" >
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Ruangan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/api/room" method="POST" enctype="multipart/form-data" id="roomForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nama Ruangan</label>
+                        <input name="room_name" type="text" class="form-control" id="nameField" placeholder="Masukkan data ruangan">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Deskripsi Ruangan</label>
+                        <input name="description" type="text" class="form-control" id="descField" placeholder="Masukan deskripsi ruangan">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Kapasitas</label>
+                        <input name="capacity" type="text" class="form-control" id="capField" placeholder="Masukkan kapasitas ruangan">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Gambar Ruangan</label>
+                        <input type="file" name="file" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Save changes</button>
+                </div>
+            </form>
+        </div>
+        </div>
+  </div>
+
     <div id="wrapper" class="d-flex h-100">
         <div id="sidebar">
             <ul id="sidebar-content" class="list-unstyled text-white">
@@ -67,7 +109,14 @@
                 </div>
             </nav>
             <main id="main-content" class="p-5">
-                <h2>Data Ruangan</h2>
+                <div id="room-header">
+                    <h2>Data Ruangan</h2>
+                       <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Tambah Ruangan
+                    </button>
+    
+                </div>
 
                 <div id="table-area">
                     <table class="table">
@@ -91,7 +140,7 @@
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>    <script>
 
-        
+       
         // Load local css stylesheet
         loadCSS(['dashboard', 'font/ubuntu', 'room']);
         // Get and check element by id
@@ -101,6 +150,11 @@
             return element ? element : null;
         };
 
+
+        $("#submitBtn")[0].addEventListener('click',(e)=>{
+            e.preventDefault();
+            addRoom();
+        });
         // Collapse Sidebar
         getElementById('toggle-sidebar-btn')?.addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
@@ -121,6 +175,33 @@
             }).done((res)=>{
                 console.log(res);
                 fetchData();
+                Swal.fire({
+                    title: 'Alert',
+                    text: res.message,
+                    icon: res.status == 200 ? 'success':'error',
+                    confirmButtonText: 'Oke'
+                  })
+            });
+        }
+
+
+        function addRoom(){
+
+            var form = $('#roomForm')[0];
+
+            // Create an FormData object 
+            var data = new FormData(form);
+
+            $.ajax({
+                contentType: 'multipart/form-data',
+                url : "/api/room",
+                method : "POST",
+                data : data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000
+            }).done((res)=>{
                 Swal.fire({
                     title: 'Alert',
                     text: res.message,

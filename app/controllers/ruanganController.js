@@ -40,18 +40,22 @@ class ruanganController {
             const data = req.body;
             const file = req.file;
 
-            if(Validator(data.room_id) && Validator(data.room_name) && Validator(data.description) && Validator(data.capacity)){
+            let newID = await Ruangan.orderBy('room_id','DESC').first();
+            if(newID == null) newID = "R00001";
+            else newID = "R" + ("00000" + (parseInt(newID.room_id.slice(-5)) + 1)).slice(-5);
+
+            if(Validator(data.room_name) && Validator(data.description) && Validator(data.capacity)){
                 var originalName = file.originalname;
-                resourceController.rename(originalName, data.room_id + ".png" );
+                resourceController.rename(originalName, newID + ".png" );
                 return Response(res, 200, "Berhasil menambahkan data ruangan !", await Ruangan.create({
-                    room_id : data.room_id,
+                    room_id : newID,
                     room_name : data.room_name,
                     description : data.description,
                     capacity : data.capacity
                 }));
             }
     
-            return Response(res, 400, "Gagal menambahkan data ruangan !", null);
+            return Response(res, 400, "Gagal menambahkan data ruangan : field tidak lengkap !", null);
 
         });
         
