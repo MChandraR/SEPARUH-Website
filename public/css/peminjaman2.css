@@ -229,13 +229,14 @@
     border-radius: .5rem;
     border: solid green 2px;
     color : green;
-    background-color: rgba(255, 255, 255, 0.701);
+    font-family: 'Ubuntu', serif;
+    background-color: rgba(255, 255, 255, 0.8);
     padding : .2rem .5rem;
 }
 
 .item-status.inorder{
-    border: solid rgb(255, 0, 0) 2px;
-    color : rgb(255, 0, 0);
+    border: solid rgb(224, 71, 71) 2px;
+    color : rgb(224, 71, 71);
 }
 
 #item-container .item-description {
