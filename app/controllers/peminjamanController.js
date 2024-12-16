@@ -8,6 +8,8 @@ const moment = require('moment-timezone');
 const { generate } = require('rand-token');
 const randToken = require('rand-token').generate;
 const url = require('url');
+const resourceController = require('./resourceController');
+
 
 class peminjamanController {
 
@@ -72,6 +74,7 @@ class peminjamanController {
     //Payload opsional : [ status ]
     async update(req,res){
         const data = req.body;
+        console.log(data);
         let update = {};
         let waktuSekarang = moment().tz('Asia/Jakarta');
 
@@ -108,6 +111,49 @@ class peminjamanController {
     async delete(req,res){
         let result = await Peminjaman.delete();
         return Response(res, 200, "Berhasil menghapus data peminjaman !");
+    }
+
+
+    //FUngsi untuk pengajuan perngembalian oleh user
+    //Payload : multi image, rating, request_id, comment
+    async return(req, res){
+        let message = "Gagal mengajukan pengembalian :field tidak lengkap !";
+        await resourceController.roomUpload.array('file')(req, res, async(err) => {
+            if (err) return Response(res, 400, "File Upload Error !", err.message);
+            if (!req.files.length) return Response(res, 400, "No file uploaded !",null);
+            let data = req.body;
+            let request = await Peminjaman.where({request_id : data.request_id ?? "", user_id : req.session.user.user_id}).first();
+            console.log(data);
+            if(Validator([data.request_id , data.rating, data.comment]) && request != null ){
+                if(request.status == 2){
+                    let image = [];
+                    req.files.forEach((file, idx)=>{
+                        resourceController.rename(file.originalname, `${data.request_id}_${idx}.png` );
+                        image.push(`${idx}.png`);
+                    });
+
+                    return Response(res, 200, "Berhasil mengajukan pengembalian !",
+                        Peminjaman.where({request_id : data.request_id}).update({
+                            document : image,
+                            status : 3,
+                            rating : data.rating,
+                            comment : data.comment
+                        })
+                    );
+                }else{
+                    message = "Belum bisa melakukan pengembalian !";
+                }
+               
+    
+            }
+            req.files.forEach((file, idx)=>{
+                resourceController.deleteFile(file.originalname);
+            });
+
+            return Response(res, 201, message);
+        });
+        
+
     }
 
 

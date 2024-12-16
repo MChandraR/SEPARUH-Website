@@ -108,13 +108,13 @@
         });
 
 
-        function accept(req_id){
+        function accept(req_id, status){
             $.ajax({
                 url : "/api/request",
                 method : "PUT",
                 data : {
                     request_id : req_id,
-                    status : "accepted"
+                    status : status
                 }
             }).done((res)=>{
                 console.log(res);
@@ -141,7 +141,7 @@
                     console.log(res.data);
                     res.data.forEach((data)=>{
                         console.log(data);
-                        let rejectBtn = `<button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status]} </button>`;
+                        let rejectBtn = `<button onClick="accept('${data.request_id}', 'rejected')"  class="btn btn-${ data.status ?'secondary' :  'danger'  }" ${data.status ? 'disabled' : ''}>Tolak </button>`;
                         $("#table-content")[0].innerHTML  += `
                             <tr>
                                 <td>${data.request_id}</td>
@@ -150,7 +150,7 @@
                                 <td>${data.req_start}</td>
                                 <td>${data.req_end}</td>
                                 <td>
-                                    <button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status]} </button>
+                                    <button onClick="accept('${data.request_id}', 'accepted')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status] ?? "-"} </button>
                                     ${data.status == 0? rejectBtn : ''}
                                 </td>
                             </tr>

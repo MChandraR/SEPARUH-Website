@@ -114,7 +114,7 @@
                 method : "PUT",
                 data : {
                     request_id : req_id,
-                    status : "accepted"
+                    status : "returned"
                 }
             }).done((res)=>{
                 console.log(res);
@@ -129,7 +129,7 @@
         }
 
         
-        const btn_label = ["Terima","Ditolak", "Dipakai", ""];
+        const btn_label = ["Terima","Ditolak", "Dipakai", "Proses", "Dikembalikan"];
 
         function fetchData(){
             $.ajax({
@@ -150,7 +150,7 @@
                                 <td>${data.req_start}</td>
                                 <td>${data.req_end}</td>
                                 <td>
-                                    <button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status ?'secondary' :  'primary'  }" ${data.status ? 'disabled' : ''}>${btn_label[data.status]} </button>
+                                    <button onClick="accept('${data.request_id}')"  class="btn btn-${ data.status != 3 ?'secondary' :  'primary'  }" ${data.status != 3 ? 'disabled' : ''}>${btn_label[data.status]} </button>
                                     ${data.status == 0? rejectBtn : ''}
                                 </td>
                             </tr>
