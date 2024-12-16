@@ -244,7 +244,7 @@ class Template {
             itemInfo.appendChild(Object.assign(createElement('p', 'item-description'), { innerHTML: `${item.description}` }));
             
             // Item Card
-            itemCard.href = `/peminjaman/${item.req_type?"asset":"ruangan"}?id=${item.room_id ?? item.asset_id}`;
+            itemCard.href = `/peminjaman/${item.asset_id?"asset":"ruangan"}?id=${item.room_id ?? item.asset_id}`;
             itemCard.style.animationDelay = `${(idx % 6) * 0.125}s`;
             itemCard.appendChild(itemImageContainer);
             itemCard.appendChild(itemInfo);

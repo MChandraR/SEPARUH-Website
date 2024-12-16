@@ -114,6 +114,31 @@ class resourceController {
         });
     }
 
+    async all(req,res){
+        let data = [];
+        data = data.concat(await Ruangan.get());
+        data = data.concat(await Asset.get());
+        this.shuffle(data);
+        Response(res, 200, "Berhasil mengambil data !", data);
+    }
+
+
+    shuffle(array) {
+        let currentIndex = array.length;
+      
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+      
+          // Pick a remaining element...
+          let randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+      }
+      
 
     async getImage(req,res){
         var key = req.url.split("/")[4];

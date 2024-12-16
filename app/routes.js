@@ -18,6 +18,7 @@ route.get('/register', (req,res)=>viewController.register(req,res));
 route.get('/dashboard', validateSession, ValidateRole(viewController), (req,res)=>viewController.dashboard(req, res));
 route.get('/home', validateSession, (req,res)=>viewController.beranda(req,res));
 route.get('/peminjaman', validateSession, viewController.peminjaman2);
+route.get('/peminjaman/asset', validateSession, (req,res)=>assetController.view(req,res));
 route.get('/peminjaman/ruangan', validateSession, (req,res)=>ruanganController.view(req,res));
 route.get('/profile', validateSession, (req,res)=>viewController.profile(req,res));
 route.get('/kontak', (req,res)=>viewController.kontak(req,res));
@@ -66,6 +67,7 @@ route.get('/api/user/request', validateSession, async(req,res)=>await peminjaman
 route.post('/api/user/return', validateSession, async(req,res)=>await peminjamanController.return(req,res));
 
 //Route untuk resources
+route.get('/api/all',validateSession, async(req,res)=>await resourceController.all(req,res));
 route.get('/api/stat', async(req,res)=>await resourceController.index(req,res));
 route.get('/uploads', async(req,res)=>await resourceController.getImage(req,res));
 route.post('/uploads', async(req,res)=>await resourceController.uploadFile(req,res));
