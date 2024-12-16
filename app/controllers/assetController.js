@@ -18,13 +18,18 @@ class assetController {
 
             const data = req.body;
             const file = req.file;
-             
-            if(Validator(data.asset_id) && Validator(data.asset_name) && Validator(data.description)){
-                resourceController.rename(file.originalname, data.asset_id + ".png");
+            let asset = await Asset.orderBy('asset_id', "DESC").first();
+            asset = asset ?  asset.asset_id.slice(-5) : "00000" ;
+            console.log(asset);
+            asset = ("A" + ("00000" + (parseInt(asset)  +  1)).slice(-5));
+
+            if(Validator(asset) && Validator(data.asset_name) && Validator(data.description)){
+                resourceController.rename(file.originalname, asset+ ".png");
                 return Response(res, 200, "Berhasil menambahkan data asset !", await Asset.create({
-                    asset_id : data.asset_id,
+                    asset_id : asset,
                     asset_name : data.asset_name,
-                    description : data.description
+                    description : data.description,
+                    status : 0
                 }));
             }
             resourceController.deleteFile(file.originalname);
