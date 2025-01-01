@@ -142,3 +142,162 @@ span#ruanganCount, span#assetCount, span#userCount {
         transform: rotate(360deg);
     }
 }
+
+
+
+@media screen and (max-width : 1000px){
+    :root {
+        /* info icon ratio */
+        --info-icon-width: 235px;
+        --info-icon-height: 125px;
+    }
+    
+    /* section - heading */
+    #heading-container {
+        padding: 1rem;
+        position: relative;
+        animation: fadeIn 1s ease-in forwards;
+        z-index: 0;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    #heading-container #title-heading {
+        margin-top : 3rem;
+        width: 100%;
+        font-size: .8rem;
+        line-height: 2.2rem;
+        font-size: var(--font-size-xl);
+        font-family: var(--font-family-ubuntu);
+    }
+
+    #heading-container #title-heading span{
+        font-size: 2rem;
+
+
+    }
+    #title-heading span:first-of-type {
+        font-weight: 700;
+        color: var(--fun-blue);
+    }
+    #title-heading span:last-of-type {
+        font-size: var(--font-size-l);
+        font-weight: 400;
+        color: var(--tundora);
+    }
+    #heading-container #mainBtn {
+        width: 182px;
+        height: 3.375rem;
+        margin-top: 12px;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        font-size: 19px;
+        font-family: "Ubuntu", serif;
+        font-weight: 700;
+        background-color: var(--fun-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #heading-container > #mainBtn:hover {
+        background-color: #1456a1;
+        border: 2px solid black;
+    }
+    
+    /* section - stat info */
+    #stat-info-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #stat-info-container .info-card {
+        margin-top : 5rem;
+        width: calc(33% - 1rem);
+        height: auto;
+        color: var(--tundora);
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 110px;
+        font-family: var(--font-family-montserrat);
+        font-weight: 700;
+        border: 2px solid var(--fun-blue);
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        opacity: 0;
+        animation: fadeIn-card 1s ease forwards;
+    }
+    @keyframes fadeIn-card {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .info-card * {
+        margin-bottom: 10px;
+    }
+    .info-card:nth-child(1) {
+        animation-delay: 0.3s !important;
+    }
+    .info-card:nth-child(2) {
+        animation-delay: 0.6s !important;
+    }
+    .info-card:nth-child(3) {
+        animation-delay: 0.9s !important;
+    }
+    .info-card .info-icon-container {
+        width: auto;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+    }
+    .info-card span {
+        font-size: var(--font-size-l);
+    }
+    span#ruanganCount, span#assetCount, span#userCount {
+        opacity: 0;
+        max-height: 0;
+        visibility: hidden;
+        transition: opacity 1s ease-out;
+    }
+    .info-card p {
+        width: 95%;
+        font-weight: 400;
+        font-size : .7rem;
+        text-align: center;
+    }
+    .info-icon-container > img {
+        width: 5rem;
+        height: 5rem;
+        object-fit: contain;
+    }
+    
+    /* from cssloaders.github.io */
+    .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid rgba(0, 0, 0, 0.5);
+        border-bottom-color: var(--fun-blue);
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        }
+    
+        @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

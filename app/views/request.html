@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="/js/cssLinkLoader.js"></script>
     <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+
     <style>
         body {visibility: hidden;}
         @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
@@ -69,7 +71,7 @@
             <main id="main-content" class="p-5">
                 <h2>Peminjaman</h2>
 
-                <table class="table">
+                <table class="table" id="table"> 
                     <thead>
                         <td>ID Peminjaman</td>
                         <td>Item ID</td>
@@ -87,7 +89,11 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>    <script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>    
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+    
+    <script>
 
         
         // Load local css stylesheet
@@ -155,6 +161,8 @@
                                 </td>
                             </tr>
                         `;
+
+                        let d = new DataTable("#table");
                     });
                 }
             });
