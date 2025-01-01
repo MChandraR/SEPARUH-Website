@@ -42,6 +42,13 @@ class sessionController {
             })
         }else Response(res,401, data && !data.verified_at ? "Harap verifikasi terlebih dahulu akun anda !" : "Username atau password salah !", null);
     }
+
+    async logout(req,res){
+        req.session.destroy((e)=>{
+            return redirect("/");
+            //Response(res,200, e ? "Err : Session cannot be destroyed !":"Berhasil keluar !", null);
+        });
+    };
 }
 
 module.exports = new sessionController();

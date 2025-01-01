@@ -122,3 +122,134 @@ label{
     width: 100%;
     height: 100%;
 }
+
+
+@media screen and (max-width : 1000px) {
+    :root {
+        --input-border-radius: 6px;
+        --input-and-button-height: 40px;
+        --input-and-button-border: 1px solid #444343;
+        --login-preset-box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+    }
+    
+    body {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.7);
+        font-family: 'Monstserrat', sans-serif;
+        background-color: #ECF6F6;
+    }
+    
+    #wrapper {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    
+    #image-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    #image-container > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    #image-container > .overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        background-color: rgba(9, 44, 132, 0.5);
+        top: 0;
+        left: 0;
+    }
+    #image-container #titled-logo {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+    }
+    #titled-logo img {
+        width: 50%;
+    }
+    label{
+        font-weight: bold;
+    }
+    
+    #form-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #form-container > #form {
+        width: 85%;
+        padding: 8%;
+        position: relative;
+        border: none;
+        background-color: white;
+        box-shadow: var(--login-preset-box-shadow);
+        border-radius: .5rem;
+    }
+    #form input {
+        width: 100%;
+        height: var(--input-and-button-height);
+        padding: 0 10px;
+        margin-top: 2px;
+        border: var(--input-and-button-border);
+        border-radius: var(--input-border-radius);
+    }
+    #form label:not(:last-child) input {
+        margin-bottom: 8px;
+    }
+    #form input::placeholder {
+        color: rgba(122, 122, 122, 0.8);
+    }
+    #form > a {
+        display: block;
+        color: gray;
+    }
+    #form > button {
+        width: 100%;
+        height: 38px;
+        margin: 25px 0;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        background-color: #1A5DAA;
+        box-shadow: var(--login-preset-box-shadow);
+        font-weight: bold;
+    }
+    #form > button:hover {
+        background-color: #2563aa;
+        cursor: pointer;
+    }
+    #form > #google-login-btn {
+        width: 100%;
+        padding: 0 4px 0 10px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: var(--input-and-button-height);
+        border: var(--input-and-button-border);
+        border-radius: var(--input-border-radius);
+    }
+    #form > #google-login-btn:hover {
+        background-color: #eae8e8;
+    }
+    
+    #icon-container {
+        height: 60%;
+        display: flex;
+    }
+    #icon-container > img {
+        width: 100%;
+        height: 100%;
+    }
+}
