@@ -1,4 +1,5 @@
 const View = require('../../utils/views').view;
+const Views = require('../../utils/views').view2;
 const Compact = require('../../utils/views').compact;
 const Response = require('../../utils/utils').sendResponse;
 const url = require('url');
@@ -6,11 +7,11 @@ const url = require('url');
 
 class viewController{
     index(req,res){
-        return res.send(View('home2'));
+        return Views(res, 'home2');
     }
 
     login(req,res){
-        return res.send(View('login'));
+        return  Views(res, 'login');
     }
 
     // desain login versi figma
@@ -19,25 +20,25 @@ class viewController{
         if (req.session && req.session.user)
             return res.redirect('/');
 
-        return res.send(View('login2'));
+        return  Views(res, 'login2');
     }
 
     beranda(req,res){
-        return res.send(View('home'));
+        return  Views(res, 'home');
     }
 
     // Beranda 2.0
     beranda2(req,res){
-        return res.send(View('home2'));
+        return  Views(res, 'home2');
     }
 
     peminjaman(req,res){
-        return res.send(View('peminjaman'));
+        return  Views(res, 'peminjaman');
     }
 
     // Peminjaman 2.0
     peminjaman2(req,res){
-        return res.send(View('peminjaman2'));
+        return  Views(res, 'peminjaman2');
     }
 
     ruangan(req,res){
@@ -48,15 +49,15 @@ class viewController{
 
     profile(req,res){
         res.set('Content-Type', 'text/html');
-        return res.send(View('profile'));
+        return  Views(res, 'profile');
     }
 
     register(req,res){
-        return res.send(View('register'));
+        return  Views(res, 'register');
     }
 
     kontak(req,res){
-        return res.send(View('kontak'));
+        return  Views(res, 'kontak');
     }
 
     pinjam(req,res){
@@ -73,7 +74,7 @@ class viewController{
     }
 
     not_found(req,res){
-        return res.send(View('not_found'));
+        return  Views(res, 'not_found');
     }
 }
 
