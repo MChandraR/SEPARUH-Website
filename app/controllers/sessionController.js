@@ -19,37 +19,28 @@ class sessionController {
     }
 
     async login(req,res){
-        let body = req.body;
-        if(Validate([body.username, body.password])){
-
-            let user = await Users.where({username : body.username, password : Encrypt.sha256(body.password)}).first();
-            if(user){
-                let state = false;
-                req.session.regenerate((err)=>{
-                    if(err)console.log(err);
-
-                    req.session.user = {
-                        user_id : user.user_id,
-                        username : user.username
-                    }
-
-                    let hours = 3600 * 1000;
-                    req.session.cookie.expires = new Date(Date.now() + hours);
-                    req.session.cookie.maxAge = hours;
-
-                    req.session.save((err)=>{
-                        state = err;
-                    });
-                });
-                
-
-                return Response(res, 200, state ? "Gagal menyimpan cookie " : "Berhasil login ", body);
-
-            }
-            return Response(res, 200, "Login gagal : username atau password salah !");
+        const body = req.body;
+        if(!Validate(body.username) || !Validate(body.password)){
+            Response(res,401, "Username atau password salah !", null);
+            return;
         }
-
-        return Response(res, 200, "Login gagal : username atau password kosong !");
+        let data = await Users.where({username:body.username, password:Encrypt.sha256(body.password)}).first();
+        if(data && data.verified_at){
+            req.session.regenerate(function (err) {
+                if (err) next(err)
+                req.session.user = {
+                    user_id : data.user_id,
+                    username : data.username,
+                    role : data.role
+                };
+                var hour = 3600000
+                req.session.cookie.expires = new Date(Date.now() + hour)
+                req.session.cookie.maxAge = hour
+                console.log(req.session.user);
+                req.session.save((err) => Response(res, 200, err ? 
+                    "Err: Session not saved!" : `Berhasil login${req.session.user.role === 'admin' ? " sebagai admin" : ""}!`, {"userRole": req.session.user.role}))  
+            })
+        }else Response(res,401, data && !data.verified_at ? "Harap verifikasi terlebih dahulu akun anda !" : "Username atau password salah !", null);
     }
 }
 
