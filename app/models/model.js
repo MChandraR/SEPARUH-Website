@@ -1,7 +1,6 @@
 const getClient = require('./mongo');
 
 class Model{
-
     table = "";
     state = {};
     fillable = [];
