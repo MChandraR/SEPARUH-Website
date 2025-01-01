@@ -52,7 +52,7 @@ class Template {
             <div class="nav-container">
                 <a id="Home" href="/home2">Beranda</a>
                 <a id="Peminjaman" href="/peminjaman2">Pinjam</a>
-                <a>Kontak</a>
+                <a id="Kontak" href="/kontak">Kontak</a>
             </div>
         `;
         
@@ -77,7 +77,7 @@ class Template {
 
         // Track user current pages
         const currentPage = document.title;
-        const links = ["Home", "Peminjaman"];
+        const links = ["Home", "Peminjaman", "Kontak"];
         links.forEach((link) => {
             if (currentPage !== '' && currentPage === link){
                 let navbarLink = document.getElementById(link);
