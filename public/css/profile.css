@@ -430,3 +430,200 @@ select:focus {
 .rating .star.active {
     color: #ffc107;
 }
+
+#table-area{
+    width :100%;
+    overflow: auto;
+}
+
+
+@media screen and (max-width : 1000px) {
+    :root {
+        --a-input-select-padding-size: 8px;
+    }
+    
+    
+    #wrapper {
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    
+    /* SIDEBAR SECTION */
+    #sidebar-container {
+        width: 100%;
+        padding: 0 1rem;
+        box-shadow: 1px 0 2px 0 rgba(0, 0, 0, 0.098);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    /* Website Logo */
+    #sidebar-container > #logo-container {
+        width: 100%;
+        padding: 12px 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #sidebar-container > #logo-container > img {
+        width: 50%;
+        -webkit-user-drag: none;
+    }
+    /* Profile Picture */
+    #sidebar-container > #profile_picture-container {
+        width: 100%;
+        padding: 24px 0 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #sidebar-container > #profile_picture-container > img {
+        width: 143px;
+        border: 1px solid lightgray;
+        border-radius: 50%;
+        -webkit-user-drag: none;
+    }
+    /* Profile Info */
+    #sidebar-container > #profile_info-container {
+        font-size: 16px;
+        font-family: var(--font-family-montserrat);
+    }
+    /* Profile Info -> Child Element */
+    #sidebar-container > #profile_info-container > div {
+        display: flex;
+        flex-direction: column;
+    }
+    #sidebar-container > #profile_info-container > div:not(:last-child) {
+        margin-bottom: 32px;
+    }
+    #sidebar-container > #profile_info-container > div > span:nth-child(2) {
+        margin: 8px 0 0;
+        font-weight: 700;
+    }
+    /* Edit Profile Button */
+    #sidebar-container > #profile_btn-container {
+        width: 100%;
+        height: 128px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #sidebar-container > #profile_btn-container > #profile_edit-btn {
+        width: 100%;
+        height: 48px;
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+        background-color: var(--fun-blue);
+        border: none;
+        border-radius: 6px;
+    }
+    #sidebar-container > #profile_btn-container > #profile_edit-btn:hover {
+        background-color: #1a569a;
+        cursor: pointer;
+    }
+    
+    /* MAIN SECTION */
+    #main-container {
+        width: 100%;
+        margin-top: 2rem;
+        padding: 1rem;
+    }
+    #main-container > hr:first-of-type {
+        margin-bottom: 80px;
+    }
+    /* Heading */
+    #main-container > #heading-container {
+        font-size: 20px;
+        font-weight: 700;
+        font-family: var(--font-family-montserrat);
+        color: var(--fun-blue);
+    }
+    /* Item List */
+    #main-container > #item-container {
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+    }
+    
+    #main-container > #heading-title{
+        font-weight: bold !important;
+    }
+    /* Item List -> Header/Column Title */
+    #main-container > #item-container > #item-header-title {
+        padding: 16px;
+        margin-bottom: 12px;
+        font-size: 16px;
+        font-family: var(--font-family-inter);
+        font-weight: 400;
+        border-bottom: 2px solid black;
+        display: flex;
+        align-items: center;
+    }
+    #main-container > #item-container > #item-header-title > span {
+        width: 200px;
+    }
+    /* Item List -> Parent Element of Each Item */
+    #main-container > #item-container > .item {
+        width: 100%;
+        height: 60px;
+        padding: 0 16px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-family: var(--font-family-montserrat);
+        border-bottom: 1px solid black;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    /* Item List -> Child Element of Each Item */
+    /* #main-container > #item-container > .item > span {
+        width: 200px;
+    } */
+    #main-container > #item-container > .item > .item-date {
+        width: 200px;
+    }
+    #main-container > #item-container > .item > .item-name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    #main-container > #item-container > .item > .item-request_id {
+        font-weight: 700;
+        /* text-decoration: underline; */
+    }
+    #main-container > #item-container > .item > .item-btn {
+        width: 160px;
+        height: 32px;
+        margin-right: 16px;
+        font-size: 13px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        position: absolute;
+        right: 0;
+    }
+
+  .dt-layout-row{
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: 50% 50% !important;
+  }
+
+  .dt-length{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  .dt-search{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 1rem;
+  }
+}

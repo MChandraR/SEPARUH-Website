@@ -9,6 +9,9 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/cssLinkLoader.js"></script>
+    <script src="/js/templateLoader.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
     /* Mencegah FOUC */
@@ -16,6 +19,8 @@
     @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
 </style>
 <body>
+    <div id="template-header"></div>
+
     <div id="wrapper">
         <div id="sidebar-container">
             <div id="logo-container">
@@ -56,20 +61,24 @@
                 <h2 id="heading-title" style="font-weight: bold;">History Peminjaman</h2>
             </div>
             <br>
-            <table  id="request-table">
-                <thead id="">
-                    <td>No</td>
-                    <td>Request ID</td>
-                    <td>Start</td>
-                    <td>End</td>
-                    <td>Jenis</td>
-                    <td>Status</td>
-                </thead>
-                <tbody id="item-container">
-                
-                
-                </tbody>
-            </table>
+            <div id="table-area">
+                <table  id="request-table">
+                    <thead id="">
+                        <td>No</td>
+                        <td>Request ID</td>
+                        <td>Start</td>
+                        <td>End</td>
+                        <td>Jenis</td>
+                        <td>Status</td>
+                        <td>Aksi</td>
+                    </thead>
+                    <tbody id="item-container">
+                    
+                    
+                    </tbody>
+                </table> 
+            </div>
+         
             
         </div>
         <div id="modal-wrapper">
@@ -196,8 +205,14 @@
       </div>
     </div>
   </div>
+  <div id="template-footer"></div>
 
-    <script src="/js/sweetalert2@11.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/bootstrap/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>   
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+  
+  
     <script>
         const fileInput = document.getElementById('fileInput');
         const imagePreview = document.getElementById('imagePreview');
@@ -285,6 +300,14 @@
         }
     </script>
     <script>
+        const template = new Template(['header', 'footer']);
+        loadCSS([
+            'main',
+            'home2',
+            'template/header',
+            'template/footer',
+            'font/ubuntu'
+        ]);
         const form = document.getElementById('form-edit_profile');
         const modal = document.getElementById('modal-wrapper');
         const close_btn = document.getElementsByClassName('exit-modal')[0];
@@ -427,6 +450,8 @@
                     </tr>
                     `;
                 });
+
+                let tb = new DataTable("#request-table");
 
             }catch(e){
                 console.log(e);
