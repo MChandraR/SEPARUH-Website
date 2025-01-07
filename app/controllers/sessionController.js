@@ -45,7 +45,7 @@ class sessionController {
 
     async logout(req,res){
         req.session.destroy((e)=>{
-            return redirect("/");
+            return res.redirect("/");
             //Response(res,200, e ? "Err : Session cannot be destroyed !":"Berhasil keluar !", null);
         });
     };

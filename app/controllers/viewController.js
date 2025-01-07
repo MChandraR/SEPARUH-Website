@@ -7,7 +7,7 @@ const url = require('url');
 
 class viewController{
     index(req,res){
-        return Views(res, 'home2');
+        return Views(res, 'home');
     }
 
     login(req,res){
@@ -20,7 +20,7 @@ class viewController{
         if (req.session && req.session.user)
             return res.redirect('/');
 
-        return  Views(res, 'login2');
+        return  Views(res, 'login');
     }
 
     beranda(req,res){
@@ -38,7 +38,7 @@ class viewController{
 
     // Peminjaman 2.0
     peminjaman2(req,res){
-        return  Views(res, 'peminjaman2');
+        return  Views(res, 'peminjaman');
     }
 
     ruangan(req,res){

@@ -1,185 +1,158 @@
-<!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/font/ubuntu.css">
-    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>   
+    <script src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/js/cssLinkLoader.js"></script>
+    <script src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/js/templateLoader.js"></script>
+    <title>Home</title>
     <style>
-      body{
-        font-family: "Ubuntu", serif;
-        padding : 0;
-        margin : 0;
-        width: 100%;
-      }
-    </style>    
-    <!-- Accessibility Code for "separuh.site" -->
-<script>
-  /*
-  
-  Want to customize your button? visit our documentation page:
-  
-  https://login.equalweb.com/custom-button.taf
-  
-  */
-  window.interdeal = {
-      "sitekey": "cc64a3f98a3edcbf27e4d9f3f9d71b22",
-      "Position": "right",
-      "domains": {
-          "js": "https://cdn.equalweb.com/",
-          "acc": "https://access.equalweb.com/"
-      },
-      "Menulang": "ID",
-      "btnStyle": {
-          "vPosition": [
-              "95%",
-              "95%"
-          ],
-          "scale": [
-              "0.5",
-              "0.5"
-          ],
-          "color": {
-              "main": "#1c4bb6",
-              "second": "#ffffff"
-          },
-          "icon": {
-              "outline": false,
-              "type": 10,
-              "shape": "circle"
-          }
-      }
-  };
-  (function(doc, head, body){
-      var coreCall             = doc.createElement('script');
-      coreCall.src             = interdeal.domains.js + 'core/5.0.9/accessibility.js';
-      coreCall.defer           = true;
-      coreCall.integrity       = 'sha512-dxjHZQgpVIG70EQus4+1KR3oj2KGyrtwR/nr4lY+tcMjrQ1Yb9V1SCKNVLGhD3CcPMgANKAqOk4ldI8WWNnQTw==';
-      coreCall.crossOrigin     = 'anonymous';
-      coreCall.setAttribute('data-cfasync', true );
-      body? body.appendChild(coreCall) : head.appendChild(coreCall);
-  })(document, document.head, document.body);
-  </script>  
-  </head>
-  <body style="margin: 0;padding : 0;">
-    <input type="hidden" id="anPageName" name="page" value="beranda">
-    <div class="container-center-horizontal" style="margin: 0;padding : 0;">
-      <div class="beranda screen " data-id="109:183" style="margin: 0;padding : 0;">
-        <div class="mac-book-air-1-LN8ZrO" data-id="101:2" style="margin: 0;padding : 0;">
-          <div class="navbar" data-id="106:3" style="margin: 0;padding : 0;">
-            <div class="nav-item">
-              <a class="navbar-list" href="/kontak">Kontak</a><div></div>
-              <a class="navbar-list" href="/peminjaman">Pinjam</a><div></div>
-              <a class="navbar-list" href="/">Beranda</a><div></div>
-              <a class="daftar" href="/register">Daftar</a><div></div>
-              <a class="daftar" href="/login">Masuk</a><div></div>
-            </div>
-            <img class="logo-fttk" src="/assets/images/logo/fttk_logo.png" alt="Mask group">
-          </div>
-
-          <h1 class="title">
-            <span class="span0">Fasilitasi Aktivitasmu Tanpa Ribet.</span>
-            <span class="span2">Pinjam Ruangan dan Aset Kampus Langsung Sat-Set!</span>
-          </h1>
-
-          <div class="main-button">
-            <a href="/peminjaman">
-              <div class="daftar-button" data-id="109:182" id="mainButton">Daftar Sekarang</div>
-            </a>
-          </div>
-
-          <center>
-            <div class="info-group content" data-id="111:494">
-              <center>
-              <div class="info-card" data-id="111:485">
-                  <img class="info-image group" style="object-fit: contain;" src="/assets/images/icon/gedung.png" alt="Group">
-                  <h2 class="info-value" id="ruanganCount">-</h2>
-                  <img class="info-line" data-id="111:483" src="/assets/images/shape/line.svg" alt="Line 1">
-                  <p class="info-title montserrat-normal-tundora-14px" data-id="111:484">Ruangan yang sedia untuk digunakan</p>
-                </div>
-              </center>
-              <center>
-              <div class="info-card" data-id="111:489">
-                  <img class="info-image group" style="object-fit: contain;" src="/assets/images/icon/asset.png" alt="Group">
-                  <h2 class="info-value" id="assetCount">-</h2>
-                  <img class="info-line" src="/assets/images/shape/line.svg" alt="Line 2">
-                  <p class="info-title montserrat-normal-tundora-14px" data-id="111:487">Aset dan peralatan yang sedia untuk digunakan</p>
-                </div>
-              </center>
-              <center>
-              <div class="info-card" data-id="111:493">
-                  <img class="info-image" style="object-fit: contain;" src="/assets/images/icon/user-account-b.png" alt="Group">
-                  <h2 class="info-value" id="userCount">-</h2>
-                  <img class="info-line" src="/assets/images/shape/line.svg" alt="Line 3">
-                  <div class="info-title montserrat-normal-tundora-14px" data-id="111:491">Mahasiswa yang sudah mendaftar</div>
-                </div>
-              </center>
-            </div>
-          </center>
-          <div style="background: #444343" class="footer">
-      
-            <div style="width: 265.46px; height: 169px; position:relative ">
-              <div style="width: 160.46px;  color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Legal</div>
-              <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Syarat dan ketentuan</div>
-              <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Copyright © 2025</div>
-              <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Kontrak</div>
-            </div>
-      
-            <div style="width: 194.76px; height: 37px; position:relative;">
-              <div style="width: 194.76px; color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Bantuan</div>
-              <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">FAQ</div>
-            </div>
-      
-            <div style="width: 238.85px; height: 55px; position: relative;">
-              <div style="width: 238.85px; color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Pelayanan</div>
-              <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">FTTK</div>
-              <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Akademik</div>
-            </div>
-            
-            <div class="sosmed" colspan="2">
-                <img src="/assets/images/logo/facebook.png" alt="" width="50" height="50">
-                <img src="/assets/images/logo/instagram.png" alt="" width="50" height="50">
-                <img src="/assets/images/logo/linkedin.png" alt="" width="50" height="50">
-                <img src="/assets/images/logo/youtube.png" alt="" width="50" height="50">
-                <img src="/assets/images/logo/twitter.png" alt="" width="50" height="50">
-            </div>
-            
-            <img style="position:absolute; left:2rem; bottom : 2rem; width: 100px; height: 42px;" src="/assets/images/logo/fttk_logo-w.png" />
-          </div>
-      </div>
+        /* Mencegah FOUC */
+        body {visibility: hidden;}
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
+    <script>
+        /*
+        
+        Want to customize your button? visit our documentation page:
+        
+        https://login.equalweb.com/custom-button.taf
+        
+        */
+        window.interdeal = {
+            "sitekey": "cc64a3f98a3edcbf27e4d9f3f9d71b22",
+            "Position": "right",
+            "domains": {
+                "js": "https://cdn.equalweb.com/",
+                "acc": "https://access.equalweb.com/"
+            },
+            "Menulang": "ID",
+            "btnStyle": {
+                "vPosition": [
+                    "95%",
+                    "95%"
+                ],
+                "scale": [
+                    "0.5",
+                    "0.5"
+                ],
+                "color": {
+                    "main": "#1c4bb6",
+                    "second": "#ffffff"
+                },
+                "icon": {
+                    "outline": false,
+                    "type": 10,
+                    "shape": "circle"
+                }
+            }
+        };
+        (function(doc, head, body){
+            var coreCall             = doc.createElement('script');
+            coreCall.src             = interdeal.domains.js + 'core/5.0.9/accessibility.js';
+            coreCall.defer           = true;
+            coreCall.integrity       = 'sha512-dxjHZQgpVIG70EQus4+1KR3oj2KGyrtwR/nr4lY+tcMjrQ1Yb9V1SCKNVLGhD3CcPMgANKAqOk4ldI8WWNnQTw==';
+            coreCall.crossOrigin     = 'anonymous';
+            coreCall.setAttribute('data-cfasync', true );
+            body? body.appendChild(coreCall) : head.appendChild(coreCall);
+        })(document, document.head, document.body);
+    </script>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <div id="template-header"></div>
+    <!-- Heading Title -->
+    <div id="heading-container">
+        <div id="title-heading">
+            <span>Fasilitasi Aktivitasmu Tanpa Ribet.</span>
+            <span>Pinjam Ruangan dan Aset Kampus Langsung Sat-Set!</span>
+        </div>
+        <a id="mainBtn" href="/peminjaman">Daftar Sekarang</a>
     </div>
- </body>
+    <!-- Stat Info -->
+    <div id="stat-info-container">
+        <div class="info-card">
+            <div class="info-icon-container">
+                <img src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/assets/images/icon/gedung.png">
+            </div>
+            <span class="loader"></span>
+            <span id="ruanganCount">0</span>
+            <hr/>
+            <p>Ruangan yang tersedia untuk digunakan</p>
+        </div>
+        <div class="info-card">
+            <div class="info-icon-container">
+                <img src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/assets/images/icon/asset.png">
+            </div>
+            <span class="loader"></span>
+            <span id="assetCount">0</span>
+            <hr/>
+            <p>Aset dan peralatan yang sedia untuk digunakan</p>
+        </div>
+        <div class="info-card">
+            <div class="info-icon-container">
+                <img src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/assets/images/icon/person.png">
+            </div>
+            <span class="loader"></span>
+            <span id="userCount">0</span>
+            <hr/>
+            <p>Mahasiswa yang sudah mendaftar</p>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div id="template-footer"></div>
+    <script>
+        const template = new Template(['header', 'footer']);
+        loadCSS([
+            'main',
+            'home2',
+            'template/header',
+            'template/footer',
+            'font/ubuntu'
+        ]);
+
+        // Observer jika diperlukan
+        const infoContainer = document.getElementById('stat-info-container');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }, { threshold: 0.5 });
+        // observer.observe(infoContainer);
+
+        const loader       = document.getElementsByClassName("loader");
+        const ruanganCount = document.getElementById("ruanganCount");
+        const assetCount   = document.getElementById("assetCount");
+        const userCount    = document.getElementById("userCount");
+        const mainBtn      = document.getElementById("mainBtn");
+
+        const countView = [ruanganCount, assetCount, userCount];
+        
+        $.ajax({
+            url: "/api/stat",
+            method: "GET"
+        }).done((e) => {
+            console.log(e);
+            
+            // Removes loading animation
+            while (loader.length > 0) {
+                loader[0].remove();
+            }
+
+            // Data viewer
+            const countData = [e.data.ruanganCount, e.data.assetCount, e.data.userCount];
+            countView.forEach((element, index) => {
+                element.innerHTML        = countData[index];
+                element.style.opacity    = 1;
+                element.style.visibility = 'visible';
+                element.style.maxHeight  = 'none';
+            });
+
+            // Button below title-heading
+            mainBtn.textContent = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
+        });
+    </script>
+</body>
 </html>
-<script>
-  const assetCount = document.getElementById("assetCount");
-  const ruanganCount = document.getElementById("ruanganCount");
-  const userCount = document.getElementById("userCount");
-  const mainButton = document.getElementById("mainButton");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
-  }, {
-    threshold: 0.5 // Memicu jika 50% dari elemen terlihat di viewport
-  });
-
-  document.querySelectorAll('.content').forEach(section => {
-    observer.observe(section);
-  });
-
-  $.ajax({
-    url : "/api/stat",
-    method : "GET"
-  }).done((e)=>{
-    console.log(e);
-    assetCount.innerHTML = e.data.assetCount;
-    ruanganCount.innerHTML = e.data.ruanganCount;
-    userCount.innerHTML = e.data.userCount;
-    mainButton.innerHTML = e.data.userLogin ? "Peminjaman" : "Daftar Sekarang";
-  });
-</script>

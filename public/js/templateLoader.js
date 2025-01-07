@@ -47,11 +47,11 @@ class Template {
         const targetDiv = 'template-header';
         const content = `
             <div class="logo-container">
-                <img src="/assets/images/logo/fttk_logo.png" />
+                <img src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/assets/images/logo/fttk_logo.png" />
             </div>
             <div class="nav-container">
-                <a id="Home" href="/home2">Beranda</a>
-                <a id="Peminjaman" href="/peminjaman2">Pinjam</a>
+                <a id="Home" href="/">Beranda</a>
+                <a id="Peminjaman" href="/peminjaman">Pinjam</a>
                 <a id="Kontak" href="/kontak">Kontak</a>
             </div>
         `;

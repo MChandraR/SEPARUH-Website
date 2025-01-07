@@ -1,7 +1,7 @@
 // NOTE: Untuk development aja, malas nambah" tag link :)
 
 function src(target) {
-    return `/css/${target}.css`;
+    return `https://separuh.s3.ap-southeast-2.amazonaws.com/public/css/${target}.css`;
 };
 
 function cssLoader(source) {

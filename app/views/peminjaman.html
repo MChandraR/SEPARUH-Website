@@ -1,188 +1,202 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="/css/font/ubuntu.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/peminjaman.css">
-    <script src="/js/jquery-3.7.1.min.js"></script>
+    <title>Peminjaman</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>   
+    <script src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/js/cssLinkLoader.js"></script>
+    <script src="https://separuh.s3.ap-southeast-2.amazonaws.com/public/js/templateLoader.js"></script>
+    <style>
+        /* Mencegah FOUC */
+        body {visibility: hidden;}
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:700,400|Inter:700,400");
+    </style>
 </head>
-<style>
-    body{
-      padding: 0;
-      margin: 0;
-    }
-    
-
-</style>
 <body>
-  <div class="body">
-    <div class="navbar">
-      <div class="nav-item">
-          <div style="font-family: Ubuntu, sans-serif;">Kontak</div>
-          <div>Pinjam</div>
-          <img style="width: 25px; height: 25px; " src="/assets/images/icon/bell.png" />
-          <img style="width: 25px; height: 25px; " src="/assets/images/icon/user.png" />
-      </div>
-      <img src="/assets/images/logo/fttk_logo.png" alt="" width="150" style="margin-left : 20px; margin-top : 20px;"/>
+    <div id="template-header"></div>
+    <div id="heading-container">
+        <div id="title-heading">
+            <span>Peminjaman Ruangan dan Aset</span>
+        </div>
+        <hr>
     </div>
-    
-    <div class="mains">
-      <center>
-          <span style="align-self:center; font-family: Ubuntu, sans-serif; color :#1A5DAA;">Peminjaman Ruangan dan Aset</span>
-          <div style="width:80%;  border: 1px #1A5DAA solid"></div>
-      </center>
-      
-      <div class="main-section">
-        <div>
-          <span style="color: #444343; font-size: 1.5rem; font-weight: 700;  line-height: 16px; word-wrap: break-word">Jenis</span><br>
-            <div style="width:40%; margin-right : 5%;float:left; padding: 8px;  background: #1A5DAA; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: inline-flex">
-                <div style="color: #F5F5F5; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">Ruangan</div>
-            </div>
-            <div style="width:40%;float:left;padding: 8px; border-radius: 8px; border: 1px #444343 solid; justify-content: center; align-items: center; gap: 8px; ">
-                <div style="text-align:center; color: #444343; font-size: 16px; font-weight: 400; line-height: 16px; word-wrap: break-word">Aset</div>
-            </div>
-            <br>
+    <div id="content-container">
+        <div id="filter-container">
+            <section>
+                <span>Jenis</span>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    <span>Ruangan</span>
+                </button>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    <span>Aset</span>
+                </button>
+            </section>
+            <section>
+                <span>Rating</span>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    <span>Tertinggi</span>
+                </button>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    <span>Terendah</span>
+                </button>
+                <button class="flex-f">
+                    <img src="/assets/images/icon/checkmark.png">
+                    <span>Paling sering dipinjam</span>
+                </button>
+            </section>
+            <section>
+                <span>Lainnya</span>
+                <button>
+                    <img src="/assets/images/icon/checkmark.png">
+                    <span>Ready</span>
+                </button>
+            </section>
+        </div>
+        <div id="item-container">
+            <div id="pagination-container"></div>
+        </div>
+    </div>
+    <div id="template-footer"></div>
 
-            <span style="color: #444343; font-size: 1.5rem; font-weight: 700;  line-height: 16px; word-wrap: break-word">Rating</span><br>
-            <div style="width:40%; margin-right : 5%;float:left; padding: 8px;  background: #1A5DAA; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: inline-flex">
-                <div style="color: #F5F5F5; font-size: 16px; font-weight: 400; line-height: 16px; word-wrap: break-word">Tertinggi</div>
-            </div>
-            <div style="width:40%;float:left;padding: 8px; border-radius: 8px; border: 1px #444343 solid; justify-content: center; align-items: center; gap: 8px; ">
-                <div style="text-align:center; color: #444343; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">Terendah</div>
-            </div>
-            <div style="width : 90%; margin-bottom : 1rem ;padding: 8px;  border-radius: 8px; border: 1px #444343 solid; justify-content: center; align-items: center; gap: 8px; display: inline-flex">
-              <div style="color: #444343; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">Paling sering di pinjam</div>
-            </div>
+    
+    <script>
+      
+        const template = new Template(['header', 'footer']);
+        const container = document.getElementById('item-container');
+
+        loadCSS([
+            'main',
+            'peminjaman2',
+            'peminjaman_mobile',
+            'template/header',
+            'template/footer',
+            'font/ubuntu'
+        ]);
+
+        // viewport viewer
+        console.log(`Viewport Width: ${window.innerWidth}px`);
+        console.log(`Viewport Height: ${window.innerHeight}px`);
+        window.addEventListener('resize', function(event) {
+            console.clear();
+            console.log(`Viewport Width: ${window.innerWidth}px`);
+            console.log(`Viewport Height: ${window.innerHeight}px`);
+        });
+
+        function toggleFilter(element) {
+            if (!element) {
+                console.log("Filter button not found!");
+                return;
+            }
+            element.classList.toggle('active');
+        }
+
+        let currentPage = 1;
+        function getCurrentPage(dataPage) {
+            return document.getElementById(`page-${dataPage}`);
+        }
+
+        function getActiveButton() {
+            return document.getElementsByClassName('page-btn active')[0];
+        }
+
+        function updatePagination(btnCount, pageNum = 1) {
+            currentPage = pageNum;
+            console.log(currentPage);
+            let prevBtn = document.getElementById('prevPageBtn');
+            if (currentPage > 1) {
+                prevBtn.classList.remove('disabled');
+                prevBtn.disabled = false;
+            }
+            else {
+                prevBtn.classList.add('disabled');
+                prevBtn.disabled = true;
+            }
+
+            let nextBtn = document.getElementById('nextPageBtn');
+            if (currentPage < btnCount) {
+                nextBtn.classList.remove('disabled');
+                nextBtn.disabled = false;
+            }
+            else {
+                nextBtn.classList.add('disabled');
+                nextBtn.disabled = true;
+            }
+        }
+
+        const filterButtons = document.querySelectorAll('#filter-container button');
+        filterButtons.forEach((btn) => {
+            btn.addEventListener('click', function() {
+                toggleFilter(btn);
+            });
+        });
+
+        $.ajax({
+            url: '/api/all',
+            method: 'GET'
+        })
+        .done( function(e, textStatus, xhr) {
+            if (!e.data) {
+                console.log("Data not found!");
+                return;
+            }
+
+            template.generateItems(e.data);
+            const pageButtons = document.getElementById('pagination-container').getElementsByClassName('page-btn');
+            Array.from(pageButtons).forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+                    // console.log(getCurrentPage(getActiveButton().getAttribute('data-page')));
+                    // console.log(getActiveButton());
+                    // Hide current page
+                    getCurrentPage(getActiveButton().getAttribute('data-page')).classList.toggle('show-page');
+                    getActiveButton().classList.toggle('active');
+
+                    // Show selected page
+                    document.getElementById(`page-${this.getAttribute('data-page')}`).classList.toggle('show-page');
+                    this.classList.toggle('active');
+                    
+                    updatePagination(pageButtons.length, parseInt(this.getAttribute('data-page')));
+                })
+            });
             
-            <span style=" color: #444343; font-size: 1.5rem; font-weight: 700;  line-height: 16px; word-wrap: break-word">Lainnya</span><br>
-            <div style="padding: 8px;  border-radius: 8px; border: 1px #444343 solid; justify-content: center; align-items: center;  display: inline-flex">
-              <div style="color: #444343; font-size: 16px; font-weight: 400; line-height: 16px; word-wrap: break-word">Ready</div>
-            </div>
+            document.getElementById('prevPageBtn').addEventListener('click', function() {
+                let activeBtn = getActiveButton();
+                currentPage = parseInt(activeBtn.getAttribute('data-page'));
+                if (currentPage <= 0) { return; }
+                else if (currentPage - 1 === 1) {
+                    this.disabled = true;
+                    this.classList.toggle('disabled');
+                }
+                // Hide current page
+                getCurrentPage(getActiveButton().getAttribute('data-page')).classList.remove('show-page');
+                activeBtn.classList.remove('active');
+                // Show previous page
+                document.getElementById(`page-${currentPage-1}`).classList.add('show-page');
+                document.querySelectorAll(`.page-btn[data-page="${currentPage-1}"]`)[0].classList.add('active');
+                updatePagination(pageButtons.length, currentPage-1);
+            });
 
-        </div>
-
-
-        <div style="position:relative;">
-            <input class="search">
-            <div class="list-items" id="list-items">
-                
-                  
-            </div>
-            <center>
-
-              <div class="page">
-                <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; opacity: 0.50; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: flex">
-                  <div style="width: 16px; height: 16px; position: relative">
-                    <div style="width: 9.33px; height: 9.33px; left: 3.33px; top: 3.33px; position: absolute; border: 1.60px #1E1E1E solid"></div>
-                  </div>
-                  <div style="color: #757575; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">Previous</div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                  <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; background: #2C2C2C; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="color: #F5F5F5; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">1</div>
-                  </div>
-                  <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="color: #1E1E1E; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">2</div>
-                  </div>
-                  <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="color: #1E1E1E; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">3</div>
-                  </div>
-                  <div style="padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="color: black; font-size: 16px;  font-weight: 700; line-height: 22.40px; word-wrap: break-word">...</div>
-                  </div>
-                  <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="color: #1E1E1E; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">67</div>
-                  </div>
-                  <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="color: #1E1E1E; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">68</div>
-                  </div>
-                </div>
-                <div style="padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: flex">
-                  <div style="color: #1E1E1E; font-size: 16px;  font-weight: 400; line-height: 16px; word-wrap: break-word">Next</div>
-                  <div style="width: 16px; height: 16px; position: relative">
-                    <div style="width: 9.33px; height: 9.33px; left: 3.33px; top: 3.33px; position: absolute; border: 1.60px #1E1E1E solid"></div>
-                  </div>
-                </div>
-              </div>
-            </center>
-        </div>
-      </div>
-
-    </div>
-      
-
-    
-    
-    <div style="background: #444343" class="footer">
-      
-      <div style="width: 265.46px; height: 169px; position:relative ">
-        <div style="width: 160.46px;  color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Legal</div>
-        <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Syarat dan ketentuan</div>
-        <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Copyright © 2025</div>
-        <div style="width: 160.46px;  color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Kontrak</div>
-      </div>
-
-      <div style="width: 194.76px; height: 37px; position:relative;">
-        <div style="width: 194.76px; color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Bantuan</div>
-        <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">FAQ</div>
-      </div>
-
-      <div style="width: 238.85px; height: 55px; position: relative;">
-        <div style="width: 238.85px; color: white; font-size: 14px;  font-weight: 700; text-decoration: underline; word-wrap: break-word">Pelayanan</div>
-        <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">FTTK</div>
-        <div style="width: 160.46px; color: white; font-size: 12px;  font-weight: 400; word-wrap: break-word">Akademik</div>
-      </div>
-      
-      <div class="sosmed">
-          <img src="/assets/images/logo/facebook.png" alt="" width="50" height="50">
-          <img src="/assets/images/logo/instagram.png" alt="" width="50" height="50">
-          <img src="/assets/images/logo/linkedin.png" alt="" width="50" height="50">
-          <img src="/assets/images/logo/youtube.png" alt="" width="50" height="50">
-          <img src="/assets/images/logo/twitter.png" alt="" width="50" height="50">
-      </div>
-      
-      <img style="position:absolute; left:2rem; bottom : 2rem; width: 100px; height: 42px;" src="/assets/images/logo/fttk_logo-w.png" />
-    </div>
-    
-    
-
-    
-    
-
-  </div>
-    
+            document.getElementById('nextPageBtn').addEventListener('click', function() {
+                let activeBtn = getActiveButton();
+                currentPage = parseInt(activeBtn.getAttribute('data-page'));
+                if (currentPage >= pageButtons.length) { return; }
+                else if (currentPage + 1 === pageButtons.length) {
+                    this.disabled = true;
+                    this.classList.toggle('disabled');
+                }
+                // Hide current page
+                getCurrentPage(getActiveButton().getAttribute('data-page')).classList.remove('show-page');
+                activeBtn.classList.remove('active');
+                // Show previous page
+                document.getElementById(`page-${currentPage+1}`).classList.add('show-page');
+                document.querySelectorAll(`.page-btn[data-page="${currentPage+1}"]`)[0].classList.add('active');
+                updatePagination(pageButtons.length, currentPage+1);
+            });
+        });
+    </script>
 </body>
 </html>
-
-<script>
-  let list_items = document.getElementById('list-items');
-
-  $.ajax({
-    url : '/api/room',
-    method : "GET"
-  }).done((e)=>{
-    console.log(e);
-    list_items.innerHTML = "";
-    e.data.forEach((data)=>{
-      console.log(new Date().getMinutes());
-      list_items.innerHTML += `<div style="width: 15rem; padding: 16px; background: white; box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25); border-radius: 8px; border: 1px #D9D9D9 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
-        <img style="object-fit : cover;align-self: stretch; height: 247px; background: linear-gradient(0deg, #E3E3E3 0%, #E3E3E3 100%)" src="https://separuh.s3.ap-southeast-2.amazonaws.com/${data.room_id}.png?time=${new Date().getMinutes()}" />
-        <div style="height: 100px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-          <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="flex: 1 1 0; color: #1E1E1E; font-size: 16px;  font-weight: 400; line-height: 22.40px; word-wrap: break-word">${data.room_name}</div>
-          </div>
-          <div style="justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="color: #1E1E1E; font-size: 16px;  font-weight: 600; line-height: 22.40px; word-wrap: break-word">4.3/5.0</div>
-          </div>
-          <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="flex: 1 1 0; color: #757575; font-size: 14px;  font-weight: 400; line-height: 19.60px; word-wrap: break-word">${data.description}</div>
-          </div>
-        </div>
-      </div>`
-      
-      ;
-    });
-  });
-</script>
